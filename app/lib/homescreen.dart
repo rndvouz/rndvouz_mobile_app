@@ -1,3 +1,4 @@
+import 'package:app/colors.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
@@ -45,32 +46,32 @@ class _HomescreenState extends State<Homescreen> {
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-            canvasColor: Colors.lightGreen,
-            primaryColor: Colors.black,
+            canvasColor: colorCream,
+            primaryColor: colorCream,
             textTheme: Theme.of(context)
                 .textTheme
-                .copyWith(bodySmall: const TextStyle(color: Colors.grey))),
+                .copyWith(bodySmall: const TextStyle(color: colorBrown1))),
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              // label: 'Home',
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              // label: 'Search',
+              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add_box),
-              // label: 'Upload Item',
+              label: 'Upload Item',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications),
-              // label: 'Notification',
+              label: 'Notification',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              // label: 'Profile',
+              label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex,
