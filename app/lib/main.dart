@@ -5,6 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// new app.dart was created, delete this?
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

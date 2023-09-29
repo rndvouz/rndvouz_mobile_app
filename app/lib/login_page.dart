@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'homescreen.dart';
+
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -14,7 +16,7 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
-              padding: EdgeInsets.only(bottom: 50.0), 
+              padding: EdgeInsets.only(bottom: 50.0),
               child: Text(
                 'RNDVOUZ',
                 style: TextStyle(
@@ -71,6 +73,10 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Handle login action here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Homescreen()),
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
@@ -98,9 +104,7 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Don't have an account?"
-                ),
+                const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
                     // Handle "Sign Up" action here
