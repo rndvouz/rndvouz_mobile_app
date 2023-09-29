@@ -54,27 +54,29 @@ class _HomescreenState extends State<Homescreen> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              // label: 'Home',
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              // label: 'Search',
+              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add_box),
-              // label: 'Upload Item',
+              label: 'Upload Item',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications),
-              // label: 'Notification',
+              label: 'Notification',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              // label: 'Profile',
+              label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
+          showSelectedLabels: false, 
+          showUnselectedLabels: false,
         ),
       ),
     );
