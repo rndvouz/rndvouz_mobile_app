@@ -3,14 +3,15 @@ import 'package:numberpicker/numberpicker.dart';
 
 import 'dart:developer' as developer;
 
-class OnBoardingSize extends StatefulWidget {
-  OnBoardingSize({super.key});
+class SignUpSize extends StatefulWidget {
+  SignUpSize({super.key});
 
   @override
-  _OnBoardingSizeState createState() => _OnBoardingSizeState();
+  _SignUpSizeState createState() => _SignUpSizeState();
 }
 
-class _OnBoardingSizeState extends State<OnBoardingSize> {
+class _SignUpSizeState extends State<SignUpSize> {
+  // Builder method
   Widget _setMeasurementBuilder(String label, int val, int min, int max) {
     return StatefulBuilder(
       builder: (context, setState) {
@@ -78,6 +79,40 @@ class _OnBoardingSizeState extends State<OnBoardingSize> {
         padding: EdgeInsets.only(left: 25.0, right: 25.0),
         child: ListView(
           children: [
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Set Your Measurements',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Set your measurements for easier view of items similar to your size!',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [Text('hi')],
+                ),
+                Column(
+                  children: [Text('hi')],
+                ),
+              ],
+            ),
             _setMeasurementBuilder('Bust', 35, 15, 50),
             _setMeasurementBuilder('Waist', 27, 15, 50),
             _setMeasurementBuilder('Hips', 38, 15, 50),

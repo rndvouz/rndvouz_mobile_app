@@ -1,3 +1,4 @@
+import 'package:app/sign_up_size.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -107,7 +108,10 @@ class LoginPage extends StatelessWidget {
                 const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
-                    // Handle "Sign Up" action here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpSize()),
+                    );
                   },
                   child: const Text(
                     'Sign Up',
