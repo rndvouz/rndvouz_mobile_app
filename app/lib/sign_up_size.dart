@@ -2,8 +2,6 @@ import 'package:app/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-import 'dart:developer' as developer;
-
 class SignUpSize extends StatefulWidget {
   const SignUpSize({super.key});
 
@@ -81,11 +79,10 @@ class SignUpSizeState extends State<SignUpSize> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () =>
-                          setState(() {
-                            final int newVal = val - 1;
-                            val = newVal.clamp(min, max);
-                          }),
+                      onPressed: () => setState(() {
+                        final int newVal = val - 1;
+                        val = newVal.clamp(min, max);
+                      }),
                     ),
                   ],
                 ),
@@ -111,11 +108,10 @@ class SignUpSizeState extends State<SignUpSize> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () =>
-                          setState(() {
-                            final int newVal = val + 1;
-                            val = newVal.clamp(min, max);
-                          }),
+                      onPressed: () => setState(() {
+                        final int newVal = val + 1;
+                        val = newVal.clamp(min, max);
+                      }),
                     ),
                   ],
                 ),

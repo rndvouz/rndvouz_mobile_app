@@ -1,6 +1,6 @@
 import 'package:app/home_screen.dart';
 import 'package:app/login_page.dart';
-import 'package:app/user_type_page.dart';
+import 'package:app/setup_complete.dart';
 import 'package:app/sign_up_size.dart';
 
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class RndvouzApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/login': (BuildContext context) => LoginPage(),
-        '/signup_size': (BuildContext context) => SignUpSize(),
+        '/login': (BuildContext context) => SetupComplete(),
+        '/signup_size': (BuildContext context) => const SignUpSize(),
         '/homescreen': (BuildContext context) => const Homescreen(),
       },
     );
