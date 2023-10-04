@@ -18,7 +18,6 @@ class RndvouzApp extends StatelessWidget {
       routes: {
         '/login': (BuildContext context) => LoginPage(),
         '/homescreen': (BuildContext context) => const Homescreen(),
-        '/usertype':(BuildContext context) => const UserTypePage(),
       },
     );
 
