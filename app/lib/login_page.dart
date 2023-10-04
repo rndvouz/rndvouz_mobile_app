@@ -108,7 +108,10 @@ class LoginPage extends StatelessWidget {
                 const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UserTypePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserTypePage()));
                     // Handle "Sign Up" action here
                   },
                   child: const Text(
