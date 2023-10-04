@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
 class SignUpTopBar extends StatelessWidget {
-  SignUpTopBar({super.key});
+  final String state;
+
+  SignUpTopBar({super.key, required this.state});
 
   final individual = [
     {
@@ -38,6 +40,8 @@ class SignUpTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final field = getField();
+
     return Column(
       children: [
         Padding(
@@ -53,7 +57,7 @@ class SignUpTopBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'p',
+                          field['title']!,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
@@ -65,7 +69,7 @@ class SignUpTopBar extends StatelessWidget {
                         Flexible(
                           child: Text(
                             textAlign: TextAlign.center,
-                            'Set your measurements for easier view of items similar to your size!',
+                            field['description']!,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -81,9 +85,19 @@ class SignUpTopBar extends StatelessWidget {
           color: Colors.cyan,
           height: 35,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              for (var label in individual) Text(label['state']!),
+              for (var label in individual)
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15),
+                  color: label['state']!.toLowerCase() == state
+                      ? Colors.amber
+                      : Colors.cyan,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text(label['state']!)],
+                  ),
+                ),
             ],
           ),
         ),
@@ -91,8 +105,20 @@ class SignUpTopBar extends StatelessWidget {
     );
   }
 
-  // Map<String, String> getField(){
-
-  //   switch
-  // }
+  Map<String, String> getField() {
+    switch (state) {
+      case 'login':
+        return individual[0];
+      case 'profile':
+        return individual[1];
+      case 'style':
+        return individual[2];
+      case 'swipe':
+        return individual[3];
+      case 'measurements':
+        return individual[4];
+      default:
+        throw Exception('Invalid state for SignUpTopBar, check parameter.');
+    }
+  }
 }
