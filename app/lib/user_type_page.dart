@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/set_up_page.dart';
+import 'package:app/setup_login_page.dart';
 
 class UserTypePage extends StatelessWidget {
   const UserTypePage({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class UserTypePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SetupPage()),
+                          builder: (context) => const SetupLoginPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

@@ -26,10 +26,11 @@ class _OnBoardingSizeState extends State<OnBoardingSize> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () => setState(() {
-                        final int newVal = val - 1;
-                        val = newVal.clamp(min, max);
-                      }),
+                      onPressed: () =>
+                          setState(() {
+                            final int newVal = val - 1;
+                            val = newVal.clamp(min, max);
+                          }),
                     ),
                   ],
                 ),
@@ -55,10 +56,11 @@ class _OnBoardingSizeState extends State<OnBoardingSize> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () => setState(() {
-                        final int newVal = val + 1;
-                        val = newVal.clamp(min, max);
-                      }),
+                      onPressed: () =>
+                          setState(() {
+                            final int newVal = val + 1;
+                            val = newVal.clamp(min, max);
+                          }),
                     ),
                   ],
                 ),
