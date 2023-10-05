@@ -63,7 +63,6 @@ class _HomescreenState extends State<Homescreen> {
       bottomNavigationBar: BottomNavigationBar(
         // Fixed so that it does not expand and shift other icons when tapped
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.lightGreen,
         selectedItemColor: Colors.brown,
         unselectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[

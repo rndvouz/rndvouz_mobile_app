@@ -1,6 +1,5 @@
 import 'package:app/home_screen.dart';
 import 'package:app/login_page.dart';
-import 'package:app/setup_complete.dart';
 import 'package:app/sign_up_size.dart';
 
 import 'package:flutter/material.dart';
@@ -18,8 +17,14 @@ ThemeData _buildAppTheme() {
       error: errorRed,
     ),
     scaffoldBackgroundColor: colorCream,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: colorCream,
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: colorGreen1,
     ),
   );
 }
