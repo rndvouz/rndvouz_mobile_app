@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'homescreen.dart';
+import 'home_screen.dart';
+import 'user_type_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
@@ -107,6 +108,10 @@ class LoginPage extends StatelessWidget {
                 const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserTypePage()));
                     // Handle "Sign Up" action here
                   },
                   child: const Text(
