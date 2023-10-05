@@ -50,7 +50,7 @@ class SignUpSizeState extends State<SignUpSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, "/homescreen");
+                                Navigator.pushNamed(context, "/setup_complete");
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(140.0, 48.0)),

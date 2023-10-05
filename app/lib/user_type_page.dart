@@ -7,7 +7,6 @@ class UserTypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 33.0, left: 10.0),
         child: Column(
@@ -19,13 +18,9 @@ class UserTypePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                  ),
                   child: const Text(
                     'Back to Login',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 10,
                     ),
                   ),

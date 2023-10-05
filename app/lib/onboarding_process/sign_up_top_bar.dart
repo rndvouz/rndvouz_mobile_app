@@ -1,3 +1,4 @@
+import 'package:app/colors.dart';
 import 'package:flutter/material.dart';
 
 class SignUpTopBar extends StatelessWidget {
@@ -57,7 +58,7 @@ class SignUpTopBar extends StatelessWidget {
                       children: [
                         Text(
                           field['title']!,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
                     ),
@@ -81,7 +82,7 @@ class SignUpTopBar extends StatelessWidget {
           ),
         ),
         Container(
-          color: Colors.cyan,
+          color: colorCream2,
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,8 +91,8 @@ class SignUpTopBar extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   color: label['state']!.toLowerCase() == state
-                      ? Colors.amber
-                      : Colors.cyan,
+                      ? colorGreen1
+                      : colorCream2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [Text(label['state']!)],

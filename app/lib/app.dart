@@ -21,9 +21,9 @@ ThemeData _buildAppTheme() {
       secondary: colorBrown1,
       error: errorRed,
     ),
-    scaffoldBackgroundColor: colorCream,
+    scaffoldBackgroundColor: colorCream1,
     appBarTheme: AppBarTheme(
-      backgroundColor: colorCream,
+      backgroundColor: colorCream1,
       titleTextStyle: TextStyle(
         color: Colors.black,
       ),
@@ -31,6 +31,9 @@ ThemeData _buildAppTheme() {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: colorGreen1,
     ),
+    cardTheme: CardTheme(
+      color: colorCream2,
+    )
   );
 }
 
@@ -49,6 +52,7 @@ class RndvouzApp extends StatelessWidget {
         '/signup_login': (BuildContext context) => const SignUpLogin(),
         '/signup_swipe': (BuildContext context) => OnBoardingSwipe(),
         '/signup_style': (BuildContext context) => const SignUpStyle(),
+        '/setup_complete': (BuildContext context) => SetupComplete(),
         '/homescreen': (BuildContext context) => const Homescreen(),
       },
     );
