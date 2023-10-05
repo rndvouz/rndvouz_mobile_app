@@ -55,6 +55,9 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.brown, //change your color here
+        ),
         title: const Text('RNDVOUZ'),
       ),
       body: Column(
