@@ -1,4 +1,4 @@
-import 'package:app/sign_up_top_bar.dart';
+import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 

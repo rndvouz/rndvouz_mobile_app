@@ -1,7 +1,8 @@
+import 'package:app/onboarding_process/onboarding_swipe.dart';
+import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
-import 'user_type_page.dart';
+import 'home_screen/home_screen.dart';
 
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
@@ -111,7 +112,8 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const UserTypePage()));
+                            builder: (context) =>
+                                SignUpTopBar(state: 'login')));
                     // Handle "Sign Up" action here
                   },
                   child: const Text(

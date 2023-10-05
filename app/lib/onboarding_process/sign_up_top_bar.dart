@@ -18,16 +18,16 @@ class SignUpTopBar extends StatelessWidget {
           'This information will be displayed on your account to help others identify you.',
     },
     {
-      'state': 'Style',
-      'title': 'Select Your Style Interests',
-      'description':
-          'Select the styles that you want to see! This will help us cater the app to your interests!',
-    },
-    {
       'state': 'Swipe',
       'title': 'Swipe!',
       'description':
           'Swipe left if you don\'t like the item and right if you do. This will help us gauge your sense of style!',
+    },
+    {
+      'state': 'Style',
+      'title': 'Select Your Style Interests',
+      'description':
+          'Select the styles that you want to see! This will help us cater the app to your interests!',
     },
     {
       'state': 'Measurements',
@@ -110,9 +110,9 @@ class SignUpTopBar extends StatelessWidget {
         return individual[0];
       case 'profile':
         return individual[1];
-      case 'style':
-        return individual[2];
       case 'swipe':
+        return individual[2];
+      case 'style':
         return individual[3];
       case 'measurements':
         return individual[4];
