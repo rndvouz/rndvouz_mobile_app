@@ -14,7 +14,7 @@ class OnBoardingSwipe extends StatefulWidget {
 
 class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
   final List<Merchandise> merchandises =
-      MerchandiseRepository.loadMerchanise(Garment.all);
+      MerchandiseRepository.loadMerchanise(Garment.signup);
 
   int currentIndex = 0;
 

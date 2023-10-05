@@ -22,14 +22,14 @@ class _SignUpStyleState extends State<SignUpStyle> {
         children: <Widget>[
           SignUpTopBar(state: step),
           SizedBox(
-              width: 400.0,
-              height: 400.0,
+              width: 500.0,
+              height: 500.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text("The style step"),
-                  const SizedBox(height: 400.0),
+                  const SizedBox(height: 200.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
