@@ -1,5 +1,6 @@
 import 'package:app/model/garment.dart';
 import 'package:app/model/merchandise_repository.dart';
+import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +23,8 @@ class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
       currentIndex = (currentIndex + 1) % merchandises.length;
 
       if (currentIndex == (merchandises.length - 1)) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SignUpTopBar(state: 'style')));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SignUpStyle()));
         // Handle "Sign Up" action here
       }
     });

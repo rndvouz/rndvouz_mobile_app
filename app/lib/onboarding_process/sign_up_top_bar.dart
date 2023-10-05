@@ -88,7 +88,7 @@ class SignUpTopBar extends StatelessWidget {
             children: [
               for (var label in individual)
                 Container(
-                  padding: EdgeInsets.only(left: 15, right: 15),
+                  padding: EdgeInsets.only(left: 10, right: 10),
                   color: label['state']!.toLowerCase() == state
                       ? Colors.amber
                       : Colors.cyan,
