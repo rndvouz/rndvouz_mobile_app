@@ -34,10 +34,9 @@ class SetupComplete extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.pushNamedAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const Homescreen()),
-                  );
+                    '/', ModalRoute.withName('/login'));
                 },
                 child: Text('Let\'s go!',
                     style: Theme.of(context).textTheme.titleLarge),

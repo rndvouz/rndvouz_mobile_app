@@ -53,7 +53,7 @@ class RndvouzApp extends StatelessWidget {
         '/signup_swipe': (BuildContext context) => OnBoardingSwipe(),
         '/signup_style': (BuildContext context) => const SignUpStyle(),
         '/setup_complete': (BuildContext context) => SetupComplete(),
-        '/homescreen': (BuildContext context) => const Homescreen(),
+        '/': (BuildContext context) => const Homescreen(),
       },
     );
 

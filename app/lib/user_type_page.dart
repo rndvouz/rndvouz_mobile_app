@@ -43,46 +43,65 @@ class UserTypePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Center(
+            Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CardWidget(
-                    'Individual User',
-                    'I\'d like to browse and sell my own items',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SetupLoginPage()),
+                      );
+                    },
+                    child: CardWidget(
+                      'Individual User',
+                      'I\'d like to browse and sell my own items',
+                    ),
                   ),
                   SizedBox(height: 15),
-                  CardWidget(
-                    'Local Business or Shop',
-                    'I\'d like to sell business\'s items on your application',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SetupLoginPage(),
+                        ),
+                      );
+                    },
+                    child: CardWidget(
+                      'Local Business or Shop',
+                      'I\'d like to sell business\'s items on your application',
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 40),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SetupLoginPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                  ),
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
+            // const SizedBox(height: 40),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(right: 20.0),
+            //     child: ElevatedButton(
+            //       onPressed: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (context) => const SetupLoginPage()),
+            //         );
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         padding: const EdgeInsets.symmetric(
+            //             horizontal: 20, vertical: 10),
+            //       ),
+            //       child: const Text(
+            //         'Next',
+            //         style: TextStyle(fontSize: 16),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
