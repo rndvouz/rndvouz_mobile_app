@@ -1,4 +1,4 @@
-import 'package:app/sign_up_top_bar.dart';
+import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -65,6 +65,7 @@ class SignUpSizeState extends State<SignUpSize> {
 
   // Builder method
   Widget _setMeasurementBuilder(String label, int val, int min, int max) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return StatefulBuilder(
       builder: (context, setState) {
         return Column(
@@ -91,6 +92,7 @@ class SignUpSizeState extends State<SignUpSize> {
                     NumberPicker(
                       axis: Axis.horizontal,
                       itemWidth: 90,
+                      // itemWidth: screenWidth * 0.1,
                       value: val,
                       minValue: min,
                       maxValue: max,

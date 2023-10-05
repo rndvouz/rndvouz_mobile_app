@@ -1,3 +1,4 @@
+import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:flutter/material.dart';
 
 class SetupProfilePage extends StatefulWidget {
@@ -58,18 +59,19 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0),
+                        padding: const EdgeInsets.symmetric(vertical: 0),
                       ),
                       child: const Text('Back'),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Handle the "Next" button action
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OnBoardingSwipe()));
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0),
+                        padding: const EdgeInsets.symmetric(vertical: 0),
                       ),
                       child: const Text('Next'),
                     ),
@@ -85,9 +87,9 @@ class SetupProfilePageState extends State<SetupProfilePage> {
 
   Widget _buildTextField(String label, TextEditingController controller,
       {bool isObscure = false,
-        double width = 500,
-        double height = 60,
-        int lines = 1}) {
+      double width = 500,
+      double height = 60,
+      int lines = 1}) {
     return Container(
       width: width, // Set the width
       height: height, // Set the height
@@ -148,4 +150,3 @@ class ProfilePictureUploadButton extends StatelessWidget {
     );
   }
 }
-
