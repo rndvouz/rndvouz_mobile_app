@@ -21,7 +21,7 @@ class SignUpSizeState extends State<SignUpSize> {
             SignUpTopBar(state: 'measurements'),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

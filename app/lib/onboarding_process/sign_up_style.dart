@@ -17,38 +17,50 @@ class _SignUpStyleState extends State<SignUpStyle> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SignUpTopBar(state: step),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text("The style step"),
-                const SizedBox(height: 200.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Column(
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: ElevatedButton(
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16, bottom: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text("The style step"),
+                    const SizedBox(height: 200.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Back'),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignUpSize()));
+                                        builder: (context) => const SignUpSize()));
                               },
                               child: const Text('Next'),
-                            ))
+                            ),
+                          ],
+                        ),
                       ],
                     )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ],
         ),
