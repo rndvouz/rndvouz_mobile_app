@@ -50,7 +50,7 @@ class SignUpSizeState extends State<SignUpSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, "/setup_complete");
+                                Navigator.pushNamedAndRemoveUntil(context, "/setup_complete", (r) => false);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(140.0, 48.0)),

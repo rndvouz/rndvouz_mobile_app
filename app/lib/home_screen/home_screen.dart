@@ -57,8 +57,19 @@ class _HomescreenState extends State<Homescreen> {
       appBar: AppBar(
         title: const Text('RNDVOUZ'),
       ),
-      body: Center(
-        child: _homescreenPages.elementAt(_selectedIndex),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _homescreenPages.elementAt(_selectedIndex),
+          (_selectedIndex == 4)
+              ? ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/login", (r) => false);
+                  },
+                  child: Text("Log Out"))
+              : SizedBox.shrink(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         // Fixed so that it does not expand and shift other icons when tapped
