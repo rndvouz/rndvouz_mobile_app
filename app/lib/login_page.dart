@@ -1,5 +1,6 @@
 import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
+import 'package:app/user_type_page.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen/home_screen.dart';
@@ -112,8 +113,7 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                SignUpTopBar(state: 'login')));
+                            builder: (context) => const UserTypePage()));
                     // Handle "Sign Up" action here
                   },
                   child: const Text(
