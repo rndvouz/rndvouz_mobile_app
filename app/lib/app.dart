@@ -5,6 +5,7 @@ import 'package:app/onboarding_process/sign_up_login.dart';
 import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:app/setup_complete.dart';
 import 'package:app/onboarding_process/sign_up_size.dart';
+import 'package:app/onboarding_process/user_type_page.dart';
 
 
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class RndvouzApp extends StatelessWidget {
         '/signup_swipe': (BuildContext context) => OnBoardingSwipe(),
         '/signup_style': (BuildContext context) => const SignUpStyle(),
         '/setup_complete': (BuildContext context) => SetupComplete(),
+        '/user_type': (BuildContext context) => const UserTypePage(),
         '/': (BuildContext context) => const Homescreen(),
       },
     );
