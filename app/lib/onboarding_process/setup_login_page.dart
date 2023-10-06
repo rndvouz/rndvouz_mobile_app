@@ -1,4 +1,4 @@
-import 'package:app/setup_profile_page.dart';
+import 'package:app/onboarding_process/setup_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 
