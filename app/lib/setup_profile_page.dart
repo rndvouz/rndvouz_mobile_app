@@ -1,6 +1,6 @@
 import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:flutter/material.dart';
-
+import 'package:app/onboarding_process/sign_up_top_bar.dart';
 class SetupProfilePage extends StatefulWidget {
   const SetupProfilePage({Key? key}) : super(key: key);
 
@@ -23,26 +23,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Set Up Your Profile',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'This information will be displayed on \n your account to help others identify you better',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 40),
-                const LinearProgressIndicator(
-                  value: 0.4,
-                  minHeight: 40,
-                ),
+                SignUpTopBar(state: 'profile'),
                 const SizedBox(height: 20), // Add spacing
                 ProfilePictureUploadButton(onPressed: () {}),
                 const SizedBox(height: 20),

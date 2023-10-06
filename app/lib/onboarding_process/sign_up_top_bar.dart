@@ -10,13 +10,14 @@ class SignUpTopBar extends StatelessWidget {
     {
       'state': 'Login',
       'title': 'Set Up Your Login',
-      'description': 'This information will be used to login to your account.',
+      'description':
+          'This information will be used to login to \n your account.',
     },
     {
       'state': 'Profile',
       'title': 'Set Up Your Profile',
       'description':
-          'This information will be displayed on your account to help others identify you.',
+          'This information will be displayed on \n your account to help others identify you.',
     },
     {
       'state': 'Swipe',
@@ -45,8 +46,8 @@ class SignUpTopBar extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 15, right: 15),
-          child: Container(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: SizedBox(
             height: 125,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,11 +59,17 @@ class SignUpTopBar extends StatelessWidget {
                       children: [
                         Text(
                           field['title']!,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25.0,
+                              ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -89,7 +96,7 @@ class SignUpTopBar extends StatelessWidget {
             children: [
               for (var label in individual)
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   color: label['state']!.toLowerCase() == state
                       ? colorGreen1
                       : colorCream2,
