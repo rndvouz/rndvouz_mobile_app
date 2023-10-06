@@ -1,5 +1,6 @@
-import 'package:app/setup_profile_page.dart';
+import 'package:app/onboarding_process/setup_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:app/onboarding_process/sign_up_top_bar.dart';
 
 class SetupLoginPage extends StatefulWidget {
   const SetupLoginPage({Key? key}) : super(key: key);
@@ -24,26 +25,7 @@ class SetupLoginPageState extends State<SetupLoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Set Up Your Login',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'This information will be used to login to \n your account',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 40),
-                const LinearProgressIndicator(
-                  value: 0.2,
-                  minHeight: 40,
-                ),
+                SignUpTopBar(state: 'login'),
                 const SizedBox(height: 40),
                 _buildTextField("Email Address", emailController),
                 const SizedBox(height: 10),

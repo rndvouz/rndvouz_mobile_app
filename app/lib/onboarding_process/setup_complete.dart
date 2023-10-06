@@ -1,4 +1,3 @@
-import 'package:app/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SetupComplete extends StatelessWidget {
@@ -25,13 +24,13 @@ class SetupComplete extends StatelessWidget {
                 'Thank You!',
                 style: Theme.of(context).textTheme.displayLarge,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Welcome, <insert name here>! Your account has been created!',
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
