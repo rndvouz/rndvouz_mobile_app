@@ -21,7 +21,8 @@ class SignUpSizeState extends State<SignUpSize> {
             SignUpTopBar(state: 'measurements'),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 30),
+                padding: const EdgeInsets.only(
+                    top: 15, left: 15, right: 15, bottom: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,8 +42,8 @@ class SignUpSizeState extends State<SignUpSize> {
                                 Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(140.0, 48.0)),
-                              child: Text('Back'),
+                                  fixedSize: const Size(140.0, 48.0)),
+                              child: const Text('Back'),
                             )
                           ],
                         ),
@@ -50,11 +51,12 @@ class SignUpSizeState extends State<SignUpSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(context, "/setup_complete", (r) => false);
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, "/setup_complete", (r) => false);
                               },
                               style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(140.0, 48.0)),
-                              child: Text('Finished'),
+                                  fixedSize: const Size(140.0, 48.0)),
+                              child: const Text('Finished'),
                             )
                           ],
                         ),
