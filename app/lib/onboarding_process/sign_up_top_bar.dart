@@ -1,3 +1,9 @@
+import 'package:app/colors.dart';
+import 'package:app/onboarding_process/onboarding_swipe.dart';
+import 'package:app/onboarding_process/setup_login_page.dart';
+import 'package:app/onboarding_process/setup_profile_page.dart';
+import 'package:app/onboarding_process/sign_up_size.dart';
+import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:flutter/material.dart';
 
 class SignUpTopBar extends StatelessWidget {
@@ -9,13 +15,14 @@ class SignUpTopBar extends StatelessWidget {
     {
       'state': 'Login',
       'title': 'Set Up Your Login',
-      'description': 'This information will be used to login to your account.',
+      'description':
+          'This information will be used to login to \n your account.',
     },
     {
       'state': 'Profile',
       'title': 'Set Up Your Profile',
       'description':
-          'This information will be displayed on your account to help others identify you.',
+          'This information will be displayed on \n your account to help others identify you.',
     },
     {
       'state': 'Swipe',
@@ -27,7 +34,7 @@ class SignUpTopBar extends StatelessWidget {
       'state': 'Style',
       'title': 'Select Your Style Interests',
       'description':
-          'Heres the results from your swipes. Feel free to choose more!',
+          'Select the styles that you want to see! This will help us cater the app to your interests!',
     },
     {
       'state': 'Measurements',
@@ -40,12 +47,18 @@ class SignUpTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final field = getField();
-
+    int index = 0;
+    for (int i = 0; i < individual.length; i++) {
+      if (individual[i]['state']!.toLowerCase() == state) {
+        index = i;
+        break;
+      }
+    }
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 15, right: 15),
-          child: Container(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: SizedBox(
             height: 125,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,11 +70,17 @@ class SignUpTopBar extends StatelessWidget {
                       children: [
                         Text(
                           field['title']!,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25.0,
+                              ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -81,20 +100,18 @@ class SignUpTopBar extends StatelessWidget {
           ),
         ),
         Container(
-          color: Colors.cyan,
+          color: colorCream2,
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              for (var label in individual)
+              for (int i = 0; i < individual.length; i++)
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  color: label['state']!.toLowerCase() == state
-                      ? Colors.amber
-                      : Colors.cyan,
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  color: i <= index ? colorGreen1 : colorCream2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text(label['state']!)],
+                    children: [Text(individual[i]['state']!)],
                   ),
                 ),
             ],

@@ -55,15 +55,28 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.brown, //change your color here
+        ),
         title: const Text('RNDVOUZ'),
       ),
-      body: Center(
-        child: _homescreenPages.elementAt(_selectedIndex),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _homescreenPages.elementAt(_selectedIndex),
+          (_selectedIndex == 4)
+              ? ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/login", (r) => false);
+                  },
+                  child: Text("Log Out"))
+              : SizedBox.shrink(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         // Fixed so that it does not expand and shift other icons when tapped
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.lightGreen,
         selectedItemColor: Colors.brown,
         unselectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[

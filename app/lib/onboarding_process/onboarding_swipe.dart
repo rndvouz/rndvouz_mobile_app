@@ -8,6 +8,8 @@ import '../model/merchandise.dart';
 import 'package:app/swipe_card.dart';
 
 class OnBoardingSwipe extends StatefulWidget {
+  const OnBoardingSwipe({super.key});
+
   @override
   _OnBoardingSwipeState createState() => _OnBoardingSwipeState();
 }

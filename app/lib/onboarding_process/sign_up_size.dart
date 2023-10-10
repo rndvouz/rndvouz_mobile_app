@@ -19,42 +19,49 @@ class SignUpSizeState extends State<SignUpSize> {
         child: Column(
           children: [
             SignUpTopBar(state: 'measurements'),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                children: [
-                  _setMeasurementBuilder('Bust', 35, 15, 50),
-                  _setMeasurementBuilder('Waist', 27, 15, 50),
-                  _setMeasurementBuilder('Hips', 38, 15, 50),
-                  _setMeasurementBuilder('Inseam', 28, 15, 50),
-                  _setMeasurementBuilder('Sleeve Length', 24, 15, 50),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(140.0, 48.0)),
-                            child: Text('Back'),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(140.0, 48.0)),
-                            child: Text('Finished'),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _setMeasurementBuilder('Bust', 35, 15, 50),
+                    _setMeasurementBuilder('Waist', 27, 15, 50),
+                    _setMeasurementBuilder('Hips', 38, 15, 50),
+                    _setMeasurementBuilder('Inseam', 28, 15, 50),
+                    _setMeasurementBuilder('Sleeve Length', 24, 15, 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: <Widget>[
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(140.0, 48.0)),
+                              child: Text('Back'),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamedAndRemoveUntil(context, "/setup_complete", (r) => false);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(140.0, 48.0)),
+                              child: Text('Finished'),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -71,7 +78,6 @@ class SignUpSizeState extends State<SignUpSize> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25),
             Text(label),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +97,7 @@ class SignUpSizeState extends State<SignUpSize> {
                   children: [
                     NumberPicker(
                       axis: Axis.horizontal,
-                      itemWidth: 90,
+                      itemWidth: 80,
                       // itemWidth: screenWidth * 0.1,
                       value: val,
                       minValue: min,
@@ -119,7 +125,6 @@ class SignUpSizeState extends State<SignUpSize> {
                 ),
               ],
             ),
-            SizedBox(height: 25)
           ],
         );
       },
