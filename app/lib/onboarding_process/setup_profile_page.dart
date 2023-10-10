@@ -1,5 +1,4 @@
 import 'package:app/onboarding_process/onboarding_swipe.dart';
-import 'package:app/onboarding_process/setup_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 class SetupProfilePage extends StatefulWidget {
@@ -38,10 +37,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SetupLoginPage()));
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 0),

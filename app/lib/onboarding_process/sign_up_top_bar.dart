@@ -47,7 +47,13 @@ class SignUpTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final field = getField();
-
+    int index = 0;
+    for(int i = 0; i < individual.length; i++) {
+      if (individual[i]['state']!.toLowerCase() == state) {
+        index = i;
+        break;
+      }
+    }
     return Column(
       children: [
         Padding(
@@ -103,41 +109,15 @@ class SignUpTopBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              for (var label in individual)
-                GestureDetector(
-                  onTap: () {
-                    if (label['state']!.toLowerCase() == 'login') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SetupLoginPage(),
-                      ));
-                    } else if (label['state']!.toLowerCase() == 'profile') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SetupProfilePage(),
-                      ));
-                    } else if (label['state']!.toLowerCase() == 'swipe') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OnBoardingSwipe(),
-                      ));
-                    } else if (label['state']!.toLowerCase() == 'style') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SignUpStyle(),
-                      ));
-                    }
-                    else if (label['state']!.toLowerCase() == 'measurements') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SignUpSize(),
-                      ));
-                    }
-                  },
-                  child: Container(
+              for (int i = 0; i < individual.length; i++)
+                  Container(
                     padding: const EdgeInsets.only(left: 10, right: 10),
-                    color: label['state']!.toLowerCase() == state
+                    color: i <= index
                         ? colorGreen1
                         : colorCream2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text(label['state']!)],
-                    ),
+                      children: [Text(individual[i]['state']!)],
                   ),
                 ),
             ],

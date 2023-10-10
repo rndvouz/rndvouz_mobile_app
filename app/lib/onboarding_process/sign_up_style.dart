@@ -1,4 +1,3 @@
-import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:app/onboarding_process/sign_up_size.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +37,7 @@ class _SignUpStyleState extends State<SignUpStyle> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => OnBoardingSwipe()));
+                                Navigator.pop(context);
                               },
                               child: const Text('Back'),
                             ),

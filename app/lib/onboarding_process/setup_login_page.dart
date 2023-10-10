@@ -1,5 +1,4 @@
 import 'package:app/onboarding_process/setup_profile_page.dart';
-import 'package:app/onboarding_process/user_type_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 
@@ -42,11 +41,7 @@ class SetupLoginPageState extends State<SetupLoginPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UserTypePage()),
-                        );
+                        Navigator.pop(context);
                       },
                       child: const Text('Back'),
                     ),

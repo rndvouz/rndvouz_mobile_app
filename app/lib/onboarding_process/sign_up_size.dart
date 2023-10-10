@@ -1,4 +1,3 @@
-import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -39,10 +38,7 @@ class SignUpSizeState extends State<SignUpSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SignUpStyle()));
+                                Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(140.0, 48.0)),
