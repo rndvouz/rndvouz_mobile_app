@@ -6,7 +6,6 @@ import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:app/onboarding_process/setup_complete.dart';
 import 'package:app/onboarding_process/sign_up_size.dart';
 
-
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -16,25 +15,24 @@ final ThemeData _appTheme = _buildAppTheme();
 ThemeData _buildAppTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    colorScheme: base.colorScheme.copyWith(
-      primary: colorGreen1,
-      secondary: colorBrown1,
-      error: errorRed,
-    ),
-    scaffoldBackgroundColor: colorCream1,
-    appBarTheme: AppBarTheme(
-      backgroundColor: colorCream1,
-      titleTextStyle: TextStyle(
-        color: Colors.black,
+      colorScheme: base.colorScheme.copyWith(
+        primary: colorGreen1,
+        secondary: colorBrown1,
+        error: errorRed,
       ),
-    ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: colorGreen1,
-    ),
-    cardTheme: CardTheme(
-      color: colorCream2,
-    )
-  );
+      scaffoldBackgroundColor: colorCream1,
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorCream1,
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colorGreen1,
+      ),
+      cardTheme: CardTheme(
+        color: colorCream2,
+      ));
 }
 
 class RndvouzApp extends StatelessWidget {
