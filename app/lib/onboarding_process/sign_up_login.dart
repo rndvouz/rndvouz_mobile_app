@@ -9,6 +9,7 @@ class SignUpLogin extends StatefulWidget {
 }
 
 class _SignUpStyleLogin extends State<SignUpLogin> {
+  @override
   Widget build(BuildContext context) {
     const String step = 'login';
 
