@@ -32,9 +32,9 @@ class SignUpTopBar extends StatelessWidget {
     },
     {
       'state': 'Style',
-      'title': 'Select Your Style Interests',
+      'title': 'Your Style Interests',
       'description':
-          'Select the styles that you want to see! This will help us cater the app to your interests!',
+          'These are the results from your swipes. Feel free to select more of what you like!',
     },
     {
       'state': 'Measurements',

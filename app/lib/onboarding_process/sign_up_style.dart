@@ -21,58 +21,178 @@ class _SignUpStyleState extends State<SignUpStyle> {
             bottomRight: Radius.circular(30)));
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SignUpTopBar(state: step),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 16.0, left: 16, right: 16, bottom: 30),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SignUpTopBar(state: step),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+                width: 500.0,
+                height: 500.0,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text("The style step"),
-                    const SizedBox(height: 200.0),
+                  children: <Widget>[
+                    Wrap(
+                      spacing: 5.0,
+                      children: <Widget>[
+                        Chip(
+                          label: const Text('Athleisure'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        const Chip(
+                          label: Text('Bohemian'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Business Casual'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        Chip(
+                          label: const Text('Casual'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        const Chip(
+                          label: Text('Chic'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Classic'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        Chip(
+                          label: const Text('Contemporary'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        Chip(
+                          label: const Text('Western'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        const Chip(
+                          label: Text('Electic'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Edgy'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Elegant'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Formal'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Gothic'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Hipster'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        Chip(
+                          label: const Text('Loungewear'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        const Chip(
+                          label: Text('Athleisure'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Minimalist'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Modern'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Outdoors'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        Chip(
+                          label: const Text('Preppy'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        const Chip(
+                          label: Text('Retro'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        const Chip(
+                          label: Text('Streetwear'),
+                          shape: roundBorder,
+                          backgroundColor: Colors.grey,
+                        ),
+                        Chip(
+                          label: const Text('Vintage'),
+                          shape: roundBorder,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 35.0,
+                      width: 200.0,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Back'),
-                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SignUpSize()));
+                                  },
+                                  child: const Text('Next'),
+                                ))
                           ],
-                        ),
-                        Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignUpSize()));
-                              },
-                              child: const Text('Next'),
-                            ),
-                          ],
-                        ),
+                        )
                       ],
                     )
                   ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                )),
+          ),
+        ],
+      )),
     );
   }
 }
