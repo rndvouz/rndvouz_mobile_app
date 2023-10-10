@@ -1,9 +1,4 @@
 import 'package:app/colors.dart';
-import 'package:app/onboarding_process/onboarding_swipe.dart';
-import 'package:app/onboarding_process/setup_login_page.dart';
-import 'package:app/onboarding_process/setup_profile_page.dart';
-import 'package:app/onboarding_process/sign_up_size.dart';
-import 'package:app/onboarding_process/sign_up_style.dart';
 import 'package:flutter/material.dart';
 
 class SignUpTopBar extends StatelessWidget {

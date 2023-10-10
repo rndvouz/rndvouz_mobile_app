@@ -1,6 +1,7 @@
 import 'package:app/onboarding_process/setup_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/onboarding_process/sign_up_top_bar.dart';
+import 'package:app/data_model/user_db.dart';
 
 class SetupLoginPage extends StatefulWidget {
   const SetupLoginPage({Key? key}) : super(key: key);
@@ -21,7 +22,8 @@ class SetupLoginPageState extends State<SetupLoginPage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView( // Wrap the entire content with SingleChildScrollView
+          child: SingleChildScrollView(
+            // Wrap the entire content with SingleChildScrollView
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -31,7 +33,8 @@ class SetupLoginPageState extends State<SetupLoginPage> {
                 const SizedBox(height: 10),
                 _buildTextField("Username", usernameController),
                 const SizedBox(height: 10),
-                _buildTextField("Password", passwordController, isObscure: true),
+                _buildTextField("Password", passwordController,
+                    isObscure: true),
                 const SizedBox(height: 10),
                 _buildTextField("Re-type Password", retypePasswordController,
                     isObscure: true),
@@ -47,11 +50,43 @@ class SetupLoginPageState extends State<SetupLoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SetupProfilePage()),
-                        );
+                        final email = emailController.text;
+                        final username = usernameController.text;
+                        final password = passwordController.text;
+                        final retypePassword = retypePasswordController.text;
+                        final newUser;
+
+                        if (password == retypePassword) {
+                          newUser = User(
+                            username: username,
+                            email: email,
+                            password: password,
+                          );
+
+                          try {
+                            userDB.userAdd(newUser);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SetupProfilePage(newUser: newUser)),
+                            );
+                          } catch (e) {
+                            final exceptionMessage =
+                                e.toString().replaceAll("Exception:", "");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(exceptionMessage),
+                              ),
+                            );
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Passwords do not match'),
+                            ),
+                          );
+                        }
                       },
                       child: const Text('Next'),
                     ),
