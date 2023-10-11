@@ -1,25 +1,28 @@
+import 'package:app/data_model/user_db.dart';
+import 'package:app/setup_process/setup_complete_page.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-import 'individual_top_bar.dart';
+import 'setup_top_bar.dart';
 
 class IndividualSetupSize extends StatefulWidget {
-  const IndividualSetupSize({super.key});
+  final User newUser;
+
+  const IndividualSetupSize({Key? key, required this.newUser})
+      : super(key: key);
 
   @override
   SignUpSizeState createState() => SignUpSizeState();
 }
 
 class SignUpSizeState extends State<IndividualSetupSize> {
-  final String step = 'measurements';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            IndividualSetupTopBar(state: 'measurements'),
+            SetupTopBar(state: 'measurements'),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -52,8 +55,12 @@ class SignUpSizeState extends State<IndividualSetupSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    "/ind_setup_complete", (r) => false);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SetupComplete(
+                                            newUser: widget.newUser)),
+                                    (r) => false);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(140.0, 48.0)),

@@ -1,19 +1,22 @@
+import 'package:app/data_model/user_db.dart';
+import 'package:app/setup_process/business_setup_contact.dart';
 import 'package:flutter/material.dart';
 
-import 'individual_size.dart';
-import 'individual_top_bar.dart';
+import 'individual_setup_size.dart';
+import 'setup_top_bar.dart';
 
-class IndividualSetupStyle extends StatefulWidget {
-  const IndividualSetupStyle({super.key});
+class SetupStyle extends StatefulWidget {
+  final User newUser;
+
+  const SetupStyle({Key? key, required this.newUser}) : super(key: key);
 
   @override
   _SignUpStyleState createState() => _SignUpStyleState();
 }
 
-class _SignUpStyleState extends State<IndividualSetupStyle> {
+class _SignUpStyleState extends State<SetupStyle> {
   @override
   Widget build(BuildContext context) {
-    const String step = 'style';
     const OutlinedBorder roundBorder = RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -27,7 +30,9 @@ class _SignUpStyleState extends State<IndividualSetupStyle> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          IndividualSetupTopBar(state: step),
+          SetupTopBar(state: widget.newUser.isBusiness
+                        ? 'styleBusiness'
+                        : 'style'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -180,8 +185,12 @@ class _SignUpStyleState extends State<IndividualSetupStyle> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                const IndividualSetupSize()));
+                                            builder: (context) => widget
+                                                    .newUser.isBusiness
+                                                ? BusinessSetupContact(
+                                                    newUser: widget.newUser)
+                                                : IndividualSetupSize(
+                                                    newUser: widget.newUser)));
                                   },
                                   child: const Text('Next'),
                                 ))
