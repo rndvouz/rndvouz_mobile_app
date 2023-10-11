@@ -191,12 +191,6 @@ class MerchandiseRepository {
           forOnboarding: false),
       Merchandise(
           primaryStyle: PrimaryStyle.casual,
-          garment: Garment.top,
-          id: 26,
-          merchName: "Casual Cute Knit Top",
-          forOnboarding: false),
-      Merchandise(
-          primaryStyle: PrimaryStyle.casual,
           secondaryStyle: SecondaryStyle.minimalist,
           garment: Garment.longsleeve,
           id: 27,
