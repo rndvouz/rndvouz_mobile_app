@@ -137,12 +137,16 @@ class SetupTopBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               for (int i = 0; i < user.length; i++)
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  color: i <= index ? colorGreen1 : colorCream2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text(user[i]['state']!)],
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    color: i <= index ? colorGreen1 : colorCream2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text(user[i]['state']!)],
+                    ),
                   ),
                 ),
             ],

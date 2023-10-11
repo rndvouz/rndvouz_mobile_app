@@ -80,8 +80,11 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => widget.newUser.isBusiness ? SetupStyle(newUser: widget.newUser) : IndividualSetupSwipe(
-                                      newUser: widget.newUser)));
+                                  builder: (context) =>
+                                      widget.newUser.isBusiness
+                                          ? SetupStyle(newUser: widget.newUser)
+                                          : IndividualSetupSwipe(
+                                              newUser: widget.newUser)));
                         } catch (e) {
                           final exceptionMessage =
                               e.toString().replaceAll("Exception:", "");
