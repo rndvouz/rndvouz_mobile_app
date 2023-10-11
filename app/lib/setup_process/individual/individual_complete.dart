@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SetupComplete extends StatelessWidget {
-  SetupComplete({super.key});
+class IndividualSetupComplete extends StatelessWidget {
+  IndividualSetupComplete({super.key});
 
   final List<String> messages = [
     'Welcome, <insert name here>! Your account has been created!',
@@ -34,8 +34,7 @@ class SetupComplete extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/', ModalRoute.withName('/login'));
+                      context, '/', ModalRoute.withName('/login'));
                 },
                 child: Text('Let\'s go!',
                     style: Theme.of(context).textTheme.titleLarge),

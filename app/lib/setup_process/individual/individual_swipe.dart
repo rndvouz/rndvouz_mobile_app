@@ -1,20 +1,21 @@
 import 'package:app/model/garment.dart';
 import 'package:app/model/merchandise_repository.dart';
-import 'package:app/onboarding_process/sign_up_style.dart';
-import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../model/merchandise.dart';
+import '../../model/merchandise.dart';
 import 'package:app/swipe_card.dart';
 
-class OnBoardingSwipe extends StatefulWidget {
-  const OnBoardingSwipe({super.key});
+import 'individual_style.dart';
+import 'individual_top_bar.dart';
+
+class IndividualSetupSwipe extends StatefulWidget {
+  const IndividualSetupSwipe({super.key});
 
   @override
   _OnBoardingSwipeState createState() => _OnBoardingSwipeState();
 }
 
-class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
+class _OnBoardingSwipeState extends State<IndividualSetupSwipe> {
   final List<Merchandise> merchandises =
       MerchandiseRepository.loadMerchanise(Garment.signup);
 
@@ -25,9 +26,10 @@ class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
       currentIndex = (currentIndex + 1) % merchandises.length;
 
       if (currentIndex == (merchandises.length - 1)) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SignUpStyle()));
-        // Handle "Sign Up" action here
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const IndividualSetupStyle()));
       }
     });
   }
@@ -41,7 +43,7 @@ class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SignUpTopBar(state: step),
+          IndividualSetupTopBar(state: step),
           SwipeCard(merchandise: merchandises[currentIndex]),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

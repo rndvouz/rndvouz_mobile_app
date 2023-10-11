@@ -1,17 +1,35 @@
-import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:flutter/material.dart';
-import 'package:app/onboarding_process/sign_up_top_bar.dart';
-class SetupProfilePage extends StatefulWidget {
-  const SetupProfilePage({Key? key}) : super(key: key);
+import 'package:app/data_model/user_db.dart';
+
+import 'individual_swipe.dart';
+import 'individual_top_bar.dart';
+
+class IndividualSetupProfilePage extends StatefulWidget {
+  final User newUser;
+
+  const IndividualSetupProfilePage({Key? key, required this.newUser})
+      : super(key: key);
 
   @override
   SetupProfilePageState createState() => SetupProfilePageState();
 }
 
-class SetupProfilePageState extends State<SetupProfilePage> {
-  TextEditingController displayNameController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+class SetupProfilePageState extends State<IndividualSetupProfilePage> {
+  late TextEditingController displayNameController;
+  late TextEditingController usernameController;
+  late User user;
   TextEditingController biographyController = TextEditingController();
+
+  SetupProfilePageState();
+
+  @override
+  void initState() {
+    super.initState();
+    displayNameController =
+        TextEditingController(text: widget.newUser.displayName);
+    usernameController = TextEditingController(text: widget.newUser.username);
+    user = widget.newUser;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +41,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SignUpTopBar(state: 'profile'),
+                IndividualSetupTopBar(state: 'profile'),
                 const SizedBox(height: 20), // Add spacing
                 ProfilePictureUploadButton(onPressed: () {}),
                 const SizedBox(height: 20),
@@ -33,23 +51,43 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                     width: 500, height: 120, lines: 3),
                 const SizedBox(height: 40),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     padding: const EdgeInsets.symmetric(vertical: 0),
+                    //   ),
+                    //   child: const Text('Back'),
+                    // ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 0),
-                      ),
-                      child: const Text('Back'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OnBoardingSwipe()));
+                        final updatedDisplayName = displayNameController.text;
+                        final updatedBiography = biographyController.text;
+                        final updatedUsername = usernameController.text;
+                        try {
+                          userDB.updateUserProfileFields(
+                            user,
+                            displayName: updatedDisplayName,
+                            newUsername: updatedUsername,
+                            biography: updatedBiography,
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const IndividualSetupSwipe()));
+                        } catch (e) {
+                          final exceptionMessage =
+                              e.toString().replaceAll("Exception:", "");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(exceptionMessage),
+                            ),
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 0),
