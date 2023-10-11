@@ -27,7 +27,6 @@ class _OnBoardingSwipeState extends State<OnBoardingSwipe> {
       if (currentIndex == (merchandises.length - 1)) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const SignUpStyle()));
-        // Handle "Sign Up" action here
       }
     });
   }

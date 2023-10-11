@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app/data_model/user_db.dart';
-import 'home_screen/home_screen.dart';
+import 'home_screen/home_bottom_nav_bar.dart';
 import 'package:app/onboarding_process/user_type_page.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -83,24 +84,26 @@ class _LoginPageState extends State<LoginPage> {
                 final username = _usernameController.text;
                 final password = _passwordController.text;
                 User? user;
-              try {
-                final user = userDB.getUser(username);
-                if(user != null && user.password == password){
+                try {
+                  final user = userDB.getUser(username);
+                  if (user != null && user.password == password) {
+                    setState(() {
+                      errorMessage = "";
+                    });
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeBottomNavBar()));
+                  } else {
+                    setState(() {
+                      errorMessage = "Invalid password";
+                    });
+                  }
+                } catch (e) {
                   setState(() {
-                    errorMessage = "";
-                  });
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Homescreen()));
-                } else {
-                  setState(() {
-                    errorMessage = "Invalid password";
+                    errorMessage = "User not found";
                   });
                 }
-              } catch(e) {
-                setState(() {
-                  errorMessage = "User not found";
-                });
-              }
-
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
@@ -131,7 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                 const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UserTypePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserTypePage()));
                     // Handle "Sign Up" action here
                   },
                   child: const Text(

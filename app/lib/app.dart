@@ -1,4 +1,4 @@
-import 'package:app/home_screen/home_screen.dart';
+import 'package:app/home_screen/home_bottom_nav_bar.dart';
 import 'package:app/login_page.dart';
 import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:app/onboarding_process/sign_up_login.dart';
@@ -51,7 +51,7 @@ class RndvouzApp extends StatelessWidget {
         '/signup_swipe': (BuildContext context) => OnBoardingSwipe(),
         '/signup_style': (BuildContext context) => const SignUpStyle(),
         '/setup_complete': (BuildContext context) => SetupComplete(),
-        '/': (BuildContext context) => const Homescreen(),
+        '/': (BuildContext context) => const HomeBottomNavBar(),
       },
     );
 
