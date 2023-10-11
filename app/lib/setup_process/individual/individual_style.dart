@@ -1,15 +1,16 @@
-import 'package:app/onboarding_process/sign_up_size.dart';
-import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 
-class SignUpStyle extends StatefulWidget {
-  const SignUpStyle({super.key});
+import 'individual_size.dart';
+import 'individual_top_bar.dart';
+
+class IndividualSetupStyle extends StatefulWidget {
+  const IndividualSetupStyle({super.key});
 
   @override
   _SignUpStyleState createState() => _SignUpStyleState();
 }
 
-class _SignUpStyleState extends State<SignUpStyle> {
+class _SignUpStyleState extends State<IndividualSetupStyle> {
   @override
   Widget build(BuildContext context) {
     const String step = 'style';
@@ -26,7 +27,7 @@ class _SignUpStyleState extends State<SignUpStyle> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SignUpTopBar(state: step),
+          IndividualSetupTopBar(state: step),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -180,7 +181,7 @@ class _SignUpStyleState extends State<SignUpStyle> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const SignUpSize()));
+                                                const IndividualSetupSize()));
                                   },
                                   child: const Text('Next'),
                                 ))

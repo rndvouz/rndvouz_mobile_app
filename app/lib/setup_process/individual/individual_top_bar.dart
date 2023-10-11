@@ -1,10 +1,10 @@
 import 'package:app/colors.dart';
 import 'package:flutter/material.dart';
 
-class SignUpTopBar extends StatelessWidget {
+class IndividualSetupTopBar extends StatelessWidget {
   final String state;
 
-  SignUpTopBar({super.key, required this.state});
+  IndividualSetupTopBar({super.key, required this.state});
 
   final individual = [
     {

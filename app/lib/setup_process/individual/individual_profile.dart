@@ -1,18 +1,20 @@
-import 'package:app/onboarding_process/onboarding_swipe.dart';
 import 'package:flutter/material.dart';
-import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:app/data_model/user_db.dart';
 
-class SetupProfilePage extends StatefulWidget {
+import 'individual_swipe.dart';
+import 'individual_top_bar.dart';
+
+class IndividualSetupProfilePage extends StatefulWidget {
   final User newUser;
 
-  const SetupProfilePage({Key? key, required this.newUser}) : super(key: key);
+  const IndividualSetupProfilePage({Key? key, required this.newUser})
+      : super(key: key);
 
   @override
   SetupProfilePageState createState() => SetupProfilePageState();
 }
 
-class SetupProfilePageState extends State<SetupProfilePage> {
+class SetupProfilePageState extends State<IndividualSetupProfilePage> {
   late TextEditingController displayNameController;
   late TextEditingController usernameController;
   late User user;
@@ -39,7 +41,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SignUpTopBar(state: 'profile'),
+                IndividualSetupTopBar(state: 'profile'),
                 const SizedBox(height: 20), // Add spacing
                 ProfilePictureUploadButton(onPressed: () {}),
                 const SizedBox(height: 20),
@@ -76,7 +78,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const OnBoardingSwipe()));
+                                      const IndividualSetupSwipe()));
                         } catch (e) {
                           final exceptionMessage =
                               e.toString().replaceAll("Exception:", "");

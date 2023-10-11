@@ -1,15 +1,16 @@
-import 'package:app/onboarding_process/sign_up_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-class SignUpSize extends StatefulWidget {
-  const SignUpSize({super.key});
+import 'individual_top_bar.dart';
+
+class IndividualSetupSize extends StatefulWidget {
+  const IndividualSetupSize({super.key});
 
   @override
   SignUpSizeState createState() => SignUpSizeState();
 }
 
-class SignUpSizeState extends State<SignUpSize> {
+class SignUpSizeState extends State<IndividualSetupSize> {
   final String step = 'measurements';
 
   @override
@@ -18,10 +19,11 @@ class SignUpSizeState extends State<SignUpSize> {
       body: SafeArea(
         child: Column(
           children: [
-            SignUpTopBar(state: 'measurements'),
+            IndividualSetupTopBar(state: 'measurements'),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 30),
+                padding: const EdgeInsets.only(
+                    top: 15, left: 15, right: 15, bottom: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +52,8 @@ class SignUpSizeState extends State<SignUpSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(context, "/setup_complete", (r) => false);
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    "/ind_setup_complete", (r) => false);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(140.0, 48.0)),
@@ -72,7 +75,6 @@ class SignUpSizeState extends State<SignUpSize> {
 
   // Builder method
   Widget _setMeasurementBuilder(String label, int val, int min, int max) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return StatefulBuilder(
       builder: (context, setState) {
         return Column(
