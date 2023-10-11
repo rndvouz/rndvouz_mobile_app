@@ -20,6 +20,10 @@ ThemeData _buildAppTheme() {
         secondary: colorBrown1,
         error: errorRed,
       ),
+      useMaterial3: false,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       scaffoldBackgroundColor: colorCream1,
       appBarTheme: AppBarTheme(
         backgroundColor: colorCream1,
