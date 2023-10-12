@@ -1,3 +1,4 @@
+import 'package:app/data_model/user_db.dart';
 import 'package:app/model/garment.dart';
 import 'package:app/model/merchandise_repository.dart';
 import 'package:flutter/material.dart';
@@ -5,17 +6,20 @@ import 'package:flutter/material.dart';
 import '../../model/merchandise.dart';
 import 'package:app/swipe_card.dart';
 
-import 'individual_style.dart';
-import 'individual_top_bar.dart';
+import 'setup_style.dart';
+import 'setup_top_bar.dart';
 
 class IndividualSetupSwipe extends StatefulWidget {
-  const IndividualSetupSwipe({super.key});
+  final User newUser;
+
+  const IndividualSetupSwipe({Key? key, required this.newUser})
+      : super(key: key);
 
   @override
-  _OnBoardingSwipeState createState() => _OnBoardingSwipeState();
+  _IndividualSetupSwipeState createState() => _IndividualSetupSwipeState();
 }
 
-class _OnBoardingSwipeState extends State<IndividualSetupSwipe> {
+class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
   final List<Merchandise> merchandises =
       MerchandiseRepository.loadMerchanise(Garment.signup);
 
@@ -29,21 +33,19 @@ class _OnBoardingSwipeState extends State<IndividualSetupSwipe> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const IndividualSetupStyle()));
+                builder: (context) => SetupStyle(newUser: widget.newUser)));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    const String step = 'swipe';
-
     return Scaffold(
         body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          IndividualSetupTopBar(state: step),
+          SetupTopBar(state: 'swipe'),
           SwipeCard(merchandise: merchandises[currentIndex]),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

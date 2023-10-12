@@ -39,7 +39,9 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SetupLoginPage()),
+                                builder: (context) => SetupLoginPage(
+                                      isBusiness: false,
+                                    )),
                           );
                         },
                         child: CardWidget(
@@ -53,7 +55,9 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SetupLoginPage(),
+                              builder: (context) => SetupLoginPage(
+                                isBusiness: true,
+                              ),
                             ),
                           );
                         },

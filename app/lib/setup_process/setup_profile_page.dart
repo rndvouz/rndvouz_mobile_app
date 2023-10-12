@@ -1,8 +1,9 @@
+import 'package:app/setup_process/setup_style.dart';
 import 'package:flutter/material.dart';
-import 'package:app/data_model/user_db.dart';
+import '../data_model/user_db.dart';
 
-import 'individual/individual_swipe.dart';
-import 'individual/individual_top_bar.dart';
+import 'setup_top_bar.dart';
+import 'individual_setup_swipe.dart';
 
 class SetupProfilePage extends StatefulWidget {
   final User newUser;
@@ -40,7 +41,10 @@ class SetupProfilePageState extends State<SetupProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                IndividualSetupTopBar(state: 'profile'),
+                SetupTopBar(
+                    state: widget.newUser.isBusiness
+                        ? 'profileBusiness'
+                        : 'profile'),
                 const SizedBox(height: 20), // Add spacing
                 ProfilePictureUploadButton(onPressed: () {}),
                 const SizedBox(height: 20),
@@ -77,7 +81,10 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const IndividualSetupSwipe()));
+                                      widget.newUser.isBusiness
+                                          ? SetupStyle(newUser: widget.newUser)
+                                          : IndividualSetupSwipe(
+                                              newUser: widget.newUser)));
                         } catch (e) {
                           final exceptionMessage =
                               e.toString().replaceAll("Exception:", "");
