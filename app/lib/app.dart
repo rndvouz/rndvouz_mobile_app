@@ -10,28 +10,35 @@ final ThemeData _appTheme = _buildAppTheme();
 ThemeData _buildAppTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-      colorScheme: base.colorScheme.copyWith(
-        primary: colorGreen1,
-        secondary: colorBrown1,
-        error: errorRed,
+    colorScheme: base.colorScheme.copyWith(
+      primary: colorGreen1,
+      secondary: colorBrown1,
+      error: errorRed,
+    ),
+    useMaterial3: false,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
+    scaffoldBackgroundColor: colorCream1,
+    appBarTheme: AppBarTheme(
+      backgroundColor: colorCream1,
+      titleTextStyle: TextStyle(
+        color: Colors.black,
       ),
-      useMaterial3: false,
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      scaffoldBackgroundColor: colorCream1,
-      appBarTheme: AppBarTheme(
-        backgroundColor: colorCream1,
-        titleTextStyle: TextStyle(
-          color: Colors.black,
-        ),
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorGreen1,
-      ),
-      cardTheme: CardTheme(
-        color: colorCream2,
-      ));
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: colorGreen1,
+    ),
+    cardTheme: CardTheme(
+      color: colorCream2,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(25.0),
+    )))),
+  );
 }
 
 class RndvouzApp extends StatelessWidget {

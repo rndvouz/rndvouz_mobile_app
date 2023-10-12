@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/setup_process/setup_login_page.dart';
+import 'package:app/setup_process/setup_login.dart';
 
 class UserTypePage extends StatelessWidget {
   const UserTypePage({Key? key}) : super(key: key);
