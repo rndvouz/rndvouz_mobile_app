@@ -6,7 +6,7 @@ class User {
   String? imagePath;
   List<String>? follower;
   List<String>? following;
-  Map<String, double>? measurements;
+  Map<String, double>? userMeasurements;
   String? type;
   String? address;
   String? style;
@@ -24,7 +24,7 @@ class User {
     this.imagePath,
     List<String>? follower,
     List<String>? following,
-    this.measurements,
+    this.userMeasurements,
     this.type,
     this.address,
     this.style,
@@ -60,6 +60,16 @@ class UserDB {
         username: 'test',
         email: 'test@hawaii.edu',
         password: 'testPass',
+        isBusiness: false),
+    User(
+        username: 'amyw',
+        email: 'amywong@hawaii.edu',
+        password: '12345678',
+        isBusiness: false),
+    User(
+        username: 'sams',
+        email: 'samsm@hawaii.edu',
+        password: '12345678',
         isBusiness: false)
   ];
 

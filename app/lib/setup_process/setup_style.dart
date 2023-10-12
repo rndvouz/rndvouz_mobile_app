@@ -30,9 +30,8 @@ class _SignUpStyleState extends State<SetupStyle> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SetupTopBar(state: widget.newUser.isBusiness
-                        ? 'styleBusiness'
-                        : 'style'),
+          SetupTopBar(
+              state: widget.newUser.isBusiness ? 'styleBusiness' : 'style'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(

@@ -1,11 +1,16 @@
-import 'package:app/data_model/user_db.dart';
-import 'package:app/model/garment.dart';
-import 'package:app/model/merchandise_repository.dart';
+// Flutter Packages
 import 'package:flutter/material.dart';
 
-import '../../model/merchandise.dart';
+// Database Packages
+import 'package:app/data_model/merchandise_garment.dart';
+import 'package:app/data_model/merchandise.dart';
+import 'package:app/data_model/merchandise_db.dart';
+import 'package:app/data_model/user_db.dart';
+
+// Components
 import 'package:app/swipe_card.dart';
 
+// Pages
 import 'setup_style.dart';
 import 'setup_top_bar.dart';
 
@@ -16,12 +21,12 @@ class IndividualSetupSwipe extends StatefulWidget {
       : super(key: key);
 
   @override
-  _IndividualSetupSwipeState createState() => _IndividualSetupSwipeState();
+  State<IndividualSetupSwipe> createState() => _IndividualSetupSwipeState();
 }
 
 class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
   final List<Merchandise> merchandises =
-      MerchandiseRepository.loadMerchanise(Garment.signup);
+      MerchandiseDB.loadMerchanise(Garment.signup);
 
   int currentIndex = 0;
 

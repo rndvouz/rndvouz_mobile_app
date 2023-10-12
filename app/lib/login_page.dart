@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -83,10 +83,10 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 final username = _usernameController.text;
                 final password = _passwordController.text;
-                User? user;
+                final User user;
                 try {
-                  final user = userDB.getUser(username);
-                  if (user != null && user.password == password) {
+                  user = userDB.getUser(username);
+                  if (user.password == password) {
                     setState(() {
                       errorMessage = "";
                     });
