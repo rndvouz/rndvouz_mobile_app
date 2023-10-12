@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data_model/user_db.dart';
+import '../../data_models/user_db.dart';
 
 class SetupComplete extends StatelessWidget {
   final User newUser;

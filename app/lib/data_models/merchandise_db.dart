@@ -1,4 +1,4 @@
-import 'package:app/data_model/measurements.dart';
+import 'package:app/data_models/measurements.dart';
 
 import 'merchandise_garment.dart';
 import 'merchandise.dart';

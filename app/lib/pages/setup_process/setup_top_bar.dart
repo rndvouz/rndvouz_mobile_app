@@ -1,4 +1,4 @@
-import 'package:app/colors.dart';
+import 'package:app/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class SetupTopBar extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:app/setup_process/setup_profile.dart';
+import 'package:app/pages/setup_process/setup_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:app/data_model/user_db.dart';
+import 'package:app/data_models/user_db.dart';
 
 import 'setup_top_bar.dart';
 

@@ -1,8 +1,8 @@
-import 'package:app/setup_process/business_setup_verify.dart';
-import 'package:app/setup_process/setup_top_bar.dart';
+import 'package:app/pages/setup_process/business_setup_verify.dart';
+import 'package:app/pages/setup_process/setup_top_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../data_model/user_db.dart';
+import '../../data_models/user_db.dart';
 
 class BusinessSetupContact extends StatefulWidget {
   final User newUser;

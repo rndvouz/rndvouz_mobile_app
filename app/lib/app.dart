@@ -1,9 +1,9 @@
-import 'package:app/home_screen/home_bottom_nav_bar.dart';
-import 'package:app/login_page.dart';
+import 'package:app/pages/home_screen/home_bottom_nav_bar.dart';
+import 'package:app/pages/login.dart';
 
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import 'themes/colors.dart';
 
 final ThemeData _appTheme = _buildAppTheme();
 

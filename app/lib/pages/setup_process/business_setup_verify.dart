@@ -1,8 +1,8 @@
-import 'package:app/setup_process/setup_top_bar.dart';
+import 'package:app/pages/setup_process/setup_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable_text/expandable_text.dart';
 
-import '../data_model/user_db.dart';
+import '../../data_models/user_db.dart';
 import 'setup_complete.dart';
 
 class BusinessSetupVerify extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:app/setup_process/setup_style.dart';
+import 'package:app/pages/setup_process/setup_style.dart';
 import 'package:flutter/material.dart';
-import '../data_model/user_db.dart';
+import '../../data_models/user_db.dart';
 
 import 'setup_top_bar.dart';
 import 'individual_setup_swipe.dart';

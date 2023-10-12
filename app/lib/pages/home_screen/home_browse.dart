@@ -1,8 +1,8 @@
-import 'package:app/data_model/merchandise.dart';
-import 'package:app/data_model/merchandise_db.dart';
+import 'package:app/data_models/merchandise.dart';
+import 'package:app/data_models/merchandise_db.dart';
 import 'package:flutter/material.dart';
 
-import '../data_model/merchandise_garment.dart';
+import '../../data_models/merchandise_garment.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
 class HomeBrowse extends StatelessWidget {

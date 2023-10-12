@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 
 // Database Packages
-import 'package:app/data_model/merchandise_garment.dart';
-import 'package:app/data_model/merchandise.dart';
-import 'package:app/data_model/merchandise_db.dart';
-import 'package:app/data_model/user_db.dart';
+import 'package:app/data_models/merchandise_garment.dart';
+import 'package:app/data_models/merchandise.dart';
+import 'package:app/data_models/merchandise_db.dart';
+import 'package:app/data_models/user_db.dart';
 
 // Components
-import 'package:app/swipe_card.dart';
+import 'package:app/components/swipe_card.dart';
 
 // Pages
 import 'setup_style.dart';

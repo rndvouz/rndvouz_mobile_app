@@ -1,5 +1,5 @@
-import 'package:app/data_model/user_db.dart';
-import 'package:app/setup_process/business_setup_contact.dart';
+import 'package:app/data_models/user_db.dart';
+import 'package:app/pages/setup_process/business_setup_contact.dart';
 import 'package:flutter/material.dart';
 
 import 'individual_setup_size.dart';
