@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-class IndividualSetupComplete extends StatelessWidget {
-  IndividualSetupComplete({super.key});
+import '../data_model/user_db.dart';
+
+class SetupComplete extends StatelessWidget {
+  final User newUser;
+
+  SetupComplete({Key? key, required this.newUser}) : super(key: key);
 
   final List<String> messages = [
     'Welcome, <insert name here>! Your account has been created!',
@@ -26,7 +30,7 @@ class IndividualSetupComplete extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                'Welcome, <insert name here>! Your account has been created!',
+                newUser.isBusiness ? messages[1] : messages[0],
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),

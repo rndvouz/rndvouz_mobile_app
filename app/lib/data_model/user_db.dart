@@ -12,11 +12,14 @@ class User {
   String? style;
   String? favoriteColors;
   String? biography;
+  bool isBusiness;
+  List<ContactInformation>? contact;
 
   User({
     required this.username,
     required this.email,
     required this.password,
+    required this.isBusiness,
     this.displayName,
     this.imagePath,
     List<String>? follower,
@@ -27,20 +30,47 @@ class User {
     this.style,
     this.favoriteColors,
     this.biography,
+    this.contact,
   })  : follower = follower ?? <String>[],
         following = following ?? <String>[];
 }
 
+class ContactInformation {
+  String name;
+  String email;
+  String phoneNumber;
+
+  ContactInformation(
+      {required this.email, required this.name, required this.phoneNumber});
+}
+
 class UserDB {
   final List<User> _users = [
-    User(username: 'Eric Beck', email: 'eric@hawaii.edu', password: 'ericPass'),
+    User(
+        username: 'Eric Beck',
+        email: 'eric@hawaii.edu',
+        password: 'ericPass',
+        isBusiness: false),
     User(
         username: 'Michael Smith ',
         email: 'michael@hawaii.edu',
-        password: 'michaelPass'),
-    User(username: 'test', email: 'test@hawaii.edu', password: 'testPass'),
-    User(username: 'amyw', email: 'amywong@hawaii.edu', password: '12345678'),
-    User(username: 'sams', email: 'samsm@hawaii.edu', password: '12345678')
+        password: 'michaelPass',
+        isBusiness: false),
+    User(
+        username: 'test',
+        email: 'test@hawaii.edu',
+        password: 'testPass',
+        isBusiness: false),
+    User(
+        username: 'amyw',
+        email: 'amywong@hawaii.edu',
+        password: '12345678',
+        isBusiness: false),
+    User(
+        username: 'sams',
+        email: 'samsm@hawaii.edu',
+        password: '12345678',
+        isBusiness: false)
   ];
 
   User getUser(String username) {
@@ -104,6 +134,26 @@ class UserDB {
     }
     if (biography != null) user.biography = biography;
   }
+
+  // Future<void> addContact(User user,
+  //     {required String name,
+  //     required String email,
+  //     required String phone}) async {
+  //   bool isPhoneValid =
+  //       await PhoneNumberUtil().validate(phone, regionCode: 'US');
+
+  //   if (!isEmailValid(email) || !isPhoneValid) {
+  //     throw Exception('Unvalid emmail or phone number.');
+  //   }
+
+  //   Map<String, String> contactToAdd = {
+  //     'name': name,
+  //     'email': email,
+  //     'phone': phone,
+  //   };
+
+  //   user.contactBusiness?.add(contactToAdd);
+  // }
 }
 
 UserDB userDB = UserDB();

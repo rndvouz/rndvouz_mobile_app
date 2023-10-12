@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/setup_process/setup_login_page.dart';
+import 'package:app/setup_process/setup_login.dart';
 
 class UserTypePage extends StatelessWidget {
   const UserTypePage({Key? key}) : super(key: key);
@@ -39,7 +39,9 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SetupLoginPage()),
+                                builder: (context) => SetupLoginPage(
+                                      isBusiness: false,
+                                    )),
                           );
                         },
                         child: CardWidget(
@@ -53,7 +55,9 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SetupLoginPage(),
+                              builder: (context) => SetupLoginPage(
+                                isBusiness: true,
+                              ),
                             ),
                           );
                         },

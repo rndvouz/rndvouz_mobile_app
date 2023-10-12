@@ -43,7 +43,10 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
         padding: EdgeInsets.only(top: 12),
         child: icon,
       ),
-      activeIcon: activeIcon,
+      activeIcon: Container(
+        padding: EdgeInsets.only(top: 12),
+        child: activeIcon,
+      ),
       label: label,
     );
   }
@@ -63,6 +66,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
             onTap: _selectedPage,
             showSelectedLabels: false,
             showUnselectedLabels: false,
+            enableFeedback: false,
             items: [
           _HomeBottomNavBarItem(Icon(Icons.home), Icon(Icons.home), 'Browse'),
           _HomeBottomNavBarItem(
