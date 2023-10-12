@@ -2,7 +2,7 @@ import 'measurements.dart';
 import 'merchandise_garment.dart';
 import 'merchandise_style.dart';
 
-enum State { selling, sold }
+enum Availability { selling, sold }
 
 enum SellingMethod { selling, negotiate, trading }
 
