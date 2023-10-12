@@ -1,4 +1,4 @@
-import 'package:app/setup_process/setup_profile_page.dart';
+import 'package:app/setup_process/setup_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:app/data_model/user_db.dart';
 
