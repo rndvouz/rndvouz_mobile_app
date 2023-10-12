@@ -1,6 +1,3 @@
-import 'package:app/model/garment.dart';
-import 'package:app/model/merchandise.dart';
-import 'package:app/model/merchandise_repository.dart';
 import 'package:flutter/material.dart';
 
 // Change to Stateful when you can tap on image to view more information about it

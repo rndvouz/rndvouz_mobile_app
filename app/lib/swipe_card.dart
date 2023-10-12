@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/merchandise.dart';
+import 'data_model/merchandise.dart';
 
 class SwipeCard extends StatelessWidget {
   const SwipeCard(

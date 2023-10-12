@@ -1,7 +1,8 @@
-import 'package:app/model/garment.dart';
-import 'package:app/model/merchandise.dart';
-import 'package:app/model/merchandise_repository.dart';
+import 'package:app/data_model/merchandise.dart';
+import 'package:app/data_model/merchandise_db.dart';
 import 'package:flutter/material.dart';
+
+import '../data_model/merchandise_garment.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
 class HomeBrowse extends StatelessWidget {
@@ -9,7 +10,7 @@ class HomeBrowse extends StatelessWidget {
 
   List<Card> _buildGridMerchCards(BuildContext context) {
     List<Merchandise> allMerchandise =
-        MerchandiseRepository.loadMerchanise(Garment.all);
+        MerchandiseDB.loadMerchanise(Garment.all);
 
     if (allMerchandise.isEmpty) {
       // Maybe provide an error message here
