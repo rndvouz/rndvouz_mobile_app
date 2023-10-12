@@ -12,6 +12,7 @@ class User {
   String? style;
   String? favoriteColors;
   String? biography;
+  List<ContactInformation>? contact;
 
   User({
     required this.username,
@@ -27,8 +28,18 @@ class User {
     this.style,
     this.favoriteColors,
     this.biography,
+    this.contact,
   })  : follower = follower ?? <String>[],
         following = following ?? <String>[];
+}
+
+class ContactInformation {
+  String name;
+  String email;
+  String phoneNumber;
+
+  ContactInformation(
+      {required this.email, required this.name, required this.phoneNumber});
 }
 
 class UserDB {
@@ -103,4 +114,5 @@ class UserDB {
     if (biography != null) user.biography = biography;
   }
 }
+
 UserDB userDB = UserDB();
