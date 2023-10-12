@@ -10,7 +10,7 @@ class MerchandiseDB {
       Merchandise(
         id: 0,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.signup,
         merchColors: {MerchColors.green},
@@ -25,7 +25,7 @@ class MerchandiseDB {
       Merchandise(
         id: 1,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.classic,
         garment: Garment.jacket,
         merchColors: {MerchColors.black, MerchColors.white},
@@ -40,7 +40,7 @@ class MerchandiseDB {
       Merchandise(
         id: 2,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.edgy,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.tshirt,
@@ -56,7 +56,7 @@ class MerchandiseDB {
       Merchandise(
         id: 3,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.edgy,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.tshirt,
@@ -72,7 +72,7 @@ class MerchandiseDB {
       Merchandise(
         id: 4,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.jeans,
         merchColors: {MerchColors.blue},
@@ -87,7 +87,7 @@ class MerchandiseDB {
       Merchandise(
         id: 5,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.preppy,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.skirt,
@@ -103,7 +103,7 @@ class MerchandiseDB {
       Merchandise(
         id: 6,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.chic,
         secondaryStyle: SecondaryStyle.formal,
         garment: Garment.jacket,
@@ -119,7 +119,7 @@ class MerchandiseDB {
       Merchandise(
         id: 7,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.bohemeian,
         // dress
         garment: Garment.signup,
@@ -135,7 +135,7 @@ class MerchandiseDB {
       Merchandise(
         id: 8,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.bohemeian,
         secondaryStyle: SecondaryStyle.vintage,
         garment: Garment.jacket,
@@ -151,7 +151,7 @@ class MerchandiseDB {
       Merchandise(
         id: 9,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.hipster,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.longsleeve,
@@ -167,7 +167,7 @@ class MerchandiseDB {
       Merchandise(
         id: 10,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.elegant,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.signup,
@@ -183,7 +183,7 @@ class MerchandiseDB {
       Merchandise(
         id: 11,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.athleisure,
         secondaryStyle: SecondaryStyle.casual,
         // pants
@@ -200,7 +200,7 @@ class MerchandiseDB {
       Merchandise(
         id: 12,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.western,
         garment: Garment.longsleeve,
         merchColors: {MerchColors.brown, MerchColors.yellow},
@@ -215,7 +215,7 @@ class MerchandiseDB {
       Merchandise(
         id: 13,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.edgy,
         secondaryStyle: SecondaryStyle.streetwear,
         garment: Garment.pants,
@@ -231,7 +231,7 @@ class MerchandiseDB {
       Merchandise(
         id: 14,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.preppy,
         secondaryStyle: SecondaryStyle.casual,
         // longsleeve
@@ -248,7 +248,7 @@ class MerchandiseDB {
       Merchandise(
         id: 15,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.preppy,
         // skirt
         garment: Garment.signup,
@@ -264,7 +264,7 @@ class MerchandiseDB {
       Merchandise(
         id: 16,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.shorts,
         merchName: "Blue Shorts",
@@ -279,7 +279,7 @@ class MerchandiseDB {
       Merchandise(
         id: 17,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.electic,
         secondaryStyle: SecondaryStyle.vintage,
         // longsleeve
@@ -300,7 +300,7 @@ class MerchandiseDB {
       Merchandise(
         id: 18,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.vintage,
         secondaryStyle: SecondaryStyle.casual,
         garment: Garment.jacket,
@@ -321,7 +321,7 @@ class MerchandiseDB {
       Merchandise(
         id: 19,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.tshirt,
         merchColors: {MerchColors.white},
@@ -336,7 +336,7 @@ class MerchandiseDB {
       Merchandise(
         id: 20,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.businessCasual,
         merchColors: {MerchColors.blue},
         garment: Garment.longsleeve,
@@ -351,7 +351,7 @@ class MerchandiseDB {
       Merchandise(
         id: 21,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.top,
         merchColors: {MerchColors.black},
@@ -366,7 +366,7 @@ class MerchandiseDB {
       Merchandise(
         id: 22,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         // longsleeve
         garment: Garment.signup,
@@ -382,7 +382,7 @@ class MerchandiseDB {
       Merchandise(
         id: 23,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.streetwear,
         garment: Garment.jacket,
         merchColors: {MerchColors.black},
@@ -397,7 +397,7 @@ class MerchandiseDB {
       Merchandise(
         id: 24,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.minimalist,
         garment: Garment.pants,
         merchColors: {MerchColors.black},
@@ -412,7 +412,7 @@ class MerchandiseDB {
       Merchandise(
         id: 25,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.retro,
         secondaryStyle: SecondaryStyle.vintage,
         garment: Garment.longsleeve,
@@ -428,7 +428,7 @@ class MerchandiseDB {
       Merchandise(
         id: 26,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.top,
         merchColors: {MerchColors.green},
@@ -443,7 +443,7 @@ class MerchandiseDB {
       Merchandise(
         id: 27,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         secondaryStyle: SecondaryStyle.minimalist,
         garment: Garment.longsleeve,
@@ -459,7 +459,7 @@ class MerchandiseDB {
       Merchandise(
         id: 28,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.tshirt,
         merchColors: {MerchColors.white},
@@ -474,7 +474,7 @@ class MerchandiseDB {
       Merchandise(
         id: 29,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.classic,
         garment: Garment.jacket,
         merchColors: {MerchColors.green},
@@ -489,7 +489,7 @@ class MerchandiseDB {
       Merchandise(
         id: 30,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.top,
         merchColors: {MerchColors.blue, MerchColors.white},
@@ -504,7 +504,7 @@ class MerchandiseDB {
       Merchandise(
         id: 31,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.formal,
         secondaryStyle: SecondaryStyle.classic,
         garment: Garment.dress,
@@ -520,7 +520,7 @@ class MerchandiseDB {
       Merchandise(
         id: 32,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.top,
         merchColors: {MerchColors.purple},
@@ -535,7 +535,7 @@ class MerchandiseDB {
       Merchandise(
         id: 33,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.loungewear,
         // longsleeve
         garment: Garment.signup,
@@ -551,7 +551,7 @@ class MerchandiseDB {
       Merchandise(
         id: 34,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.formal,
         garment: Garment.dress,
         merchColors: {MerchColors.black},
@@ -566,7 +566,7 @@ class MerchandiseDB {
       Merchandise(
         id: 35,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.outdoors,
         garment: Garment.pants,
         merchColors: {MerchColors.purple},
@@ -581,7 +581,7 @@ class MerchandiseDB {
       Merchandise(
         id: 36,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.streetwear,
         garment: Garment.jacket,
         merchColors: {MerchColors.black},
@@ -596,7 +596,7 @@ class MerchandiseDB {
       Merchandise(
         id: 37,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.casual,
         garment: Garment.top,
         merchColors: {MerchColors.green},
@@ -611,7 +611,7 @@ class MerchandiseDB {
       Merchandise(
         id: 38,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.businessCasual,
         garment: Garment.longsleeve,
         merchColors: {MerchColors.white},
@@ -626,7 +626,7 @@ class MerchandiseDB {
       Merchandise(
         id: 39,
         ownerUsername: "test",
-        state: State.selling,
+        state: Availability.selling,
         primaryStyle: PrimaryStyle.streetwear,
         garment: Garment.tshirt,
         merchColors: {MerchColors.yellow},

@@ -55,7 +55,7 @@ class SetupLoginPageState extends State<SetupLoginPage> {
                         final username = usernameController.text;
                         final password = passwordController.text;
                         final retypePassword = retypePasswordController.text;
-                        final newUser;
+                        final User newUser;
 
                         if (password == retypePassword) {
                           newUser = User(

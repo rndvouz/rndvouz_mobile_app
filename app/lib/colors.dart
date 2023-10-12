@@ -8,7 +8,6 @@ const colorGreen2 = Color(0xFF9B9B7A);
 const colorCream1 = Color.fromRGBO(253, 241, 220, 1);
 const colorCream2 = Color.fromRGBO(233, 218, 192, 1);
 
-
 const colorBrown1 = Color(0xFFD08C60);
 const colorBrown2 = Color(0xFFF0B27A);
 

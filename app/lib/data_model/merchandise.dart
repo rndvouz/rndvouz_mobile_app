@@ -25,7 +25,7 @@ enum MerchColors {
 class Merchandise {
   final int id;
   final String ownerUsername;
-  final State state;
+  final Availability state;
   // final bool forOnboarding;
   final PrimaryStyle primaryStyle;
   final SecondaryStyle? secondaryStyle;
@@ -77,7 +77,11 @@ class MerchandiseGenerator {
     final List<Merchandise> newMerchandiseList = [];
 
     final List<String> usernames = ['test', 'amyw', 'sams'];
-    final List<State> states = [State.selling, State.selling, State.sold];
+    final List<Availability> states = [
+      Availability.selling,
+      Availability.selling,
+      Availability.sold
+    ];
     SecondaryStyle? secondaryStyle;
     final List<int> prices = [
       10,

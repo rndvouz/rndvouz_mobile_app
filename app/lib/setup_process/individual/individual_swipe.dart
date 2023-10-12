@@ -12,7 +12,7 @@ class IndividualSetupSwipe extends StatefulWidget {
   const IndividualSetupSwipe({Key? key}) : super(key: key);
 
   @override
-  State<IndividualSetupSwipe> createState() => _IndividualSetupSwipeState();
+  _IndividualSetupSwipeState createState() => _IndividualSetupSwipeState();
 }
 
 class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
