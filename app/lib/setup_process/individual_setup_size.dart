@@ -22,7 +22,7 @@ class SignUpSizeState extends State<IndividualSetupSize> {
       body: SafeArea(
         child: Column(
           children: [
-            SetupTopBar(state: 'measurements'),
+            SetupTopBar(state: 'size'),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(

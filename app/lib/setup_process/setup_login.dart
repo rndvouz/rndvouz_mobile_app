@@ -22,84 +22,91 @@ class SetupLoginPageState extends State<SetupLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            // Wrap the entire content with SingleChildScrollView
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SetupTopBar(
-                    state: widget.isBusiness ? 'loginBusiness' : 'login'),
-                const SizedBox(height: 40),
-                _buildTextField("Email Address", emailController),
-                const SizedBox(height: 10),
-                _buildTextField("Username", usernameController),
-                const SizedBox(height: 10),
-                _buildTextField("Password", passwordController,
-                    isObscure: true),
-                const SizedBox(height: 10),
-                _buildTextField("Re-type Password", retypePasswordController,
-                    isObscure: true),
-                const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Back'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        final email = emailController.text;
-                        final username = usernameController.text;
-                        final password = passwordController.text;
-                        final retypePassword = retypePasswordController.text;
-                        final newUser;
+      body: SafeArea(
+        child: Column(
+          children: [
+            SetupTopBar(state: widget.isBusiness ? 'loginBusiness' : 'login'),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  // Wrap the entire content with SingleChildScrollView
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 40),
+                      _buildTextField("Email Address", emailController),
+                      const SizedBox(height: 10),
+                      _buildTextField("Username", usernameController),
+                      const SizedBox(height: 10),
+                      _buildTextField("Password", passwordController,
+                          isObscure: true),
+                      const SizedBox(height: 10),
+                      _buildTextField(
+                          "Re-type Password", retypePasswordController,
+                          isObscure: true),
+                      const SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Back'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              final email = emailController.text;
+                              final username = usernameController.text;
+                              final password = passwordController.text;
+                              final retypePassword =
+                                  retypePasswordController.text;
+                              final newUser;
 
-                        if (password == retypePassword) {
-                          newUser = User(
-                            username: username,
-                            email: email,
-                            password: password,
-                            isBusiness: widget.isBusiness,
-                          );
+                              if (password == retypePassword) {
+                                newUser = User(
+                                  username: username,
+                                  email: email,
+                                  password: password,
+                                  isBusiness: widget.isBusiness,
+                                );
 
-                          try {
-                            userDB.userAdd(newUser);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SetupProfilePage(newUser: newUser)),
-                            );
-                          } catch (e) {
-                            final exceptionMessage =
-                                e.toString().replaceAll("Exception:", "");
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(exceptionMessage),
-                              ),
-                            );
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Passwords do not match'),
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text('Next'),
-                    ),
-                  ],
+                                try {
+                                  userDB.userAdd(newUser);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SetupProfilePage(newUser: newUser)),
+                                  );
+                                } catch (e) {
+                                  final exceptionMessage =
+                                      e.toString().replaceAll("Exception:", "");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(exceptionMessage),
+                                    ),
+                                  );
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Passwords do not match'),
+                                  ),
+                                );
+                              }
+                            },
+                            child: const Text('Next'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

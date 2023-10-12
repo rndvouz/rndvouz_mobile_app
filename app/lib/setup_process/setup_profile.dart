@@ -34,77 +34,84 @@ class SetupProfilePageState extends State<SetupProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SetupTopBar(
-                    state: widget.newUser.isBusiness
-                        ? 'profileBusiness'
-                        : 'profile'),
-                const SizedBox(height: 20), // Add spacing
-                ProfilePictureUploadButton(onPressed: () {}),
-                const SizedBox(height: 20),
-                _buildTextField("Display Name", displayNameController),
-                _buildTextField("Username", usernameController),
-                _buildTextField('Biography', biographyController,
-                    width: 500, height: 120, lines: 3),
-                const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.pop(context);
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     padding: const EdgeInsets.symmetric(vertical: 0),
-                    //   ),
-                    //   child: const Text('Back'),
-                    // ),
-                    ElevatedButton(
-                      onPressed: () {
-                        final updatedDisplayName = displayNameController.text;
-                        final updatedBiography = biographyController.text;
-                        final updatedUsername = usernameController.text;
-                        try {
-                          userDB.updateUserProfileFields(
-                            user,
-                            displayName: updatedDisplayName,
-                            newUsername: updatedUsername,
-                            biography: updatedBiography,
-                          );
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      widget.newUser.isBusiness
-                                          ? SetupStyle(newUser: widget.newUser)
-                                          : IndividualSetupSwipe(
-                                              newUser: widget.newUser)));
-                        } catch (e) {
-                          final exceptionMessage =
-                              e.toString().replaceAll("Exception:", "");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(exceptionMessage),
+      body: SafeArea(
+        child: Column(
+          children: [
+            SetupTopBar(
+                state:
+                    widget.newUser.isBusiness ? 'profileBusiness' : 'profile'),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 20), // Add spacing
+                      ProfilePictureUploadButton(onPressed: () {}),
+                      const SizedBox(height: 20),
+                      _buildTextField("Display Name", displayNameController),
+                      _buildTextField("Username", usernameController),
+                      _buildTextField('Biography', biographyController,
+                          width: 500, height: 120, lines: 3),
+                      const SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     Navigator.pop(context);
+                          //   },
+                          //   style: ElevatedButton.styleFrom(
+                          //     padding: const EdgeInsets.symmetric(vertical: 0),
+                          //   ),
+                          //   child: const Text('Back'),
+                          // ),
+                          ElevatedButton(
+                            onPressed: () {
+                              final updatedDisplayName =
+                                  displayNameController.text;
+                              final updatedBiography = biographyController.text;
+                              final updatedUsername = usernameController.text;
+                              try {
+                                userDB.updateUserProfileFields(
+                                  user,
+                                  displayName: updatedDisplayName,
+                                  newUsername: updatedUsername,
+                                  biography: updatedBiography,
+                                );
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            widget.newUser.isBusiness
+                                                ? SetupStyle(
+                                                    newUser: widget.newUser)
+                                                : IndividualSetupSwipe(
+                                                    newUser: widget.newUser)));
+                              } catch (e) {
+                                final exceptionMessage =
+                                    e.toString().replaceAll("Exception:", "");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(exceptionMessage),
+                                  ),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 0),
                             ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 0),
+                            child: const Text('Next'),
+                          ),
+                        ],
                       ),
-                      child: const Text('Next'),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

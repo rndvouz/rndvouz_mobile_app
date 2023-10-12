@@ -32,7 +32,7 @@ class SetupTopBar extends StatelessWidget {
           'These are the results from your swipes. Feel free to select more of what you like!',
     },
     {
-      'state': 'Measurements',
+      'state': 'Size',
       'title': 'Add Your Measurements',
       'description':
           'Add your measurements to help us find clothes that\'ll be a good fit!',
@@ -166,7 +166,7 @@ class SetupTopBar extends StatelessWidget {
         return individual[2];
       case 'style':
         return individual[3];
-      case 'measurements':
+      case 'size':
         return individual[4];
       case 'loginBusiness':
         return business[0];
