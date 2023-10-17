@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import '../data_model/merchandise_garment.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
-class HomeBrowse extends StatelessWidget {
-  const HomeBrowse({Key? key}) : super(key: key);
+class HomeBrowseOrSwipe extends StatelessWidget {
+  const HomeBrowseOrSwipe({Key? key}) : super(key: key);
 
+  static const List<String> titles = <String>['Browse', 'Swipe'];
+
+  // Items for Browsing Feature
   List<Card> _buildGridMerchCards(BuildContext context) {
     List<Merchandise> allMerchandise =
         MerchandiseDB.loadMerchanise(Garment.all);
@@ -37,12 +40,48 @@ class HomeBrowse extends StatelessWidget {
     }).toList();
   }
 
+  // Items for Swiping Feature
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: GridView.count(
+  //       crossAxisCount: 3,
+  //       children: _buildGridMerchCards(context),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView.count(
-        crossAxisCount: 3,
-        children: _buildGridMerchCards(context),
+    const int tabsCount = 2;
+
+    return DefaultTabController(
+      initialIndex: 0,
+      length: tabsCount,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                icon: const Icon(Icons.apps),
+                text: titles[0],
+              ),
+              Tab(
+                icon: const Icon(Icons.swipe),
+                text: titles[0],
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            GridView.count(
+              crossAxisCount: 3,
+              children: _buildGridMerchCards(context),
+            ),
+          ],
+        ),
       ),
     );
   }
