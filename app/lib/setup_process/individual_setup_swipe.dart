@@ -76,6 +76,7 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SetupTopBar(state: 'swipe'),
             Flexible(
               child: CardSwiper(
                 controller: controller,

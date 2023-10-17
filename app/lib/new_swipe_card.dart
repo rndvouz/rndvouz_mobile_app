@@ -16,60 +16,69 @@ class NewSwipeCard extends StatelessWidget {
       fit: BoxFit.fitHeight,
     );
 
-    return Container(
-      height: 400,
-      width: 280,
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 15.0,
-            // spreadRadius: 2,
-            offset: Offset(0, 4),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 100),
+        Container(
+          height: 400,
+          width: 280,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 15.0,
+                // spreadRadius: 2,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: merchandiseImage,
-            ),
-          ),
-          Positioned(
-            // bottom: 0,
-            top: 300,
-            child: Container(
-              height: 80,
-              width: 280,
-              decoration: const ShapeDecoration(
-                color: colorCream2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
+          child: Center(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: merchandiseImage,
                   ),
                 ),
-              ),
-              child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
-                    merchandise.merchName,
+                Positioned(
+                  // bottom: 0,
+                  top: 300,
+                  child: Container(
+                    height: 80,
+                    width: 280,
+                    decoration: const ShapeDecoration(
+                      color: colorCream2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        ),
+                      ),
+                    ),
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 11),
+                          merchandise.merchName,
+                        ),
+                      ],
+                      // ),
+                    ),
                   ),
-                ],
-                // ),
-              ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }
