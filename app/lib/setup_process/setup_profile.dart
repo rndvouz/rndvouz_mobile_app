@@ -69,11 +69,11 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-
                           ElevatedButton(
                             onPressed: () {
                               // Handle 'Next' button action
-                              final updatedDisplayName = displayNameController.text;
+                              final updatedDisplayName =
+                                  displayNameController.text;
                               final updatedBiography = biographyController.text;
                               final updatedUsername = usernameController.text;
                               try {
@@ -87,14 +87,14 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        widget.newUser.isBusiness
-                                            ? SetupStyle(
-                                            newUser: widget.newUser)
-                                            : IndividualSetupSwipe(
-                                            newUser: widget.newUser)));
+                                            widget.newUser.isBusiness
+                                                ? SetupStyle(
+                                                    newUser: widget.newUser)
+                                                : IndividualSetupSwipe(
+                                                    newUser: widget.newUser)));
                               } catch (e) {
                                 final exceptionMessage =
-                                e.toString().replaceAll("Exception:", "");
+                                    e.toString().replaceAll("Exception:", "");
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(exceptionMessage),
@@ -122,9 +122,9 @@ class SetupProfilePageState extends State<SetupProfilePage> {
 
   Widget _buildTextField(String label, TextEditingController controller,
       {bool isObscure = false,
-        double width = 500,
-        double height = 60,
-        int lines = 1}) {
+      double width = 500,
+      double height = 60,
+      int lines = 1}) {
     return Container(
       width: width, // Set the width
       height: height, // Set the height
@@ -171,7 +171,8 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ImageOptionsUtil.showImageSourceOptions(context, (imageSource) => selectImage(imageSource));
+        ImageOptionsUtil.showImageSourceOptions(
+            context, (imageSource) => selectImage(imageSource));
       },
       child: Container(
         width: 250,
@@ -182,31 +183,31 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
         ),
         child: _image != null
             ? ClipOval(
-          child: Image.memory(
-            _image!,
-            fit: BoxFit.cover,
-          ),
-        )
+                child: Image.memory(
+                  _image!,
+                  fit: BoxFit.cover,
+                ),
+              )
             : Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.add_a_photo_outlined,
-                size: 40,
-                color: Colors.grey[600],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Add Photo',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_a_photo_outlined,
+                      size: 40,
+                      color: Colors.grey[600],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Add Photo',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/material.dart';
+
 pickAndCropImage(ImageSource source) async {
   final ImagePicker imagePicker = ImagePicker();
   final ImageCropper imageCropper = ImageCropper();
@@ -21,6 +22,7 @@ pickAndCropImage(ImageSource source) async {
   }
   return await croppedFile.readAsBytes();
 }
+
 class ImageOptionsUtil {
   static void showImageSourceOptions(
       BuildContext context, Function(ImageSource) onSelectImageSource) {
