@@ -70,6 +70,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: <Widget>[
             GridView.count(
               crossAxisCount: 3,
