@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:app/data_model/user_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home_screen/home_bottom_nav_bar.dart';
 import 'package:app/setup_process/user_type.dart';
 
-class LoginPage extends StatefulWidget {
+final errorMessageProvider = StateNotifierProvider<ErrorMessageNotifier, String?>((ref) {
+  return ErrorMessageNotifier();
+});
+
+class ErrorMessageNotifier extends StateNotifier<String?> {
+  ErrorMessageNotifier() : super(null);
+
+  void setError(String message) {
+    state = message;
+  }
+
+  void clearError() {
+    state = null;
+  }
+}
+
+class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final UserDB userDB = ref.watch(userDBProvider);
 
-class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
 
-  String errorMessage = '';
+    final errorMessage = ref.watch(errorMessageProvider);
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -48,13 +62,17 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Username',
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: usernameController,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Username',
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -67,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
-                  controller: _passwordController,
+                  controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -80,28 +98,25 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                final username = _usernameController.text;
-                final password = _passwordController.text;
-                final User user;
+                final username = usernameController.text;
+                final password = passwordController.text;
+
                 try {
-                  user = userDB.getUser(username);
+                  final user = userDB.getUser(username);
+
                   if (user.password == password) {
-                    setState(() {
-                      errorMessage = "";
-                    });
+                    ref.read(errorMessageProvider.notifier).clearError();
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeBottomNavBar()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeBottomNavBar(),
+                      ),
+                    );
                   } else {
-                    setState(() {
-                      errorMessage = "Invalid password";
-                    });
+                    ref.read(errorMessageProvider.notifier).setError('Invalid password');
                   }
                 } catch (e) {
-                  setState(() {
-                    errorMessage = "User not found";
-                  });
+                  ref.read(errorMessageProvider.notifier).setError('User not found');
                 }
               },
               child: const Padding(
@@ -134,9 +149,11 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const UserTypePage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserTypePage(),
+                      ),
+                    );
                     // Handle "Sign Up" action here
                   },
                   child: const Text(
@@ -146,14 +163,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            // Display error message
-            Text(
-              errorMessage,
-              style: const TextStyle(color: Colors.red),
-            ),
+            if (errorMessage != null)
+              Text(
+                errorMessage,
+                style: const TextStyle(color: Colors.red),
+              ),
           ],
         ),
       ),
     );
   }
 }
+
