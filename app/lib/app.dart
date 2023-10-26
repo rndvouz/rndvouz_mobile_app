@@ -1,7 +1,10 @@
+import 'package:app/colors.dart';
 import 'package:app/home_screen/home_bottom_nav_bar.dart';
+import 'package:app/login_page.dart';
 import 'package:app/main.dart';
 import 'package:app/settings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_theme_builder/material_theme_builder.dart';
 import 'app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -20,8 +23,8 @@ class RndvouzApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: curThemeMode,
       routes: {
-        //'/login': (BuildContext context) => LoginPage(),
-        '/login': (BuildContext context) => Settings(),
+        '/login': (BuildContext context) => LoginPage(),
+        //'/login': (BuildContext context) => Settings(),
         '/': (BuildContext context) => const HomeBottomNavBar(),
       },
     );

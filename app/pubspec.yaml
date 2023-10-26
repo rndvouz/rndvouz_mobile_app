@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
   expandable_text: ^2.3.0
+  material_theme_builder: ^1.0.4
 
 dev_dependencies:
   flutter_test:
