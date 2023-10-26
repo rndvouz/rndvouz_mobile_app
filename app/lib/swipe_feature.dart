@@ -1,44 +1,31 @@
-// Flutter Packages
-import 'package:flutter/material.dart';
-
-// Database Packages
-import 'package:app/data_model/merchandise.dart';
 import 'package:app/data_model/merchandise_db.dart';
 import 'package:app/data_model/user_db.dart';
-
-// Components
 import 'package:app/new_swipe_card.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
-// Pages
-import 'setup_style.dart';
-import 'setup_top_bar.dart';
+import 'data_model/merchandise.dart';
 
-class IndividualSetupSwipe extends StatefulWidget {
-  final User newUser;
+class SwipeFeature extends StatefulWidget {
+  // required this User logged in
 
-  const IndividualSetupSwipe({Key? key, required this.newUser})
-      : super(key: key);
+  const SwipeFeature({Key? key}) : super(key: key);
 
   @override
-  State<IndividualSetupSwipe> createState() => _IndividualSetupSwipeState();
+  State<SwipeFeature> createState() => _SwipeFeature();
 }
 
-class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
+class _SwipeFeature extends State<SwipeFeature> {
   final CardSwiperController controller = CardSwiperController();
-  final List<Merchandise> merchandises =
-      MerchandiseDB.loadMerchanise(Purpose.setup);
-
-  int displayedIndex = 0;
+  final List<Merchandise> swipeMerchandises =
+      MerchandiseDB.loadMerchanise(Purpose.browse);
 
   bool _onSwipe(
     int previousIndex,
     int? currentIndex,
     CardSwiperDirection direction,
   ) {
-    setState(() {
-      displayedIndex = (displayedIndex + 1) % merchandises.length;
-    });
+    setState(() {});
 
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
@@ -48,10 +35,17 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
   }
 
   void endSwipe() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SetupStyle(newUser: widget.newUser)));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Text(
+            "That's all of the available clothes for now. Come back later!",
+            style: TextStyle(fontSize: 10.0),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -62,14 +56,13 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SetupTopBar(state: 'swipe'),
             SizedBox(
-              height: 40.0,
+              height: 50.0,
             ),
             Flexible(
               child: CardSwiper(
                 controller: controller,
-                cardsCount: merchandises.length,
+                cardsCount: swipeMerchandises.length,
                 initialIndex: 0,
                 isLoop: false,
                 maxAngle: 70,
@@ -81,8 +74,8 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
                 cardBuilder: (context, index, horizontalOffsetPercentage,
                         verticalOffsetPercentage) =>
                     NewSwipeCard(
-                  merchandise: merchandises[index],
-                  setup: true,
+                  merchandise: swipeMerchandises[index],
+                  setup: false,
                 ),
                 onEnd: endSwipe,
               ),
@@ -113,12 +106,6 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("$displayedIndex of ${merchandises.length}"),
-                    ],
-                  )
                 ],
               ),
             ),

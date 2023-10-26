@@ -4,24 +4,36 @@ import 'colors.dart';
 import 'data_model/merchandise.dart';
 
 class NewSwipeCard extends StatelessWidget {
-  const NewSwipeCard({required this.merchandise, Key? key}) : super(key: key);
+  const NewSwipeCard({required this.merchandise, required this.setup, Key? key})
+      : super(key: key);
 
   final Merchandise merchandise;
+  final bool setup;
 
   @override
   Widget build(BuildContext context) {
     final merchandiseImage = Image.asset(
       "${merchandise.assetImages}.jpg",
-      // fit: BoxFit.cover,
       fit: BoxFit.fitHeight,
     );
+
+    double heightSet;
+    double topSet;
+
+    if (setup) {
+      heightSet = 400;
+      topSet = 300;
+    } else {
+      heightSet = 420;
+      topSet = 320;
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 100),
         Container(
-          height: 400,
+          height: heightSet,
           width: 280,
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
@@ -46,7 +58,7 @@ class NewSwipeCard extends StatelessWidget {
                 ),
                 Positioned(
                   // bottom: 0,
-                  top: 300,
+                  top: topSet,
                   child: Container(
                     height: 80,
                     width: 280,

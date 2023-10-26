@@ -1,7 +1,9 @@
 import 'package:app/data_model/merchandise.dart';
 import 'package:app/data_model/merchandise_db.dart';
+import 'package:app/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
+import '../colors.dart';
 import '../data_model/merchandise_garment.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
@@ -13,7 +15,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
   // Items for Browsing Feature
   List<Card> _buildGridMerchCards(BuildContext context) {
     List<Merchandise> allMerchandise =
-        MerchandiseDB.loadMerchanise(Garment.all);
+        MerchandiseDB.loadMerchanise(Purpose.browse);
 
     if (allMerchandise.isEmpty) {
       // Maybe provide an error message here
@@ -42,16 +44,6 @@ class HomeBrowseOrSwipe extends StatelessWidget {
 
   // Items for Swiping Feature
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: GridView.count(
-  //       crossAxisCount: 3,
-  //       children: _buildGridMerchCards(context),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     const int tabsCount = 2;
@@ -61,7 +53,10 @@ class HomeBrowseOrSwipe extends StatelessWidget {
       length: tabsCount,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: colorGreen1,
+          toolbarHeight: 1,
           bottom: TabBar(
+            indicatorColor: colorBrown1,
             tabs: <Widget>[
               Tab(
                 icon: const Icon(Icons.apps),
@@ -69,7 +64,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
               ),
               Tab(
                 icon: const Icon(Icons.swipe),
-                text: titles[0],
+                text: titles[1],
               ),
             ],
           ),
@@ -80,6 +75,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
               crossAxisCount: 3,
               children: _buildGridMerchCards(context),
             ),
+            const SwipeFeature(),
           ],
         ),
       ),
