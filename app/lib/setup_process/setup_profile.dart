@@ -5,45 +5,29 @@ import 'package:app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data_model/user_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'setup_top_bar.dart';
 import 'individual_setup_swipe.dart';
 
-class SetupProfilePage extends StatefulWidget {
+class SetupProfilePage extends ConsumerWidget {
   final User newUser;
 
   const SetupProfilePage({Key? key, required this.newUser}) : super(key: key);
 
   @override
-  SetupProfilePageState createState() => SetupProfilePageState();
-}
-
-class SetupProfilePageState extends State<SetupProfilePage> {
-  late TextEditingController displayNameController;
-  late TextEditingController usernameController;
-  late User user;
-  TextEditingController biographyController = TextEditingController();
-  Uint8List? selectedImage;
-
-  SetupProfilePageState();
-
-  @override
-  void initState() {
-    super.initState();
-    displayNameController =
-        TextEditingController(text: widget.newUser.displayName);
-    usernameController = TextEditingController(text: widget.newUser.username);
-    user = widget.newUser;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final displayNameController =
+        TextEditingController(text: newUser.displayName);
+    final usernameController = TextEditingController(text: newUser.username);
+    final biographyController = TextEditingController();
+    Uint8List? selectedImage;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             SetupTopBar(
-              state: widget.newUser.isBusiness ? 'profileBusiness' : 'profile',
+              state: newUser.isBusiness ? 'profileBusiness' : 'profile',
             ),
             Expanded(
               child: Padding(
@@ -55,9 +39,7 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                       const SizedBox(height: 20), // Add spacing
                       ImageSelectionButton(
                         onImageSelected: (image) {
-                          setState(() {
-                            selectedImage = image;
-                          });
+                          selectedImage = image;
                         },
                       ),
                       const SizedBox(height: 20),
@@ -67,31 +49,32 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                           width: 500, height: 120, lines: 3),
                       const SizedBox(height: 40),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
                             onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 0),
+                            ),
+                            child: const Text('Back'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              newUser.displayName = displayNameController.text;
+                              newUser.username = usernameController.text;
+                              newUser.biography = biographyController.text;
+                              //newUser.imagePath =
                               // Handle 'Next' button action
-                              final updatedDisplayName =
-                                  displayNameController.text;
-                              final updatedBiography = biographyController.text;
-                              final updatedUsername = usernameController.text;
                               try {
-                                userDB.updateUserProfileFields(
-                                  user,
-                                  displayName: updatedDisplayName,
-                                  newUsername: updatedUsername,
-                                  biography: updatedBiography,
-                                );
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            widget.newUser.isBusiness
-                                                ? SetupStyle(
-                                                    newUser: widget.newUser)
-                                                : IndividualSetupSwipe(
-                                                    newUser: widget.newUser)));
+                                        builder: (context) => newUser.isBusiness
+                                            ? SetupStyle(newUser: newUser)
+                                            : IndividualSetupSwipe(
+                                                newUser: newUser)));
                               } catch (e) {
                                 final exceptionMessage =
                                     e.toString().replaceAll("Exception:", "");
