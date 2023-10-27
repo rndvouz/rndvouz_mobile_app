@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 class User {
   String username;
   String? displayName;
@@ -9,7 +11,7 @@ class User {
   Map<String, double>? userMeasurements;
   String? type;
   String? address;
-  String? style;
+  List<String>? style;
   String? favoriteColors;
   String? biography;
   bool isBusiness;
@@ -45,6 +47,8 @@ class ContactInformation {
 }
 
 class UserDB {
+  UserDB(this.ref);
+  final ProviderRef<UserDB> ref;
   final List<User> _users = [
     User(
         username: 'Eric Beck',
@@ -82,7 +86,7 @@ class UserDB {
     return _users.firstWhere((user) => user.username == username);
   }
 
-  void userAdd(User newUser) {
+  void validateUser(User newUser){
     if (isEmailValid(newUser.email)) {
       if (_users.any((user) => user.email == newUser.email)) {
         throw Exception("Email has been used");
@@ -103,6 +107,9 @@ class UserDB {
     if (newUser.password.length < 8) {
       throw Exception("Password must be at least 8 characters.");
     }
+  }
+  void addUser(User newUser) {
+    validateUser(newUser);
 
     _users.add(newUser);
   }
@@ -161,4 +168,8 @@ class UserDB {
   // }
 }
 
-UserDB userDB = UserDB();
+final userDBProvider = Provider<UserDB>((ref) {
+  return UserDB(ref);
+});
+
+

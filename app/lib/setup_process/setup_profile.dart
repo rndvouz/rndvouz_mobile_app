@@ -1,45 +1,34 @@
+import 'dart:typed_data';
+
 import 'package:app/setup_process/setup_style.dart';
+import 'package:app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../data_model/user_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'setup_top_bar.dart';
 import 'individual_setup_swipe.dart';
 
-class SetupProfilePage extends StatefulWidget {
+class SetupProfilePage extends ConsumerWidget {
   final User newUser;
 
   const SetupProfilePage({Key? key, required this.newUser}) : super(key: key);
 
   @override
-  SetupProfilePageState createState() => SetupProfilePageState();
-}
-
-class SetupProfilePageState extends State<SetupProfilePage> {
-  late TextEditingController displayNameController;
-  late TextEditingController usernameController;
-  late User user;
-  TextEditingController biographyController = TextEditingController();
-
-  SetupProfilePageState();
-
-  @override
-  void initState() {
-    super.initState();
-    displayNameController =
-        TextEditingController(text: widget.newUser.displayName);
-    usernameController = TextEditingController(text: widget.newUser.username);
-    user = widget.newUser;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final displayNameController =
+        TextEditingController(text: newUser.displayName);
+    final usernameController = TextEditingController(text: newUser.username);
+    final biographyController = TextEditingController();
+    Uint8List? selectedImage;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             SetupTopBar(
-                state:
-                    widget.newUser.isBusiness ? 'profileBusiness' : 'profile'),
+              state: newUser.isBusiness ? 'profileBusiness' : 'profile',
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -48,7 +37,11 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       const SizedBox(height: 20), // Add spacing
-                      ProfilePictureUploadButton(onPressed: () {}),
+                      ImageSelectionButton(
+                        onImageSelected: (image) {
+                          selectedImage = image;
+                        },
+                      ),
                       const SizedBox(height: 20),
                       _buildTextField("Display Name", displayNameController),
                       _buildTextField("Username", usernameController),
@@ -56,39 +49,32 @@ class SetupProfilePageState extends State<SetupProfilePage> {
                           width: 500, height: 120, lines: 3),
                       const SizedBox(height: 40),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // ElevatedButton(
-                          //   onPressed: () {
-                          //     Navigator.pop(context);
-                          //   },
-                          //   style: ElevatedButton.styleFrom(
-                          //     padding: const EdgeInsets.symmetric(vertical: 0),
-                          //   ),
-                          //   child: const Text('Back'),
-                          // ),
                           ElevatedButton(
                             onPressed: () {
-                              final updatedDisplayName =
-                                  displayNameController.text;
-                              final updatedBiography = biographyController.text;
-                              final updatedUsername = usernameController.text;
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 0),
+                            ),
+                            child: const Text('Back'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              newUser.displayName = displayNameController.text;
+                              newUser.username = usernameController.text;
+                              newUser.biography = biographyController.text;
+                              //newUser.imagePath =
+                              // Handle 'Next' button action
                               try {
-                                userDB.updateUserProfileFields(
-                                  user,
-                                  displayName: updatedDisplayName,
-                                  newUsername: updatedUsername,
-                                  biography: updatedBiography,
-                                );
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            widget.newUser.isBusiness
-                                                ? SetupStyle(
-                                                    newUser: widget.newUser)
-                                                : IndividualSetupSwipe(
-                                                    newUser: widget.newUser)));
+                                        builder: (context) => newUser.isBusiness
+                                            ? SetupStyle(newUser: newUser)
+                                            : IndividualSetupSwipe(
+                                                newUser: newUser)));
                               } catch (e) {
                                 final exceptionMessage =
                                     e.toString().replaceAll("Exception:", "");
@@ -141,43 +127,70 @@ class SetupProfilePageState extends State<SetupProfilePage> {
   }
 }
 
-class ProfilePictureUploadButton extends StatelessWidget {
-  final Function() onPressed;
+class ImageSelectionButton extends StatefulWidget {
+  final Function(Uint8List?) onImageSelected;
 
-  const ProfilePictureUploadButton({Key? key, required this.onPressed})
+  const ImageSelectionButton({Key? key, required this.onImageSelected})
       : super(key: key);
+
+  @override
+  _ImageSelectionButtonState createState() => _ImageSelectionButtonState();
+}
+
+class _ImageSelectionButtonState extends State<ImageSelectionButton> {
+  Uint8List? _image;
+
+  void selectImage(ImageSource source) async {
+    Uint8List? img = await pickAndCropImage(source);
+    if (img != null) {
+      setState(() {
+        _image = img;
+      });
+      widget.onImageSelected(_image);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: () {
+        ImageOptionsUtil.showImageSourceOptions(
+            context, (imageSource) => selectImage(imageSource));
+      },
       child: Container(
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.grey[300],
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.add_a_photo_outlined,
-                size: 40,
-                color: Colors.grey[600],
-              ),
-              const SizedBox(height: 8), // Add spacing between Icon and Text
-              Text(
-                'Add Photo',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
+        child: _image != null
+            ? ClipOval(
+                child: Image.memory(
+                  _image!,
+                  fit: BoxFit.cover,
+                ),
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_a_photo_outlined,
+                      size: 40,
+                      color: Colors.grey[600],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Add Photo',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }
