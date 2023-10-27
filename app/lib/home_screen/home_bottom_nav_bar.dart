@@ -21,7 +21,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   @override
   void initState() {
     _pages = [
-      {'page': HomeBrowse()},
+      {'page': HomeBrowseOrSwipe()},
       {'page': HomeSearch()},
       {'page': HomeUploadItem()},
       {'page': HomeNotification()},

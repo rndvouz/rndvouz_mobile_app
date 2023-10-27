@@ -20,8 +20,4 @@ enum Garment {
   boots,
   // other
   accessories,
-  // everything, for browse section
-  all,
-  // temp, because I'm not sure how to get forOnboarding yet
-  signup,
 }
