@@ -17,38 +17,43 @@ class Settings extends ConsumerWidget {
         title: Text('Settings'),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Text(curTheme.toString()),
-            ElevatedButton(
-                onPressed: () {
-                  ref.read(curThemeModeStateProvider.notifier).state =
-                      curTheme == ThemeMode.light
-                          ? ThemeMode.dark
-                          : ThemeMode.light;
-                },
-                child: Text('Change')),
-            DropdownButton<ThemeMode>(
-              value: curTheme,
-              items: const [
-                DropdownMenuItem(
-                  value: ThemeMode.system,
-                  child: Text('System Theme'),
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DropdownButton<ThemeMode>(
+                  value: curTheme,
+                  items: const [
+                    DropdownMenuItem(
+                      value: ThemeMode.system,
+                      child: Text('System Theme'),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.light,
+                      child: Text('Light Theme'),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.dark,
+                      child: Text('Dark Theme'),
+                    )
+                  ],
+                  onChanged: (value) {
+                    ref.read(curThemeModeStateProvider.notifier).state = value!;
+                  },
                 ),
-                DropdownMenuItem(
-                  value: ThemeMode.light,
-                  child: Text('Light Theme'),
+                SizedBox(height: 50),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/login", (r) => false);
+                  },
+                  child: Text("Log Out"),
                 ),
-                DropdownMenuItem(
-                  value: ThemeMode.dark,
-                  child: Text('Dark Theme'),
-                )
               ],
-              onChanged: (value) {
-                ref.read(curThemeModeStateProvider.notifier).state = value!;
-              },
             ),
-          ],
+          ),
         ),
       ),
     );
