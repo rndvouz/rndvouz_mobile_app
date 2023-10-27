@@ -11,7 +11,6 @@ class SetupLoginPage extends ConsumerWidget {
   const SetupLoginPage({Key? key, required this.isBusiness}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final UserDB userDB = ref.watch(userDBProvider);
     TextEditingController emailController = TextEditingController();
     TextEditingController usernameController = TextEditingController();

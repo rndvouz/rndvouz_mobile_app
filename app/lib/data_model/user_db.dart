@@ -86,7 +86,7 @@ class UserDB {
     return _users.firstWhere((user) => user.username == username);
   }
 
-  void validateUser(User newUser){
+  void validateUser(User newUser) {
     if (isEmailValid(newUser.email)) {
       if (_users.any((user) => user.email == newUser.email)) {
         throw Exception("Email has been used");
@@ -108,6 +108,7 @@ class UserDB {
       throw Exception("Password must be at least 8 characters.");
     }
   }
+
   void addUser(User newUser) {
     validateUser(newUser);
 
@@ -171,5 +172,3 @@ class UserDB {
 final userDBProvider = Provider<UserDB>((ref) {
   return UserDB(ref);
 });
-
-

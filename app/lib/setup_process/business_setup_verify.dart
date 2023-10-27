@@ -136,12 +136,12 @@ class BusinessSetupVerify extends ConsumerWidget {
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SetupComplete(
-                                          newUser: newUser)),
-                                      (r) => false);
+                                      builder: (context) =>
+                                          SetupComplete(newUser: newUser)),
+                                  (r) => false);
                             } catch (e) {
                               final exceptionMessage =
-                              e.toString().replaceAll("Exception:", "");
+                                  e.toString().replaceAll("Exception:", "");
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(exceptionMessage),

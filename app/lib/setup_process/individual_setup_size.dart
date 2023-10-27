@@ -15,7 +15,13 @@ class IndividualSetupSize extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final UserDB userDB = ref.watch(userDBProvider);
-    Map<String, double> userMeasurements  = {"Bust":34, "Waist": 26, "Hips": 37, "Inseam": 28, "Sleeve Length":24}; // just hard code for this one now.
+    Map<String, double> userMeasurements = {
+      "Bust": 34,
+      "Waist": 26,
+      "Hips": 37,
+      "Inseam": 28,
+      "Sleeve Length": 24
+    }; // just hard code for this one now.
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -59,12 +65,12 @@ class IndividualSetupSize extends ConsumerWidget {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SetupComplete(
-                                              newUser: newUser)),
+                                          builder: (context) =>
+                                              SetupComplete(newUser: newUser)),
                                       (r) => false);
                                 } catch (e) {
                                   final exceptionMessage =
-                                  e.toString().replaceAll("Exception:", "");
+                                      e.toString().replaceAll("Exception:", "");
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(exceptionMessage),

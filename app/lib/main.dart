@@ -5,7 +5,8 @@ import 'app.dart';
 
 ThemeMode curThemeMode = ThemeMode.system;
 
-final curThemeModeStateProvider = StateProvider<ThemeMode>((ref) => curThemeMode);
+final curThemeModeStateProvider =
+    StateProvider<ThemeMode>((ref) => curThemeMode);
 
 void main() {
   runApp(ProviderScope(

@@ -35,7 +35,7 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                   textAlign: TextAlign.left,
                 ),
                 _buildTextField('Name', nameController),
-                _buildTextField('Email Address',emailController),
+                _buildTextField('Email Address', emailController),
                 _buildTextField('Phone Number', phoneNumberController),
                 const SizedBox(height: 25),
                 ElevatedButton(
@@ -65,7 +65,10 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                             final name = nameController.text;
                             final email = emailController.text;
                             final phoneNumber = phoneNumberController.text;
-                            widget.newUser.contact!.add(ContactInformation(email: email, name: name, phoneNumber: phoneNumber));
+                            widget.newUser.contact!.add(ContactInformation(
+                                email: email,
+                                name: name,
+                                phoneNumber: phoneNumber));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

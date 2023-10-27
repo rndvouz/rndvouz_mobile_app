@@ -6,14 +6,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'individual_setup_size.dart';
 import 'setup_top_bar.dart';
 
-class SetupStyle extends ConsumerWidget{
+class SetupStyle extends ConsumerWidget {
   final User newUser;
 
   const SetupStyle({Key? key, required this.newUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String>? style = ["Athleisure", "Casual"]; // for now, just hard code for style.
+    List<String>? style = [
+      "Athleisure",
+      "Casual"
+    ]; // for now, just hard code for style.
     const OutlinedBorder roundBorder = RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -27,8 +30,7 @@ class SetupStyle extends ConsumerWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SetupTopBar(
-              state: newUser.isBusiness ? 'styleBusiness' : 'style'),
+          SetupTopBar(state: newUser.isBusiness ? 'styleBusiness' : 'style'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -192,11 +194,12 @@ class SetupStyle extends ConsumerWidget{
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => newUser.isBusiness
-                                                ? BusinessSetupContact(
-                                                    newUser: newUser)
-                                                : IndividualSetupSize(
-                                                    newUser: newUser)));
+                                            builder: (context) =>
+                                                newUser.isBusiness
+                                                    ? BusinessSetupContact(
+                                                        newUser: newUser)
+                                                    : IndividualSetupSize(
+                                                        newUser: newUser)));
                                   },
                                   child: const Text('Next'),
                                 ))

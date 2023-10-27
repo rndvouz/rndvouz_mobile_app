@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home_screen/home_bottom_nav_bar.dart';
 import 'package:app/setup_process/user_type.dart';
 
-final errorMessageProvider = StateNotifierProvider<ErrorMessageNotifier, String?>((ref) {
+final errorMessageProvider =
+    StateNotifierProvider<ErrorMessageNotifier, String?>((ref) {
   return ErrorMessageNotifier();
 });
 
@@ -113,10 +114,14 @@ class LoginPage extends ConsumerWidget {
                       ),
                     );
                   } else {
-                    ref.read(errorMessageProvider.notifier).setError('Invalid password');
+                    ref
+                        .read(errorMessageProvider.notifier)
+                        .setError('Invalid password');
                   }
                 } catch (e) {
-                  ref.read(errorMessageProvider.notifier).setError('User not found');
+                  ref
+                      .read(errorMessageProvider.notifier)
+                      .setError('User not found');
                 }
               },
               child: const Padding(
@@ -174,4 +179,3 @@ class LoginPage extends ConsumerWidget {
     );
   }
 }
-
