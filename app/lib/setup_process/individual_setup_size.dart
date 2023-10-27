@@ -2,22 +2,20 @@ import 'package:app/data_model/user_db.dart';
 import 'package:app/setup_process/setup_complete.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'setup_top_bar.dart';
 
-class IndividualSetupSize extends StatefulWidget {
+class IndividualSetupSize extends ConsumerWidget {
   final User newUser;
 
   const IndividualSetupSize({Key? key, required this.newUser})
       : super(key: key);
 
   @override
-  SignUpSizeState createState() => SignUpSizeState();
-}
-
-class SignUpSizeState extends State<IndividualSetupSize> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final UserDB userDB = ref.watch(userDBProvider);
+    Map<String, double> userMeasurements  = {"Bust":34, "Waist": 26, "Hips": 37, "Inseam": 28, "Sleeve Length":24}; // just hard code for this one now.
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -46,8 +44,8 @@ class SignUpSizeState extends State<IndividualSetupSize> {
                                 Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(140.0, 48.0)),
-                              child: Text('Back'),
+                                  fixedSize: const Size(140.0, 48.0)),
+                              child: const Text('Back'),
                             )
                           ],
                         ),
@@ -55,16 +53,28 @@ class SignUpSizeState extends State<IndividualSetupSize> {
                           children: <Widget>[
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SetupComplete(
-                                            newUser: widget.newUser)),
-                                    (r) => false);
+                                try {
+                                  newUser.userMeasurements = userMeasurements;
+                                  userDB.addUser(newUser);
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SetupComplete(
+                                              newUser: newUser)),
+                                      (r) => false);
+                                } catch (e) {
+                                  final exceptionMessage =
+                                  e.toString().replaceAll("Exception:", "");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(exceptionMessage),
+                                    ),
+                                  );
+                                }
                               },
                               style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(140.0, 48.0)),
-                              child: Text('Finished'),
+                                  fixedSize: const Size(140.0, 48.0)),
+                              child: const Text('Finished'),
                             )
                           ],
                         ),
@@ -94,7 +104,7 @@ class SignUpSizeState extends State<IndividualSetupSize> {
                 Column(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: const Icon(Icons.arrow_back_ios),
                       onPressed: () => setState(() {
                         final int newVal = val - 1;
                         val = newVal.clamp(min, max);
@@ -124,7 +134,7 @@ class SignUpSizeState extends State<IndividualSetupSize> {
                 Column(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_forward_ios),
+                      icon: const Icon(Icons.arrow_forward_ios),
                       onPressed: () => setState(() {
                         final int newVal = val + 1;
                         val = newVal.clamp(min, max);

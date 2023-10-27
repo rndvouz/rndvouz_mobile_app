@@ -1,31 +1,28 @@
 import 'package:app/setup_process/setup_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:app/data_model/user_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'setup_top_bar.dart';
 
-class SetupLoginPage extends StatefulWidget {
+class SetupLoginPage extends ConsumerWidget {
   final bool isBusiness;
 
   const SetupLoginPage({Key? key, required this.isBusiness}) : super(key: key);
-
   @override
-  SetupLoginPageState createState() => SetupLoginPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class SetupLoginPageState extends State<SetupLoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController retypePasswordController = TextEditingController();
+    final UserDB userDB = ref.watch(userDBProvider);
+    TextEditingController emailController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController retypePasswordController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            SetupTopBar(state: widget.isBusiness ? 'loginBusiness' : 'login'),
+            SetupTopBar(state: isBusiness ? 'loginBusiness' : 'login'),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -62,18 +59,18 @@ class SetupLoginPageState extends State<SetupLoginPage> {
                               final password = passwordController.text;
                               final retypePassword =
                                   retypePasswordController.text;
-                              final newUser;
+                              final User newUser;
 
                               if (password == retypePassword) {
                                 newUser = User(
                                   username: username,
                                   email: email,
                                   password: password,
-                                  isBusiness: widget.isBusiness,
+                                  isBusiness: isBusiness,
                                 );
 
                                 try {
-                                  userDB.userAdd(newUser);
+                                  userDB.validateUser(newUser);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

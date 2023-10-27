@@ -17,6 +17,9 @@ class BusinessSetupContact extends StatefulWidget {
 class _BusinessSetupContactState extends State<BusinessSetupContact> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController phoneNumberController = TextEditingController();
     return Scaffold(
       body: SafeArea(
           child: ListView(
@@ -26,20 +29,20 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
             padding: const EdgeInsets.only(left: 25, right: 25),
             child: Column(
               children: [
-                SizedBox(height: 25),
-                Text(
+                const SizedBox(height: 25),
+                const Text(
                   'Contact Person 1:',
                   textAlign: TextAlign.left,
                 ),
-                _buildTextField('Name'),
-                _buildTextField('Email Address'),
-                _buildTextField('Phone Number'),
-                SizedBox(height: 25),
+                _buildTextField('Name', nameController),
+                _buildTextField('Email Address',emailController),
+                _buildTextField('Phone Number', phoneNumberController),
+                const SizedBox(height: 25),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Add Another Contact'),
+                  child: const Text('Add Another Contact'),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -50,8 +53,8 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
-                              fixedSize: Size(140.0, 48.0)),
-                          child: Text('Back'),
+                              fixedSize: const Size(140.0, 48.0)),
+                          child: const Text('Back'),
                         )
                       ],
                     ),
@@ -59,6 +62,10 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                       children: <Widget>[
                         ElevatedButton(
                           onPressed: () {
+                            final name = nameController.text;
+                            final email = emailController.text;
+                            final phoneNumber = phoneNumberController.text;
+                            widget.newUser.contact!.add(ContactInformation(email: email, name: name, phoneNumber: phoneNumber));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -66,8 +73,8 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                                         newUser: widget.newUser)));
                           },
                           style: ElevatedButton.styleFrom(
-                              fixedSize: Size(140.0, 48.0)),
-                          child: Text('Next'),
+                              fixedSize: const Size(140.0, 48.0)),
+                          child: const Text('Next'),
                         )
                       ],
                     ),
@@ -81,7 +88,7 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
     );
   }
 
-  Widget _buildTextField(String label,
+  Widget _buildTextField(String label, TextEditingController controller,
       {bool isObscure = false,
       double width = 500,
       double height = 60,
@@ -93,6 +100,7 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
       child: TextField(
         obscureText: isObscure,
         maxLines: lines,
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(

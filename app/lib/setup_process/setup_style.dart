@@ -1,22 +1,19 @@
 import 'package:app/data_model/user_db.dart';
 import 'package:app/setup_process/business_setup_contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'individual_setup_size.dart';
 import 'setup_top_bar.dart';
 
-class SetupStyle extends StatefulWidget {
+class SetupStyle extends ConsumerWidget{
   final User newUser;
 
   const SetupStyle({Key? key, required this.newUser}) : super(key: key);
 
   @override
-  _SignUpStyleState createState() => _SignUpStyleState();
-}
-
-class _SignUpStyleState extends State<SetupStyle> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<String>? style = ["Athleisure", "Casual"]; // for now, just hard code for style.
     const OutlinedBorder roundBorder = RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -31,7 +28,7 @@ class _SignUpStyleState extends State<SetupStyle> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SetupTopBar(
-              state: widget.newUser.isBusiness ? 'styleBusiness' : 'style'),
+              state: newUser.isBusiness ? 'styleBusiness' : 'style'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -173,23 +170,33 @@ class _SignUpStyleState extends State<SetupStyle> {
                       width: 200.0,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: <Widget>[
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Back'),
+                            )
+                          ],
+                        ),
                         Column(
                           children: [
                             Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    newUser.style = style;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => widget
-                                                    .newUser.isBusiness
+                                            builder: (context) => newUser.isBusiness
                                                 ? BusinessSetupContact(
-                                                    newUser: widget.newUser)
+                                                    newUser: newUser)
                                                 : IndividualSetupSize(
-                                                    newUser: widget.newUser)));
+                                                    newUser: newUser)));
                                   },
                                   child: const Text('Next'),
                                 ))
