@@ -8,7 +8,7 @@ ThemeMode curThemeMode = ThemeMode.system;
 final curThemeModeStateProvider = StateProvider<ThemeMode>((ref) => curThemeMode);
 
 void main() {
-  runApp(const ProviderScope(
+  runApp(ProviderScope(
     child: RndvouzApp(),
   ));
 }
