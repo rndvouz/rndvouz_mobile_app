@@ -57,8 +57,8 @@ class NewSwipeCard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  // bottom: 0,
-                  top: topSet,
+                  bottom: 0,
+                  // top: topSet,
                   child: Container(
                     height: 80,
                     width: 280,
