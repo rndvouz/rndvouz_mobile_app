@@ -14,3 +14,8 @@ const colorBrown2 = Color(0xFFF0B27A);
 const errorRed = Color(0xFFC5032B);
 
 const surfaceWhite = Color.fromARGB(255, 255, 255, 255);
+
+const primaryGreen = Color(0xFF797D62);
+const secondaryBrown = Color(0xFF967100);
+const tertiaryBlue = Color(0xFF6d998e);
+const neutralGrey = Color(0xFF92918a);

@@ -74,6 +74,11 @@ class UserDB {
         username: 'sams',
         email: 'samsm@hawaii.edu',
         password: '12345678',
+        isBusiness: false),
+    User(
+        username: 'l',
+        email: 'l@l.com',
+        password: 'llllllll',
         isBusiness: false)
   ];
 

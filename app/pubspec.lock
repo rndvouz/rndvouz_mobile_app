@@ -296,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  material_theme_builder:
+    dependency: "direct main"
+    description:
+      name: material_theme_builder
+      sha256: "380ab70835e01f4ee0c37904eebae9e36ed37b5cf8ed40d67412ea3244a2afd6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   meta:
     dependency: transitive
     description:
