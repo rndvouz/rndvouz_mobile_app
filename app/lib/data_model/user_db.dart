@@ -32,9 +32,10 @@ class User {
     this.style,
     this.favoriteColors,
     this.biography,
-    this.contact,
+    List<ContactInformation>? contact,
   })  : follower = follower ?? <String>[],
-        following = following ?? <String>[];
+        following = following ?? <String>[],
+        contact = contact ?? <ContactInformation>[];
 }
 
 class ContactInformation {

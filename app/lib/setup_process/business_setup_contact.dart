@@ -65,7 +65,7 @@ class _BusinessSetupContactState extends State<BusinessSetupContact> {
                             final name = nameController.text;
                             final email = emailController.text;
                             final phoneNumber = phoneNumberController.text;
-                            widget.newUser.contact!.add(ContactInformation(
+                            widget.newUser.contact?.add(ContactInformation(
                                 email: email,
                                 name: name,
                                 phoneNumber: phoneNumber));
