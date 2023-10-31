@@ -27,7 +27,7 @@ class IndividualSetupSwipe extends StatefulWidget {
 class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
   final CardSwiperController controller = CardSwiperController();
   final List<Merchandise> merchandises =
-      MerchandiseDB.loadMerchanise(Purpose.setup);
+      merchandiseDB.loadMerchanise(Purpose.setup);
 
   int displayedIndex = 0;
 

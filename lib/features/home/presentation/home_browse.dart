@@ -15,7 +15,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
   // Items for Browsing Feature
   List<Card> _buildGridMerchCards(BuildContext context) {
     List<Merchandise> allMerchandise =
-        MerchandiseDB.loadMerchanise(Purpose.browse);
+        merchandiseDB.loadMerchanise(Purpose.browse);
 
     if (allMerchandise.isEmpty) {
       // Maybe provide an error message here

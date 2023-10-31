@@ -18,7 +18,7 @@ class SwipeFeature extends StatefulWidget {
 class _SwipeFeature extends State<SwipeFeature> {
   final CardSwiperController controller = CardSwiperController();
   final List<Merchandise> swipeMerchandises =
-      MerchandiseDB.loadMerchanise(Purpose.browse);
+      merchandiseDB.loadMerchanise(Purpose.browse);
 
   bool _onSwipe(
     int previousIndex,

@@ -54,31 +54,39 @@ class UserDB {
   final List<User> _users = [
     User(
         username: 'Eric Beck',
+        displayName: 'Eric Beck',
         email: 'eric@hawaii.edu',
         password: 'ericPass',
         isBusiness: false),
     User(
         username: 'Michael Smith ',
+        displayName: 'Michael Smith ',
         email: 'michael@hawaii.edu',
         password: 'michaelPass',
         isBusiness: false),
     User(
         username: 'test',
+        displayName: 'test',
         email: 'test@hawaii.edu',
         password: 'testPass',
-        isBusiness: false),
+        isBusiness: false,
+        biography: "I'm passionate about fashion and clothing. I love to express myself through my style. Whether it's a casual day out or a special occasion, I believe that what you wear can make a statement."
+    ),
     User(
         username: 'amyw',
+        displayName: 'amyw',
         email: 'amywong@hawaii.edu',
         password: '12345678',
         isBusiness: false),
     User(
         username: 'sams',
+        displayName: 'sams',
         email: 'samsm@hawaii.edu',
         password: '12345678',
         isBusiness: false),
     User(
         username: 'l',
+        displayName: 'l',
         email: 'l@l.com',
         password: 'llllllll',
         isBusiness: false)

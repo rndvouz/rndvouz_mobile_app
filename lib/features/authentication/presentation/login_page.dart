@@ -28,7 +28,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final UserDB userDB = ref.watch(userDBProvider);
-
+    final String currentUser = ref.watch(currentUserProvider);
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
 
@@ -108,6 +108,8 @@ class LoginPage extends ConsumerWidget {
 
                   if (user.password == password) {
                     ref.read(errorMessageProvider.notifier).clearError();
+                    ref.read(currentUserProvider.notifier).state = username;
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
