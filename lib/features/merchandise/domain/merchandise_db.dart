@@ -6,11 +6,10 @@ import 'merchandise.dart';
 import 'merchandise_style.dart';
 
 class MerchandiseDB {
-  static List<Merchandise> loadMerchanise(Purpose purpose, [Garment? garment]) {
     List<Merchandise> allGarments = <Merchandise>[
       Merchandise(
         id: 0,
-        ownerUsername: "test",
+        ownerUsername: "Eric Beck",
         state: Availability.selling,
         purpose: Purpose.setup,
         primaryStyle: PrimaryStyle.casual,
@@ -643,7 +642,7 @@ class MerchandiseDB {
       Merchandise(
         id: 38,
         ownerUsername: "test",
-        state: Availability.selling,
+        state: Availability.sold,
         purpose: Purpose.browse,
         primaryStyle: PrimaryStyle.businessCasual,
         garment: Garment.longsleeve,
@@ -659,7 +658,7 @@ class MerchandiseDB {
       Merchandise(
         id: 39,
         ownerUsername: "test",
-        state: Availability.selling,
+        state: Availability.sold,
         purpose: Purpose.setup,
         primaryStyle: PrimaryStyle.streetwear,
         garment: Garment.tshirt,
@@ -674,8 +673,12 @@ class MerchandiseDB {
       ),
     ];
 
+    List<Merchandise> findByOwnerAndState(String owner, Availability availability ){
+      return allGarments.where((m)=> m.ownerUsername == owner && m.state == availability).toList();
+    }
+     List<Merchandise> loadMerchanise(Purpose purpose, [Garment? garment, String? owner]) {
     if (purpose == Purpose.all) {
-      return allGarments;
+      return this.allGarments;
     } else {
       // use for searching feature
       return allGarments.where((Merchandise m) {
@@ -684,3 +687,4 @@ class MerchandiseDB {
     }
   }
 }
+MerchandiseDB merchandiseDB = MerchandiseDB();
