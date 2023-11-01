@@ -110,7 +110,7 @@ class LoginPage extends ConsumerWidget {
                     ref.read(errorMessageProvider.notifier).clearError();
                     ref.read(currentUserProvider.notifier).state = username;
 
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomeBottomNavBar(),

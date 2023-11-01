@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/data/colors.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user_db.dart';
 import 'package:rndvouz/features/settings/presentation/settings.dart';
@@ -18,167 +19,191 @@ class HomeProfile extends ConsumerWidget {
     final String currentUser = ref.watch(currentUserProvider);
     User user = userDB.getUser(currentUser);
 
-    final selectedTab = ref.watch(selectedTabProvider);
+    ref.watch(selectedTabProvider);
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://qph.fs.quoracdn.net/main-qimg-11ef692748351829b4629683eff21100.webp'),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    user.displayName ?? "",
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: 100,
-                    height: 40,
-                    padding: const EdgeInsets.only(left: 20),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.blue,
-                            width: 1,
-                            style: BorderStyle.solid,
-                          ),
-                          borderRadius: BorderRadius.circular(50),
+    return Container(
+      color: colorGreen1,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
+          backgroundColor: colorCream1,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                            'https://qph.fs.quoracdn.net/main-qimg-11ef692748351829b4629683eff21100.webp'),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        user.displayName ?? "",
+                        style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                      const Spacer(),
+                      Container(
+                        width: 100,
+                        height: 40,
+                        padding: const EdgeInsets.only(left: 20),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                color: Colors.blue,
+                                width: 1,
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                          onPressed: () {
+                            // Add your button click logic here
+                          },
+                          child: const Text(
+                            'Edit',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Settings()),
+                          );
+                        },
+                        icon: const Icon(Icons.settings),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(user.biography ?? "...."),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          user.follower!.length.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 20),
+                        ),
+                        const Text(
+                          'Followers',
+                          style:
+                              TextStyle(fontSize: 15, color: Colors.blueGrey),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          user.following!.length.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 20),
+                        ),
+                        const Text(
+                          'Following',
+                          style:
+                              TextStyle(fontSize: 15, color: Colors.blueGrey),
+                        ),
+                      ],
+                    ),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '30',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 20),
+                        ),
+                        Text(
+                          'Like',
+                          style:
+                              TextStyle(fontSize: 15, color: Colors.blueGrey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.blueGrey[200],
+                  ),
+                ),
+
+                // Selling and Sold tabs
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
                       onPressed: () {
-                        // Add your button click logic here
+                        ref.read(selectedTabProvider.notifier).state =
+                            'Selling';
                       },
-                      child: const Text(
-                        'Edit',
-                        style: TextStyle(color: Colors.white),
+                      child: Text(
+                        'Selling',
+                        style: TextStyle(
+                          color: ref.read(selectedTabProvider.notifier).state ==
+                                  'Selling'
+                              ? Colors.blue
+                              : Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Settings()),
-                      );
-                    },
-                    icon: const Icon(Icons.settings),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(user.biography ?? "...."),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      user.follower!.length.toString(),
-                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                    ),
-                    const Text(
-                      'Followers',
-                      style: TextStyle(fontSize: 15, color: Colors.blueGrey),
+                    TextButton(
+                      onPressed: () {
+                        ref.read(selectedTabProvider.notifier).state = 'Sold';
+                      },
+                      child: Text(
+                        'Sold',
+                        style: TextStyle(
+                          color: ref.read(selectedTabProvider.notifier).state ==
+                                  'Sold'
+                              ? Colors.blue
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      user.following!.length.toString(),
-                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                    ),
-                    const Text(
-                      'Following',
-                      style: TextStyle(fontSize: 15, color: Colors.blueGrey),
-                    ),
-                  ],
-                ),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '30',
-                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                    ),
-                    Text(
-                      'Like',
-                      style: TextStyle(fontSize: 15, color: Colors.blueGrey),
-                    ),
-                  ],
-                ),
+                SizedBox(height: 10),
+                // Conditional content based on the selected tab
+                if (ref.read(selectedTabProvider.notifier).state == 'Selling')
+                  ..._buildSellingItems(currentUser),
+                if (ref.read(selectedTabProvider.notifier).state == 'Sold')
+                  ..._buildSoldItems(currentUser),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Divider(
-                thickness: 1,
-                color: Colors.blueGrey[200],
-              ),
-            ),
-
-            // Selling and Sold tabs
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    ref.read(selectedTabProvider.notifier).state = 'Selling';
-                  },
-                  child: Text(
-                    'Selling',
-                    style: TextStyle(
-                      color: ref.read(selectedTabProvider.notifier).state == 'Selling' ? Colors.blue : Colors.black,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    ref.read(selectedTabProvider.notifier).state = 'Sold';
-                  },
-                  child: Text(
-                    'Sold',
-                    style: TextStyle(
-                      color: ref.read(selectedTabProvider.notifier).state == 'Sold' ? Colors.blue : Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            // Conditional content based on the selected tab
-            if (ref.read(selectedTabProvider.notifier).state == 'Selling')
-              ..._buildSellingItems(currentUser),
-            if (ref.read(selectedTabProvider.notifier).state == 'Sold')
-              ..._buildSoldItems(currentUser),
-          ],
+          ),
         ),
       ),
     );
   }
 
   List<Widget> _buildSellingItems(String currentUser) {
-    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(currentUser, Availability.selling);
+    List<Merchandise> allMerchandise =
+        merchandiseDB.findByOwnerAndState(currentUser, Availability.selling);
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {
@@ -225,9 +250,9 @@ class HomeProfile extends ConsumerWidget {
     return sellingItems;
   }
 
-
   List<Widget> _buildSoldItems(String currentUser) {
-    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(currentUser, Availability.sold);
+    List<Merchandise> allMerchandise =
+        merchandiseDB.findByOwnerAndState(currentUser, Availability.sold);
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {
