@@ -6,7 +6,6 @@ import 'package:rndvouz/features/user/domain/user_db.dart';
 import 'package:rndvouz/features/settings/presentation/settings.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
 final selectedTabProvider = StateProvider<String>((ref) => 'Selling');
 
