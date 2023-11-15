@@ -8,6 +8,7 @@ class UserTypePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(30),
@@ -32,31 +33,28 @@ class UserTypePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SetupLoginPage(
-                                      isBusiness: false,
-                                    )),
-                          );
-                        },
-                        child: const CardWidget(
-                          'Individual User',
-                          'I\'d like to browse and sell my own items',
+                      FittedBox(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              SetupLoginPage.routeName,
+                              arguments: SetupLoginPageArguments(false),
+                            );
+                          },
+                          child: const CardWidget(
+                            'Individual User',
+                            'I\'d like to browse and sell my own items',
+                          ),
                         ),
                       ),
                       const SizedBox(height: 15),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const SetupLoginPage(
-                                isBusiness: true,
-                              ),
-                            ),
+                            SetupLoginPage.routeName,
+                            arguments: SetupLoginPageArguments(true),
                           );
                         },
                         child: const CardWidget(

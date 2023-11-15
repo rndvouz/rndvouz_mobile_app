@@ -43,7 +43,6 @@ class HomeProfile extends ConsumerWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
           ),
-          backgroundColor: colorCream1,
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child: Column(

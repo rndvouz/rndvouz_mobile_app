@@ -13,10 +13,15 @@ final formSubmitProvider = StateProvider<bool>((ref) {
   return false;
 });
 
-class SetupLoginPage extends ConsumerStatefulWidget {
+class SetupLoginPageArguments {
   final bool isBusiness;
 
-  const SetupLoginPage({Key? key, required this.isBusiness}) : super(key: key);
+  SetupLoginPageArguments(this.isBusiness);
+}
+
+class SetupLoginPage extends ConsumerStatefulWidget {
+  static const routeName = 'signup';
+  const SetupLoginPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<SetupLoginPage> createState() => _SetupLoginPageState();
@@ -35,6 +40,9 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final SetupLoginPageArguments args =
+        ModalRoute.of(context)!.settings.arguments as SetupLoginPageArguments;
+    final isBusiness = args.isBusiness;
     final AsyncValue<List<User>> asyncUsernames = ref.watch(usersProvider);
     final userDB = ref.watch(userDBProvider);
     return asyncUsernames.when(
@@ -47,11 +55,13 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
             usernameController,
             passwordController,
             retypePasswordController,
+            isBusiness,
             ref);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stacktrace) =>
-          const Center(child: Text('Something went wrong')),
+      error: (error, stacktrace) {
+        return const Center(child: Text('Something went wrong'));
+      },
     );
   }
 
@@ -63,110 +73,111 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       TextEditingController usernameController,
       TextEditingController passwordController,
       TextEditingController retypePasswordController,
+      bool isBusiness,
       WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SetupTopBar(
-                  state: super.widget.isBusiness ? 'loginBusiness' : 'login'),
-              Center(
-                child: Form(
-                  key: formKey,
-                  // Wrap the entire content with SingleChildScrollView
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(height: 40),
-                      _buildTextField(
-                        "Email Address",
-                        emailController,
-                        listUsers: listUsers,
-                        ref: ref,
-                      ),
-                      const SizedBox(height: 5),
-                      _buildTextField(
-                        "Username",
-                        usernameController,
-                        listUsers: listUsers,
-                        ref: ref,
-                      ),
-                      const SizedBox(height: 5),
-                      _buildTextField(
-                        "Password",
-                        passwordController,
-                        isObscure: true,
-                        ref: ref,
-                      ),
-                      const SizedBox(height: 5),
-                      _buildTextField(
-                        "Re-type Password",
-                        retypePasswordController,
-                        controller2: passwordController,
-                        isObscure: true,
-                        ref: ref,
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              ref.read(formSubmitProvider.notifier).state =
-                                  true;
-                              if (!formKey.currentState!.validate()) {
-                                GlobalSnackBar.show(
-                                  'Please fill in all fields',
-                                );
-                                return;
-                              }
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SetupTopBar(state: isBusiness ? 'loginBusiness' : 'login'),
+                Center(
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const SizedBox(height: 40),
+                        _buildTextField(
+                          "Email Address",
+                          emailController,
+                          listUsers: listUsers,
+                          ref: ref,
+                        ),
+                        const SizedBox(height: 5),
+                        _buildTextField(
+                          "Username",
+                          usernameController,
+                          listUsers: listUsers,
+                          ref: ref,
+                        ),
+                        const SizedBox(height: 5),
+                        _buildTextField(
+                          "Password",
+                          passwordController,
+                          isObscure: true,
+                          ref: ref,
+                        ),
+                        const SizedBox(height: 5),
+                        _buildTextField(
+                          "Re-type Password",
+                          retypePasswordController,
+                          controller2: passwordController,
+                          isObscure: true,
+                          ref: ref,
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                ref.read(formSubmitProvider.notifier).state =
+                                    true;
+                                if (!formKey.currentState!.validate()) {
+                                  GlobalSnackBar.show(
+                                    'Please fill in all fields',
+                                  );
+                                  return;
+                                }
 
-                              final email = emailController.text;
-                              final username = usernameController.text;
-                              final password = passwordController.text;
+                                final email = emailController.text;
+                                final username = usernameController.text;
+                                final password = passwordController.text;
 
-                              try {
-                                final user = await FirebaseAuth.instance
-                                    .createUserWithEmailAndPassword(
-                                        email: email, password: password);
+                                try {
+                                  final user = await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email: email, password: password);
 
-                                FirebaseAuth.instance.currentUser!
-                                    .sendEmailVerification();
+                                  FirebaseAuth.instance.currentUser!
+                                      .sendEmailVerification();
 
-                                final User newUser;
+                                  final User newUser;
 
-                                newUser = User(
-                                  id: user.user!.uid,
-                                  username: username,
-                                  email: email,
-                                  isBusiness: super.widget.isBusiness,
-                                );
+                                  newUser = User(
+                                    id: user.user!.uid,
+                                    username: username,
+                                    email: email,
+                                    isBusiness: isBusiness,
+                                  );
 
-                                await userDB.setUser(newUser);
-                              } on FirebaseAuthException catch (e) {
-                                GlobalSnackBar.show(
-                                    "Unknown error has occured, please try again later");
-                              } catch (e) {
-                                GlobalSnackBar.show(
-                                    "Unknown error has occured, please try again later");
-                              }
-                            },
-                            child: const Text('Confirm'),
-                          ),
-                        ],
-                      ),
-                    ],
+                                  await userDB.setUser(newUser);
+                                } on FirebaseAuthException {
+                                  GlobalSnackBar.show(
+                                      "Unknown error has occured, please try again later");
+                                } catch (e) {
+                                  GlobalSnackBar.show(
+                                      "Unknown error has occured, please try again later");
+                                }
+                              },
+                              child: const Text('Confirm'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -181,6 +192,9 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         controller: controller,
         obscureText: isObscure,
         autovalidateMode: AutovalidateMode.onUserInteraction,

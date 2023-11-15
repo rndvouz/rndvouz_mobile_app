@@ -1,5 +1,6 @@
 import 'package:rndvouz/features/authentication/presentation/await_verify.dart';
 import 'package:rndvouz/features/authentication/presentation/login_page.dart';
+import 'package:rndvouz/features/authentication/presentation/setup_login.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/home/presentation/home_bottom_nav_bar.dart';
@@ -26,9 +27,11 @@ class RndvouzApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: curThemeMode,
       routes: {
-        '/login': (BuildContext context) => LoginPage(),
-        '/verify': (BuildContext context) => AwaitVerifyPage(),
-        '/home': (BuildContext context) => HomeBottomNavBar(),
+        '/login': (BuildContext context) => const LoginPage(),
+        '/verify': (BuildContext context) => const AwaitVerifyPage(),
+        '/home': (BuildContext context) => const HomeBottomNavBar(),
+        SetupLoginPage.routeName: (BuildContext context) =>
+            const SetupLoginPage(),
       },
     );
 
