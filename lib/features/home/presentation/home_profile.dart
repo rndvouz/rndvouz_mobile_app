@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
-import 'package:rndvouz/features/user/domain/user_db.dart';
+import 'package:rndvouz/features/user/domain/user.dart';
+import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/settings/presentation/settings.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
@@ -15,11 +16,26 @@ class HomeProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final UserDB userDB = ref.watch(userDBProvider);
-    final String currentUser = ref.watch(currentUserProvider);
-    User user = userDB.getUser(currentUser);
-
     ref.watch(selectedTabProvider);
+    final AsyncValue<User> user = ref.watch(currentUserProvider);
 
+    return user.when(
+      data: (user) {
+        return _build(
+          context,
+          userDB,
+          user,
+          ref,
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stacktrace) {
+        return const Center(child: Text('Something went wrong'));
+      },
+    );
+  }
+
+  Widget _build(BuildContext context, UserDB userDB, User user, WidgetRef ref) {
     return Container(
       color: colorGreen1,
       child: SafeArea(
@@ -189,9 +205,9 @@ class HomeProfile extends ConsumerWidget {
                 SizedBox(height: 10),
                 // Conditional content based on the selected tab
                 if (ref.read(selectedTabProvider.notifier).state == 'Selling')
-                  ..._buildSellingItems(currentUser),
+                  ..._buildSellingItems(user.username),
                 if (ref.read(selectedTabProvider.notifier).state == 'Sold')
-                  ..._buildSoldItems(currentUser),
+                  ..._buildSoldItems(user.username),
               ],
             ),
           ),

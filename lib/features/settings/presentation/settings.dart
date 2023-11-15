@@ -2,6 +2,7 @@ import 'package:rndvouz/features/settings/data/theme_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 class Settings extends ConsumerWidget {
   const Settings({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final curTheme = ref.watch(curThemeModeStateProvider);
+    final auth = ref.watch(firebaseAuthProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,6 +47,7 @@ class Settings extends ConsumerWidget {
                 const SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () {
+                    auth.signOut();
                     Navigator.pushNamedAndRemoveUntil(
                         context, "/login", (r) => false);
                   },

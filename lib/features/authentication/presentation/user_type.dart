@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rndvouz/features/setup_process/presentation/setup_login.dart';
+import './setup_login.dart';
 
 class UserTypePage extends StatelessWidget {
   const UserTypePage({Key? key}) : super(key: key);
@@ -7,28 +7,26 @@ class UserTypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(30),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               const Align(
                 alignment: Alignment.center,
-                child: Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: Text(
-                    "How Would You Like to\n Register?",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'RobotoMono',
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+                child: Text(
+                  "How Would You Like to\n Register?",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'RobotoMono',
+                    fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 20),
               Expanded(
                 child: Center(
                   child: Column(
@@ -39,29 +37,29 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SetupLoginPage(
+                                builder: (context) => const SetupLoginPage(
                                       isBusiness: false,
                                     )),
                           );
                         },
-                        child: CardWidget(
+                        child: const CardWidget(
                           'Individual User',
                           'I\'d like to browse and sell my own items',
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SetupLoginPage(
+                              builder: (context) => const SetupLoginPage(
                                 isBusiness: true,
                               ),
                             ),
                           );
                         },
-                        child: CardWidget(
+                        child: const CardWidget(
                           'Local Business or Shop',
                           'I\'d like to sell business\'s items on your application',
                         ),
@@ -70,42 +68,6 @@ class UserTypePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text(
-                      'Back',
-                    ),
-                  ),
-                ],
-              ),
-              // const SizedBox(height: 40),
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(right: 20.0),
-              //     child: ElevatedButton(
-              //       onPressed: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => const SetupLoginPage()),
-              //         );
-              //       },
-              //       style: ElevatedButton.styleFrom(
-              //         padding: const EdgeInsets.symmetric(
-              //             horizontal: 20, vertical: 10),
-              //       ),
-              //       child: const Text(
-              //         'Next',
-              //         style: TextStyle(fontSize: 16),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

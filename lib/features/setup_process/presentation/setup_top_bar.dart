@@ -90,24 +90,26 @@ class SetupTopBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: SizedBox(
-            height: 125,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          field['title']!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25.0,
-                              ),
+                        Flexible(
+                          child: Text(
+                            field['title']!,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0,
+                                ),
+                          ),
                         ),
                       ],
                     ),
@@ -130,28 +132,30 @@ class SetupTopBar extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          color: colorCream2,
-          height: 35,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              for (int i = 0; i < user.length; i++)
-                Flexible(
-                  flex: 1,
-                  fit: FlexFit.tight,
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    color: i <= index ? colorGreen1 : colorCream2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text(user[i]['state']!)],
-                    ),
-                  ),
+        state.contains("login")
+            ? const SizedBox(height: 0)
+            : Container(
+                color: colorCream2,
+                height: 35,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    for (int i = 0; i < user.length; i++)
+                      Flexible(
+                        flex: 1,
+                        fit: FlexFit.tight,
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          color: i <= index ? colorGreen1 : colorCream2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [Text(user[i]['state']!)],
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-            ],
-          ),
-        ),
+              ),
       ],
     );
   }
