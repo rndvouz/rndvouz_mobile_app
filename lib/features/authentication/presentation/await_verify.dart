@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
@@ -19,13 +18,12 @@ class _AwaitVerifyPageState extends ConsumerState<AwaitVerifyPage> {
   void initState() {
     super.initState();
 
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
       await FirebaseAuth.instance.currentUser?.reload();
       final user = FirebaseAuth.instance.currentUser;
       if (user?.emailVerified ?? false) {
         timer.cancel();
-        print("email verified");
-        // GlobalNavigatorKey.navigatorKey.currentState?.pushNamed("/login");
+        GlobalNavigatorKey.navigatorKey.currentState?.pushNamed("/home");
       }
     });
   }
