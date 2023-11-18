@@ -22,13 +22,13 @@ final firebaseAuthProvider = Provider<FirebaseAuth>.internal(
 );
 
 typedef FirebaseAuthRef = ProviderRef<FirebaseAuth>;
-String _$authStateChangesHash() => r'246216fb58ccd90cdc0648eb76dc26ef40047afa';
+String _$authStateChangesHash() => r'7e326c55f53626ffc5c33d29388ff51fd19f37b4';
 
 /// Provides access to [FirebaseAuth.authStateChanges].
 ///
 /// Copied from [authStateChanges].
 @ProviderFor(authStateChanges)
-final authStateChangesProvider = AutoDisposeStreamProvider<User?>.internal(
+final authStateChangesProvider = StreamProvider<User?>.internal(
   authStateChanges,
   name: r'authStateChangesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -38,6 +38,21 @@ final authStateChangesProvider = AutoDisposeStreamProvider<User?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef AuthStateChangesRef = AutoDisposeStreamProviderRef<User?>;
+typedef AuthStateChangesRef = StreamProviderRef<User?>;
+String _$firestoreServiceHash() => r'f027109869bdb1bb7da39ead2ef77e62ec52e353';
+
+/// See also [firestoreService].
+@ProviderFor(firestoreService)
+final firestoreServiceProvider = Provider<FirestoreService>.internal(
+  firestoreService,
+  name: r'firestoreServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firestoreServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FirestoreServiceRef = ProviderRef<FirestoreService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

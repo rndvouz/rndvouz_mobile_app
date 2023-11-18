@@ -3,16 +3,19 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rndvouz/repositories/firestore/firestore_service.dart';
+import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 import 'package:rndvouz/repositories/firestore/firestore_path.dart';
+import 'package:rndvouz/repositories/firestore/firestore_service.dart';
 import '../domain/user.dart';
 
 class UserDB {
-  UserDB(this.ref);
+  UserDB(this.ref) {
+    _service = ref.read(firestoreServiceProvider);
+  }
 
   final ProviderRef<UserDB> ref;
 
-  final _service = FirestoreService.instance;
+  late FirestoreService _service;
 
   Stream<List<User>> watchUsers() => _service.watchCollection(
       path: FirestorePath.users(),
@@ -58,6 +61,4 @@ class UserDB {
       return snap.docs[0]["email"];
     }
   }
-
-
 }

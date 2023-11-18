@@ -21,7 +21,7 @@ class SetupLoginPageArguments {
 
 class SetupLoginPage extends ConsumerStatefulWidget {
   static const routeName = 'signup';
-  const SetupLoginPage({Key? key}) : super(key: key);
+  const SetupLoginPage({super.key});
 
   @override
   ConsumerState<SetupLoginPage> createState() => _SetupLoginPageState();
@@ -123,7 +123,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
                           isObscure: true,
                           ref: ref,
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -156,6 +156,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
                                     id: user.user!.uid,
                                     username: username,
                                     email: email,
+                                    displayName: username,
                                     isBusiness: isBusiness,
                                   );
 

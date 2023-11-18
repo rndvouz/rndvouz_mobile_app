@@ -6,6 +6,8 @@ import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/home/presentation/home_bottom_nav_bar.dart';
 import 'package:rndvouz/features/settings/data/theme_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
+import 'package:rndvouz/features/setup_process/presentation/setup_profile.dart';
 import 'features/settings/presentation/app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -31,6 +33,10 @@ class RndvouzApp extends ConsumerWidget {
         '/home': (BuildContext context) => const HomeBottomNavBar(),
         SetupLoginPage.routeName: (BuildContext context) =>
             const SetupLoginPage(),
+        SetupProfilePage.routeName: (BuildContext context) =>
+            const SetupProfilePage(),
+        GetStartedPage.routeName: (BuildContext context) =>
+            const GetStartedPage(),
       },
     );
 

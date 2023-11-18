@@ -35,6 +35,7 @@ mixin _$User {
   List<String> get follower => throw _privateConstructorUsedError;
   List<String> get following => throw _privateConstructorUsedError;
   List<ContactInformation> get contact => throw _privateConstructorUsedError;
+  String get setupStep => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +62,8 @@ abstract class $UserCopyWith<$Res> {
       List<String>? style,
       List<String> follower,
       List<String> following,
-      List<ContactInformation> contact});
+      List<ContactInformation> contact,
+      String setupStep});
 
   $MeasurementsCopyWith<$Res>? get userMeasurements;
 }
@@ -94,6 +96,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? follower = null,
     Object? following = null,
     Object? contact = null,
+    Object? setupStep = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -156,6 +159,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
               as List<ContactInformation>,
+      setupStep: null == setupStep
+          ? _value.setupStep
+          : setupStep // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -194,7 +201,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<String>? style,
       List<String> follower,
       List<String> following,
-      List<ContactInformation> contact});
+      List<ContactInformation> contact,
+      String setupStep});
 
   @override
   $MeasurementsCopyWith<$Res>? get userMeasurements;
@@ -225,6 +233,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? follower = null,
     Object? following = null,
     Object? contact = null,
+    Object? setupStep = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -287,6 +296,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._contact
           : contact // ignore: cast_nullable_to_non_nullable
               as List<ContactInformation>,
+      setupStep: null == setupStep
+          ? _value.setupStep
+          : setupStep // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -309,7 +322,8 @@ class _$UserImpl extends _User {
       final List<String>? style,
       final List<String> follower = const [],
       final List<String> following = const [],
-      final List<ContactInformation> contact = const []})
+      final List<ContactInformation> contact = const [],
+      this.setupStep = "setupProfile"})
       : _style = style,
         _follower = follower,
         _following = following,
@@ -379,8 +393,12 @@ class _$UserImpl extends _User {
   }
 
   @override
+  @JsonKey()
+  final String setupStep;
+
+  @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, isBusiness: $isBusiness, displayName: $displayName, imagePath: $imagePath, type: $type, address: $address, favoriteColors: $favoriteColors, biography: $biography, userMeasurements: $userMeasurements, style: $style, follower: $follower, following: $following, contact: $contact)';
+    return 'User(id: $id, username: $username, email: $email, isBusiness: $isBusiness, displayName: $displayName, imagePath: $imagePath, type: $type, address: $address, favoriteColors: $favoriteColors, biography: $biography, userMeasurements: $userMeasurements, style: $style, follower: $follower, following: $following, contact: $contact, setupStep: $setupStep)';
   }
 
   @override
@@ -410,7 +428,9 @@ class _$UserImpl extends _User {
             const DeepCollectionEquality().equals(other._follower, _follower) &&
             const DeepCollectionEquality()
                 .equals(other._following, _following) &&
-            const DeepCollectionEquality().equals(other._contact, _contact));
+            const DeepCollectionEquality().equals(other._contact, _contact) &&
+            (identical(other.setupStep, setupStep) ||
+                other.setupStep == setupStep));
   }
 
   @JsonKey(ignore: true)
@@ -431,7 +451,8 @@ class _$UserImpl extends _User {
       const DeepCollectionEquality().hash(_style),
       const DeepCollectionEquality().hash(_follower),
       const DeepCollectionEquality().hash(_following),
-      const DeepCollectionEquality().hash(_contact));
+      const DeepCollectionEquality().hash(_contact),
+      setupStep);
 
   @JsonKey(ignore: true)
   @override
@@ -463,7 +484,8 @@ abstract class _User extends User {
       final List<String>? style,
       final List<String> follower,
       final List<String> following,
-      final List<ContactInformation> contact}) = _$UserImpl;
+      final List<ContactInformation> contact,
+      final String setupStep}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -498,6 +520,8 @@ abstract class _User extends User {
   List<String> get following;
   @override
   List<ContactInformation> get contact;
+  @override
+  String get setupStep;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

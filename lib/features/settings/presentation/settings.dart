@@ -2,6 +2,7 @@ import 'package:rndvouz/features/settings/data/theme_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 class Settings extends ConsumerWidget {
@@ -48,8 +49,6 @@ class Settings extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: () {
                     auth.signOut();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, "/login", (r) => false);
                   },
                   child: const Text("Log Out"),
                 ),

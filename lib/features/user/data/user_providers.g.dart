@@ -34,5 +34,20 @@ final currentUserProvider = AutoDisposeStreamProvider<User>.internal(
 );
 
 typedef CurrentUserRef = AutoDisposeStreamProviderRef<User>;
+String _$fetchCurrentUserHash() => r'e3256ee7246875afaf52e76ee77478ea156dc8e6';
+
+/// See also [fetchCurrentUser].
+@ProviderFor(fetchCurrentUser)
+final fetchCurrentUserProvider = AutoDisposeFutureProvider<User>.internal(
+  fetchCurrentUser,
+  name: r'fetchCurrentUserProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchCurrentUserHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FetchCurrentUserRef = AutoDisposeFutureProviderRef<User>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

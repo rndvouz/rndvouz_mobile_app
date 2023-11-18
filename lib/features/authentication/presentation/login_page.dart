@@ -28,7 +28,7 @@ class ErrorMessageNotifier extends StateNotifier<String?> {
 }
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,27 +39,16 @@ class LoginPage extends ConsumerWidget {
 
     final errorMessage = ref.watch(errorMessageProvider);
 
-    auth.authStateChanges().listen((User? user) async {
-      await user?.reload();
-      if (user != null) {
-        if (!user.emailVerified) {
-          GlobalNavigatorKey.navigatorKey.currentState!.pushNamed("/verify");
-        } else {
-          GlobalNavigatorKey.navigatorKey.currentState!.pushNamed("/home");
-        }
-      }
-    });
-
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           child: AuthFlowBuilder<EmailAuthController>(
-              auth: FirebaseAuth.instance,
+              auth: auth,
               action: AuthAction.signIn,
               listener: (oldState, newState, ctrl) async {
                 if (newState is SignedIn) {
-                  ref.read(currentUserIdProvider.notifier).state =
-                      newState.user!.uid;
+                  // ref.read(currentUserIdProvider.notifier).state =
+                  //     newState.user!.uid;
                   ref.read(errorMessageProvider.notifier).clearError();
                 } else if (newState is AuthFailed) {
                   if (usernameController.text.isEmpty ||

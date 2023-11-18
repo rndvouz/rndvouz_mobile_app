@@ -12,8 +12,7 @@ final userDBProvider = Provider<UserDB>((ref) {
 });
 
 final currentUserIdProvider = StateProvider<String>((ref) {
-  final auth = ref.watch(firebaseAuthProvider);
-  return auth.currentUser?.uid ?? "";
+  return "";
 });
 
 @riverpod
@@ -23,10 +22,16 @@ Stream<List<User>> users(UsersRef ref) {
   return database.watchUsers();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<User> currentUser(CurrentUserRef ref) {
   final database = ref.watch(userDBProvider);
   final currentUserId = ref.watch(currentUserIdProvider);
-
   return database.watchUser(currentUserId);
+}
+
+@riverpod
+Future<User> fetchCurrentUser(FetchCurrentUserRef ref) {
+  final database = ref.watch(userDBProvider);
+  final currentUserId = ref.watch(currentUserIdProvider);
+  return database.fetchUser(currentUserId);
 }

@@ -1,11 +1,51 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
+import 'package:rndvouz/features/user/data/user_providers.dart';
+import 'package:rndvouz/features/user/domain/user.dart';
+import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 /// Generic interface for accessing Firestore.
 class FirestoreService {
   // Make the class non-instantiable outside this file.
-  FirestoreService._();
-  // This could (should?) be a Riverpod provider, rather than a global variable
-  static final instance = FirestoreService._();
+  FirestoreService(this.ref) {
+    _init();
+  }
+
+  final Ref ref;
+
+  void _init() {
+    ref.listen(authStateChangesProvider, (prev, next) async {
+      print("prev: ${prev?.value}");
+      print("next: ${next.value}");
+      if (prev?.value == null && next.value != null) {
+        // We are signed in
+        ref.read(currentUserIdProvider.notifier).state = next.value!.uid;
+        String routeName = "/home";
+        if (!next.value!.emailVerified) {
+          routeName = "/verify";
+        } else {
+          // email is verified, check setup process stage
+          final user = await ref.read(fetchCurrentUserProvider.future);
+          if (user.setupStep != "completed") {
+            routeName = GetStartedPage.routeName;
+          }
+        }
+        GlobalNavigatorKey.navigatorKey.currentState!.pushNamed(routeName);
+        // WidgetsBinding.instance.addPostFrameCallback((_) {
+        // });
+      }
+
+      if (prev != null && next.value == null) {
+        // We are signed out
+        ref.read(currentUserIdProvider.notifier).state = "";
+        GlobalNavigatorKey.navigatorKey.currentState!
+            .pushNamedAndRemoveUntil("/login", (route) => false);
+      }
+    });
+  }
 
   Future<void> setData({
     required String path,
@@ -99,6 +139,4 @@ class FirestoreService {
     final snapshot = await reference.get();
     return builder(snapshot.data(), snapshot.id);
   }
-
-  
 }

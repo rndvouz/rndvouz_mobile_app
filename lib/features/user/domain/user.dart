@@ -26,6 +26,7 @@ class User with _$User {
     @Default([]) List<String> follower,
     @Default([]) List<String> following,
     @Default([]) List<ContactInformation> contact,
+    @Default("setupProfile") String setupStep,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

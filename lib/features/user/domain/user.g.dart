@@ -36,6 +36,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
                   (e) => ContactInformation.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      setupStep: json['setupStep'] as String? ?? "setupProfile",
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -55,6 +56,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'follower': instance.follower,
       'following': instance.following,
       'contact': instance.contact,
+      'setupStep': instance.setupStep,
     };
 
 _$ContactInformationImpl _$$ContactInformationImplFromJson(

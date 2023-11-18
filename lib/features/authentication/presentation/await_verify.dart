@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
+import 'package:rndvouz/features/setup_process/presentation/setup_profile.dart';
 
 class AwaitVerifyPage extends ConsumerStatefulWidget {
   const AwaitVerifyPage({Key? key}) : super(key: key);
@@ -23,7 +25,8 @@ class _AwaitVerifyPageState extends ConsumerState<AwaitVerifyPage> {
       final user = FirebaseAuth.instance.currentUser;
       if (user?.emailVerified ?? false) {
         timer.cancel();
-        GlobalNavigatorKey.navigatorKey.currentState?.pushNamed("/home");
+        GlobalNavigatorKey.navigatorKey.currentState
+            ?.pushNamed(GetStartedPage.routeName);
       }
     });
   }
