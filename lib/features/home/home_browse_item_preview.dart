@@ -31,144 +31,147 @@ class HomeBrowseItemPreview extends StatelessWidget {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding:
-                  EdgeInsets.all(30.0), // Adjust the padding values as needed
-              child: Text(
-                "${merchandise.ownerUsername}",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    EdgeInsets.all(30.0), // Adjust the padding values as needed
+                child: Text(
+                  "${merchandise.ownerUsername}",
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Image.asset(
-              "${merchandise.assetImages}.jpg",
-              fit:
-                  BoxFit.cover, // Use BoxFit.cover to maintain the aspect ratio
-            ),
-            SizedBox(height: 15.0),
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Chip(
-                          label: Text(
-                            "${formatAvailability(merchandise.state)}",
+              Image.asset(
+                "${merchandise.assetImages}.jpg",
+                fit: BoxFit
+                    .cover, // Use BoxFit.cover to maintain the aspect ratio
+              ),
+              SizedBox(height: 15.0),
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Chip(
+                            label: Text(
+                              "${formatAvailability(merchandise.state)}",
+                            ),
+                            shape: roundBorder,
+                            backgroundColor: colorGreen2,
                           ),
-                          shape: roundBorder,
-                          backgroundColor: colorGreen2,
-                        ),
-                        SizedBox(
-                            width: 8.0), // Add some spacing between the chips
-                        Chip(
-                          label: Text(
-                              "${formatSellingMethod(merchandise.sellingMethod)}"),
-                          shape: roundBorder,
-                          backgroundColor: colorGreen2,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        Text("${formatText(merchandise.sellingMethod)}",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            "${formatSellingDisplay(merchandise.sellingMethod)}",
-                            style: TextStyle(fontSize: 16.0)),
-                      ],
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        Text("Item Description",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Wrap(
-                            children: [
-                              // Add in item description property for item later
-                              Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                              ),
-                            ],
+                          SizedBox(
+                              width: 8.0), // Add some spacing between the chips
+                          Chip(
+                            label: Text(
+                                "${formatSellingMethod(merchandise.sellingMethod)}"),
+                            shape: roundBorder,
+                            backgroundColor: colorGreen2,
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        Text("Item Measurements",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '15" x 4" x 10"',
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            height: 45.0,
-                            child: TextField(
-                              maxLines: null, // Allow multiple lines of text
-                              decoration: InputDecoration(
-                                hintText: '   Type your comment..',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      20.0), // Set the border radius
+                        ],
+                      ),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Text("${formatText(merchandise.sellingMethod)}",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                              "${formatSellingDisplay(merchandise.sellingMethod)}",
+                              style: TextStyle(fontSize: 16.0)),
+                        ],
+                      ),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Text("Item Description",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Wrap(
+                              children: [
+                                // Add in item description property for item later
+                                Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                                 ),
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 10.0),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Text("Item Measurements",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            '15" x 4" x 10"',
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              width: double.infinity,
+                              height: 45.0,
+                              child: TextField(
+                                maxLines: null, // Allow multiple lines of text
+                                decoration: InputDecoration(
+                                  hintText: '   Type your comment..',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20.0), // Set the border radius
+                                  ),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 10.0),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                            width:
-                                10.0), // Add some spacing between the input field and button
-                        ElevatedButton(
-                          onPressed: () {
-                            // Handle button click
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                                30.0, 30.0), // Set the fixed size of the button
+                          SizedBox(
+                              width:
+                                  10.0), // Add some spacing between the input field and button
+                          ElevatedButton(
+                            onPressed: () {
+                              // Handle button click
+                            },
+                            style: ElevatedButton.styleFrom(
+                              fixedSize: Size(30.0,
+                                  30.0), // Set the fixed size of the button
+                            ),
+                            child: Icon(Icons.send),
                           ),
-                          child: Icon(Icons.send),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
