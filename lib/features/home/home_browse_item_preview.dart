@@ -38,8 +38,10 @@ class HomeBrowseItemPreview extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                    EdgeInsets.all(30.0), // Adjust the padding values as needed
+                padding: EdgeInsets.only(
+                    top: 15.0,
+                    left: 15.0,
+                    bottom: 25.0), // Adjust the padding values as needed
                 child: Text(
                   "${merchandise.ownerUsername}",
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
