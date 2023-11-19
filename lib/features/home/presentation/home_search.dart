@@ -49,12 +49,17 @@ class _HomeSearchState extends State<HomeSearch> {
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
+          // If searched text is empty AND the textField is not empty
           child: filteredSearch.isEmpty && searchController.text.isNotEmpty
+              // Display that no items were found for the search
               ? Center(
                   child: Text("No items found for '${searchController.text}'"),
                 )
+              // Else, when the textField is empty
               : searchController.text.isEmpty
+                  // Display the garment grid of options to choose from
                   ? GarmentGrid()
+                  // When there is a search result that matches, display it in a grid format
                   : GridView.count(
                       crossAxisCount: 2,
                       crossAxisSpacing: 15.0,
@@ -188,7 +193,7 @@ Card searchCard(Merchandise merch) {
     elevation: 0.0,
     margin: EdgeInsets.all(0.5),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0), // Adjust the value as needed
+      borderRadius: BorderRadius.circular(10.0),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
