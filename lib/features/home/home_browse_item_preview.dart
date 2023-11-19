@@ -300,22 +300,22 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
     final List<String> lines = [];
 
     if (measurements.bust != null) {
-      lines.add('Bust: ${measurements.bust}');
+      lines.add('Bust: ${measurements.bust}"');
     }
     if (measurements.waist != null) {
-      lines.add('Waist: ${measurements.waist}');
+      lines.add('Waist: ${measurements.waist}"');
     }
     if (measurements.hips != null) {
-      lines.add('Hips: ${measurements.hips}');
+      lines.add('Hips: ${measurements.hips}"');
     }
     if (measurements.inseam != null) {
-      lines.add('Inseam: ${measurements.inseam}');
+      lines.add('Inseam: ${measurements.inseam}"');
     }
     if (measurements.sleeveLength != null) {
-      lines.add('Sleeve Length: ${measurements.sleeveLength}');
+      lines.add('Sleeve Length: ${measurements.sleeveLength}"');
     }
     if (measurements.length != null) {
-      lines.add('Full Length: ${measurements.length}');
+      lines.add('Full Length: ${measurements.length}"');
     }
 
     return lines.join('\n');
