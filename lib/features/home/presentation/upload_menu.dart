@@ -5,6 +5,8 @@ import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
 import 'dart:developer' as developer;
 
+import '../data/upload_item_providers.dart';
+
 class UploadMenu extends ConsumerWidget {
   const UploadMenu({Key? key}) : super(key: key);
 
@@ -33,6 +35,9 @@ class UploadMenu extends ConsumerWidget {
                     onTap: () {
                       ref.read(sellingMethodStateProvider.notifier).state =
                           SellingMethod.selling;
+                      if (theState == SellingMethod.selling) {
+                        developer.log("selling");
+                      }
                     },
                     child: Column(
                       children: [
@@ -49,6 +54,9 @@ class UploadMenu extends ConsumerWidget {
                     onTap: () {
                       ref.read(sellingMethodStateProvider.notifier).state =
                           SellingMethod.negotiate;
+                      if (theState == SellingMethod.negotiate) {
+                        developer.log("negotiate");
+                      }
                     },
                     child: Column(
                       children: [
@@ -65,6 +73,9 @@ class UploadMenu extends ConsumerWidget {
                     onTap: () {
                       ref.read(sellingMethodStateProvider.notifier).state =
                           SellingMethod.trading;
+                      if (theState == SellingMethod.trading) {
+                        developer.log("trading");
+                      }
                     },
                     child: Column(
                       children: [
@@ -81,8 +92,3 @@ class UploadMenu extends ConsumerWidget {
     );
   }
 }
-
-SellingMethod? curState;
-
-final sellingMethodStateProvider =
-    StateProvider<SellingMethod?>((ref) => curState);

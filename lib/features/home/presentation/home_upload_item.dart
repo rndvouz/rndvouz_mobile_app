@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:rndvouz/features/home/presentation/upload_fields.dart';
 import 'package:rndvouz/features/home/presentation/upload_menu.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
@@ -16,11 +17,6 @@ class HomeUploadItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final MerchandiseDB? theItem = ref.watch(uploadItemProvider);
-
-    final itemNameController = TextEditingController();
-    final descriptionController = TextEditingController();
-
     Uint8List? selectedImage;
 
     return Scaffold(
@@ -42,39 +38,13 @@ class HomeUploadItem extends ConsumerWidget {
                       ),
                       UploadMenu(),
                       const SizedBox(height: 20),
-                      _buildTextField("Item Name", itemNameController),
-                      _buildTextField("Description", descriptionController),
-                      const SizedBox(height: 40),
-                      ElevatedButton(onPressed: () {}, child: Text("Add"))
+                      UploadFields(),
                     ],
                   ),
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(String label, TextEditingController controller,
-      {bool isObscure = false,
-      double width = 500,
-      double height = 60,
-      int lines = 1}) {
-    return Container(
-      width: width, // Set the width
-      height: height, // Set the height
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextField(
-        controller: controller,
-        obscureText: isObscure,
-        maxLines: lines,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
         ),
       ),
     );
