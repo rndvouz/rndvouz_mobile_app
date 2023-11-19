@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore: ^4.13.0
   firebase_ui_auth: ^1.10.0
   stream_channel: ^2.1.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

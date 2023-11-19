@@ -31,7 +31,7 @@ class NewSwipeCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(height: 100),
+        const SizedBox(height: 100),
         Container(
           height: heightSet,
           width: 280,
@@ -43,7 +43,7 @@ class NewSwipeCard extends StatelessWidget {
                 color: Colors.black.withOpacity(0.2),
                 blurRadius: 15.0,
                 // spreadRadius: 2,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -77,7 +77,7 @@ class NewSwipeCard extends StatelessWidget {
                       children: [
                         Text(
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 11),
                           merchandise.merchName,
                         ),

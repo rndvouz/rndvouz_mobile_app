@@ -63,7 +63,7 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SetupTopBar(state: 'swipe'),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             Flexible(
@@ -110,7 +110,7 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(

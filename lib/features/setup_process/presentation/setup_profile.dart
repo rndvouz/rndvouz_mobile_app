@@ -134,7 +134,7 @@ class ImageSelectionButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ImageSelectionButtonState createState() => _ImageSelectionButtonState();
+  State<ImageSelectionButton> createState() => _ImageSelectionButtonState();
 }
 
 class _ImageSelectionButtonState extends State<ImageSelectionButton> {

@@ -44,10 +44,10 @@ ThemeData _buildAppTheme(String mode) {
     // highlightColor: Colors.transparent,
     // hoverColor: Colors.transparent,
     // scaffoldBackgroundColor: colorCream1,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: primaryGreen,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: primaryGreen,
     ),
     // cardTheme: CardTheme(

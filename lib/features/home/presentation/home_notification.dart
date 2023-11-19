@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:stream_channel/stream_channel.dart';
 import 'package:rndvouz/features/chat/Presentation/chat.dart';
 
 class HomeNotification extends StatefulWidget {
@@ -33,8 +32,8 @@ class _HomeNotificationState extends State<HomeNotification> {
         backgroundColor: Colors.white,
         flexibleSpace: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(left: 16, top: 16, right: 16),
-            child: Row(
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -45,8 +44,13 @@ class _HomeNotificationState extends State<HomeNotification> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 12,),
-                Icon(Icons.settings, color: Colors.black54,),
+                SizedBox(
+                  width: 12,
+                ),
+                Icon(
+                  Icons.settings,
+                  color: Colors.black54,
+                ),
               ],
             ),
           ),
@@ -58,7 +62,7 @@ class _HomeNotificationState extends State<HomeNotification> {
           if (snapshot.hasData) {
             return buildChatList(snapshot.data!);
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -73,15 +77,15 @@ class _HomeNotificationState extends State<HomeNotification> {
           );
           _streamController.sink.add(message);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-          elevation: 0,
-          child: Container(
+        elevation: 0,
+        child: Container(
           height: 60.0,
           color: Colors.transparent,
-          ),
+        ),
       ),
     );
   }
@@ -95,15 +99,15 @@ class _HomeNotificationState extends State<HomeNotification> {
             _onMessageClicked(message);
           },
           child: ListTile(
-            leading: CircleAvatar(
+            leading: const CircleAvatar(
               child: Icon(Icons.person),
             ),
             title: Text(message.text),
             subtitle: Text(
               DateFormat('HH:mm').format(message.timestamp),
-              style: TextStyle(fontSize: 12.0),
+              style: const TextStyle(fontSize: 12.0),
             ),
-            trailing: message.isMe ? null : Icon(Icons.person),
+            trailing: message.isMe ? null : const Icon(Icons.person),
             tileColor: message.isMe ? Colors.blue.withOpacity(0.2) : null,
           ),
         );
@@ -115,14 +119,11 @@ class _HomeNotificationState extends State<HomeNotification> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SingleChat(),
+        builder: (context) => const SingleChat(),
       ),
     );
   }
-
 }
-
-
 
 class ChatMessage {
   final String text;

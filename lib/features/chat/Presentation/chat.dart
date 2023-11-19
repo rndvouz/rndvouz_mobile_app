@@ -25,25 +25,25 @@ class SingleChat extends StatelessWidget {
           backgroundColor: Colors.white,
           flexibleSpace: SafeArea(
             child: Container(
-              padding: EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: Row(
                 children: <Widget>[
                   IconButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     maxRadius: 20,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Expanded(
@@ -51,12 +51,12 @@ class SingleChat extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           "Kriss Benwat",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 6,
                         ),
                         Text(
@@ -67,12 +67,19 @@ class SingleChat extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
-                  ), // Add some padding
-                  Icon(
-                    Icons.settings,
-                    color: Colors.black54,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.settings,
+                        // size: 18,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -84,11 +91,11 @@ class SingleChat extends StatelessWidget {
             ListView.builder(
               itemCount: messages.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10),
-              physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(top: 10),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
                   child: Align(
                     alignment: (messages[index].messageType == "receiver"
                         ? Alignment.topLeft
@@ -100,10 +107,10 @@ class SingleChat extends StatelessWidget {
                             ? Colors.grey.shade200
                             : colorCream2),
                       ),
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Text(
                         messages[index].messageContent,
-                        style: TextStyle(fontSize: 15),
+                        style: const TextStyle(fontSize: 15),
                       ),
                     ),
                   ),
@@ -115,33 +122,26 @@ class SingleChat extends StatelessWidget {
                   MainAxisAlignment.end, // Align the children at the bottom
               children: <Widget>[
                 Container(
-                  padding:
-                      EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 3),
+                  padding: const EdgeInsets.only(
+                      left: 12, right: 12, top: 3, bottom: 3),
                   color: Colors.white,
                   child: Row(
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          // Handle onTap
-                        },
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            color: secondaryBrown,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Icon(
+                      CircleAvatar(
+                        backgroundColor: secondaryBrown,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
                             Icons.add,
+                            size: 18,
                             color: Colors.white,
-                            size: 20,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: "Write message...",
@@ -152,7 +152,7 @@ class SingleChat extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.send,
                           size: 18,
                         ),
@@ -160,6 +160,9 @@ class SingleChat extends StatelessWidget {
                     ],
                   ),
                 ),
+                MediaQuery.of(context).viewInsets.bottom == 0
+                    ? const SizedBox(height: 10)
+                    : const SizedBox(height: 0),
               ],
             ),
           ],

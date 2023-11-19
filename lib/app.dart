@@ -7,7 +7,7 @@ import 'features/settings/presentation/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class RndvouzApp extends ConsumerWidget {
-  RndvouzApp({Key? key}) : super(key: key);
+  const RndvouzApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class RndvouzApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: curThemeMode,
       routes: {
-        '/login': (BuildContext context) => LoginPage(),
+        '/login': (BuildContext context) => const LoginPage(),
         //'/login': (BuildContext context) => Settings(),
         '/': (BuildContext context) => const HomeBottomNavBar(),
       },

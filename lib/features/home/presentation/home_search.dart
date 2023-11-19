@@ -6,13 +6,13 @@ class HomeSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("SEARCH PAGE TO BE IMPLEMENTED!"),
+            Text("SEARCH PAGE TO BE IMPLEMENTED!"),
           ],
         ),
       ),
