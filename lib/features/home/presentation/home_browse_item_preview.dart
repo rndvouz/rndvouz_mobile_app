@@ -15,6 +15,8 @@ class HomeBrowseItemPreview extends StatefulWidget {
 }
 
 class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
+  bool isLiked = false;
+  bool isClicked = false;
   @override
   Widget build(BuildContext context) {
     const OutlinedBorder roundBorder = RoundedRectangleBorder(
@@ -24,8 +26,7 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
             bottomLeft: Radius.circular(50),
             bottomRight: Radius.circular(50)));
 
-    bool isLiked = false;
-    bool isClicked = false;
+
 
     return Scaffold(
       appBar: AppBar(
