@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
-import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 part 'user_providers.g.dart';
 

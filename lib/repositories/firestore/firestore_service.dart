@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
-import 'package:rndvouz/features/user/domain/user.dart';
 import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 /// Generic interface for accessing Firestore.

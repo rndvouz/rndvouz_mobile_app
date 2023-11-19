@@ -1,21 +1,16 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
-import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
 import 'package:rndvouz/features/common/presentation/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
-import '../../user/data/user_db.dart';
 import '../../user/domain/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image/image.dart' as IMG;
 
 import 'setup_top_bar.dart';
-import 'individual/individual_setup_swipe.dart';
 
 class SetupProfilePage extends ConsumerWidget {
   const SetupProfilePage({super.key});
