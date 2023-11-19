@@ -21,11 +21,11 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   @override
   void initState() {
     _pages = [
-      {'page': HomeBrowseOrSwipe()},
-      {'page': HomeSearch()},
-      {'page': HomeUploadItem()},
+      {'page': const HomeBrowseOrSwipe()},
+      {'page': const HomeSearch()},
+      {'page': const HomeUploadItem()},
       {'page': HomeNotification()},
-      {'page': HomeProfile()},
+      {'page': const HomeProfile()},
     ];
 
     super.initState();
@@ -40,11 +40,11 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   _HomeBottomNavBarItem(Icon icon, Icon activeIcon, String label) {
     return BottomNavigationBarItem(
       icon: Container(
-        padding: EdgeInsets.only(top: 12),
+        padding: const EdgeInsets.only(top: 12),
         child: icon,
       ),
       activeIcon: Container(
-        padding: EdgeInsets.only(top: 12),
+        padding: const EdgeInsets.only(top: 12),
         child: activeIcon,
       ),
       label: label,
@@ -58,9 +58,9 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
             type: BottomNavigationBarType.fixed,
             elevation: 0.0,
             // backgroundColor already determined
-            selectedIconTheme: IconThemeData(color: colorBrown1),
+            selectedIconTheme: const IconThemeData(color: colorBrown1),
             selectedItemColor: colorBrown1,
-            unselectedIconTheme: IconThemeData(color: colorCream1),
+            unselectedIconTheme: const IconThemeData(color: colorCream1),
             unselectedItemColor: colorCream1,
             currentIndex: _selectedIndex,
             onTap: _selectedPage,
@@ -68,15 +68,16 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
             showUnselectedLabels: false,
             enableFeedback: false,
             items: [
-          _HomeBottomNavBarItem(Icon(Icons.home), Icon(Icons.home), 'Browse'),
           _HomeBottomNavBarItem(
-              Icon(Icons.search), Icon(Icons.search), 'Search'),
+              const Icon(Icons.home), const Icon(Icons.home), 'Browse'),
           _HomeBottomNavBarItem(
-              Icon(Icons.add_box), Icon(Icons.add_box), 'Upload Item'),
-          _HomeBottomNavBarItem(Icon(Icons.notifications),
-              Icon(Icons.notifications), 'Notifications'),
+              const Icon(Icons.search), const Icon(Icons.search), 'Search'),
+          _HomeBottomNavBarItem(const Icon(Icons.add_box),
+              const Icon(Icons.add_box), 'Upload Item'),
+          _HomeBottomNavBarItem(const Icon(Icons.notifications),
+              const Icon(Icons.notifications), 'Notifications'),
           _HomeBottomNavBarItem(
-              Icon(Icons.person), Icon(Icons.person), 'Profile'),
+              const Icon(Icons.person), const Icon(Icons.person), 'Profile'),
         ]));
   }
 

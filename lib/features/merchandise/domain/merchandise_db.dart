@@ -1,5 +1,4 @@
 import 'package:rndvouz/features/common/domain/measurements.dart';
-import 'package:flutter/foundation.dart';
 
 import 'merchandise_garment.dart';
 import 'merchandise.dart';
@@ -797,7 +796,7 @@ class MerchandiseDB {
   List<Merchandise> loadMerchanise(Purpose purpose,
       [Garment? garment, String? owner]) {
     if (purpose == Purpose.all) {
-      return this.allGarments;
+      return allGarments;
     } else {
       // use for searching feature
       return allGarments.where((Merchandise m) {

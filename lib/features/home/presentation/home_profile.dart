@@ -186,7 +186,7 @@ class HomeProfile extends ConsumerWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Conditional content based on the selected tab
                 if (ref.read(selectedTabProvider.notifier).state == 'Selling')
                   ..._buildSellingItems(currentUser),
@@ -234,7 +234,7 @@ class HomeProfile extends ConsumerWidget {
       // If the row has fewer than 3 items, add empty cards to complete the row
       while (rowItems.length < 3) {
         rowItems.add(
-          Expanded(
+          const Expanded(
             child: Card(),
           ),
         );
@@ -283,7 +283,7 @@ class HomeProfile extends ConsumerWidget {
       // If the row has fewer than 3 items, add empty cards to complete the row
       while (rowItems.length < 3) {
         rowItems.add(
-          Expanded(
+          const Expanded(
             child: Card(),
           ),
         );
