@@ -4,8 +4,6 @@ import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/data/colors.dart';
-import '../../merchandise/domain/merchandise_garment.dart';
-
 // Change to Stateful when you can tap on image to view more information about it
 class HomeBrowseOrSwipe extends StatelessWidget {
   const HomeBrowseOrSwipe({Key? key}) : super(key: key);
@@ -25,7 +23,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
     return allMerchandise.map((merch) {
       return Card(
         elevation: 0.0,
-        margin: EdgeInsets.all(0.5),
+        margin: const EdgeInsets.all(0.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

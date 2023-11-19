@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1038188114074",
+    "project_id": "rndvouz-uh",
+    "storage_bucket": "rndvouz-uh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038188114074:android:7b8f30ce8f2f27c972af23",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv9v6hiCwMgDwm8A2olU0XVhNtcU5bANs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

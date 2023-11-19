@@ -39,29 +39,29 @@ class UserTypePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SetupLoginPage(
+                                builder: (context) => const SetupLoginPage(
                                       isBusiness: false,
                                     )),
                           );
                         },
-                        child: CardWidget(
+                        child: const CardWidget(
                           'Individual User',
                           'I\'d like to browse and sell my own items',
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SetupLoginPage(
+                              builder: (context) => const SetupLoginPage(
                                 isBusiness: true,
                               ),
                             ),
                           );
                         },
-                        child: CardWidget(
+                        child: const CardWidget(
                           'Local Business or Shop',
                           'I\'d like to sell business\'s items on your application',
                         ),

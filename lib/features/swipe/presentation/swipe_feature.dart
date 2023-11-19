@@ -1,5 +1,4 @@
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
-import 'package:rndvouz/features/user/domain/user_db.dart';
 import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -38,7 +37,7 @@ class _SwipeFeature extends State<SwipeFeature> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Center(
+        return const Center(
           child: Text(
             "That's all of the available clothes for now. Come back later!",
             style: TextStyle(fontSize: 10.0),
@@ -56,7 +55,7 @@ class _SwipeFeature extends State<SwipeFeature> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
             Flexible(
@@ -103,7 +102,7 @@ class _SwipeFeature extends State<SwipeFeature> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                 ],
