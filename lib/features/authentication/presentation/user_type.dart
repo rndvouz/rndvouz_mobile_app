@@ -51,15 +51,16 @@ class UserTypePage extends StatelessWidget {
                       const SizedBox(height: 15),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            SetupLoginPage.routeName,
-                            arguments: SetupLoginPageArguments(true),
-                          );
+                          // Navigator.pushNamed(
+                          //   context,
+                          //   SetupLoginPage.routeName,
+                          //   arguments: SetupLoginPageArguments(true),
+                          // );
                         },
                         child: const CardWidget(
-                          'Local Business or Shop',
+                          'Local Business or Shop (Currently Unavailable)',
                           'I\'d like to sell business\'s items on your application',
+                          disable: true,
                         ),
                       ),
                     ],
@@ -77,8 +78,10 @@ class UserTypePage extends StatelessWidget {
 class CardWidget extends StatelessWidget {
   final String title;
   final String description;
+  final bool disable;
 
-  const CardWidget(this.title, this.description, {Key? key}) : super(key: key);
+  const CardWidget(this.title, this.description,
+      {super.key, this.disable = false});
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +89,7 @@ class CardWidget extends StatelessWidget {
       width: 300,
       height: 200,
       child: Card(
+        surfaceTintColor: disable ? Colors.red : Colors.transparent,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
