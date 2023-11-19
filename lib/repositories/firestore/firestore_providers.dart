@@ -5,7 +5,7 @@ import 'package:rndvouz/repositories/firestore/firestore_service.dart';
 part 'firestore_providers.g.dart';
 
 /// Provides access to a [FirebaseAuth.instance].
-@Riverpod()
+@Riverpod(keepAlive: true)
 FirebaseAuth firebaseAuth(FirebaseAuthRef ref) {
   return FirebaseAuth.instance;
 }

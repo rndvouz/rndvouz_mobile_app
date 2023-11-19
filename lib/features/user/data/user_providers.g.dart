@@ -20,11 +20,11 @@ final usersProvider = AutoDisposeStreamProvider<List<User>>.internal(
 );
 
 typedef UsersRef = AutoDisposeStreamProviderRef<List<User>>;
-String _$currentUserHash() => r'bb3ea789970408a36aab1c953af155ed35c5d64e';
+String _$currentUserHash() => r'd74fdd8231847a8875067ef2c5cbe2fbd69c43ec';
 
 /// See also [currentUser].
 @ProviderFor(currentUser)
-final currentUserProvider = AutoDisposeStreamProvider<User>.internal(
+final currentUserProvider = StreamProvider<User>.internal(
   currentUser,
   name: r'currentUserProvider',
   debugGetCreateSourceHash:
@@ -33,8 +33,8 @@ final currentUserProvider = AutoDisposeStreamProvider<User>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef CurrentUserRef = AutoDisposeStreamProviderRef<User>;
-String _$fetchCurrentUserHash() => r'e3256ee7246875afaf52e76ee77478ea156dc8e6';
+typedef CurrentUserRef = StreamProviderRef<User>;
+String _$fetchCurrentUserHash() => r'3b5f0d5bc59a19dbece249a6dc5be7f30a97a6c3';
 
 /// See also [fetchCurrentUser].
 @ProviderFor(fetchCurrentUser)

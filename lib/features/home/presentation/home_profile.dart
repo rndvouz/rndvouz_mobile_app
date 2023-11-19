@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
@@ -75,7 +77,7 @@ class HomeProfile extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -86,8 +88,11 @@ class HomeProfile extends ConsumerWidget {
                           children: [
                             CircleAvatar(
                               radius: MediaQuery.of(context).size.height / 15,
-                              backgroundImage: const NetworkImage(
-                                  'https://qph.fs.quoracdn.net/main-qimg-11ef692748351829b4629683eff21100.webp'),
+                              backgroundImage: (user.imagePath == null)
+                                  ? const NetworkImage(
+                                      'https://qph.fs.quoracdn.net/main-qimg-11ef692748351829b4629683eff21100.webp')
+                                  : Image.memory(base64Decode(user.imagePath!))
+                                      .image,
                             ),
                             Expanded(
                               child: Padding(
@@ -210,23 +215,43 @@ class HomeProfile extends ConsumerWidget {
                           ],
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            user.displayName != null
+                                ? Text(
+                                    user.displayName!,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : const SizedBox(
+                                    height: 0,
+                                  ),
+                            user.biography != null && user.biography != ""
+                                ? Text(
+                                    user.biography ?? "",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.016,
+                                    ),
+                                  )
+                                : const SizedBox(
+                                    height: 0,
+                                  ),
+                          ],
+                        ),
+                      ),
 
-                      user.biography != null && user.biography != ""
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
-                              child: Text(
-                                user.biography ?? "",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.016,
-                                ),
-                              ),
-                            )
-                          : const SizedBox(
-                              height: 0,
-                            ),
                       // // Selling and Sold tabs
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -305,156 +330,6 @@ class HomeProfile extends ConsumerWidget {
                     ],
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(10.0),
-                //   child: Column(
-                //     children: [
-                //       Row(
-                //         children: [
-                //           CircleAvatar(
-                //             radius: MediaQuery.of(context).size.height / 12,
-                //             backgroundImage: const NetworkImage(
-                //                 'https://qph.fs.quoracdn.net/main-qimg-11ef692748351829b4629683eff21100.webp'),
-                //           ),
-                //           Expanded(
-                //             child: Padding(
-                //               padding:
-                //                   const EdgeInsets.only(left: 80, right: 20.0),
-                //               child: Column(
-                //                 mainAxisAlignment:
-                //                     MainAxisAlignment.spaceBetween,
-                //                 children: [
-                //                   Row(
-                //                     mainAxisAlignment:
-                //                         MainAxisAlignment.spaceBetween,
-                //                     children: [
-                //                       Column(
-                //                         crossAxisAlignment:
-                //                             CrossAxisAlignment.center,
-                //                         children: [
-                //                           Text(
-                //                             user.follower!.length.toString(),
-                //                             style: const TextStyle(
-                //                                 fontWeight: FontWeight.w800,
-                //                                 fontSize: 20),
-                //                           ),
-                //                           const Text(
-                //                             'Followers',
-                //                             style: TextStyle(
-                //                                 fontSize: 15,
-                //                                 color: Colors.blueGrey),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       Column(
-                //                         crossAxisAlignment:
-                //                             CrossAxisAlignment.center,
-                //                         children: [
-                //                           Text(
-                //                             user.following!.length.toString(),
-                //                             style: const TextStyle(
-                //                                 fontWeight: FontWeight.w800,
-                //                                 fontSize: 20),
-                //                           ),
-                //                           const Text(
-                //                             'Following',
-                //                             style: TextStyle(
-                //                                 fontSize: 15,
-                //                                 color: Colors.blueGrey),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       const Column(
-                //                         crossAxisAlignment:
-                //                             CrossAxisAlignment.center,
-                //                         children: [
-                //                           Text(
-                //                             '30',
-                //                             style: TextStyle(
-                //                                 fontWeight: FontWeight.w800,
-                //                                 fontSize: 20),
-                //                           ),
-                //                           Text(
-                //                             'Like',
-                //                             style: TextStyle(
-                //                                 fontSize: 15,
-                //                                 color: Colors.blueGrey),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                   Row(
-                //                     mainAxisAlignment: MainAxisAlignment.end,
-                //                     children: [
-                //                       ElevatedButton(
-                //                         style: ElevatedButton.styleFrom(
-                //                           backgroundColor: colorBrown1,
-                //                           shape: RoundedRectangleBorder(
-                //                             side: const BorderSide(
-                //                               color: colorBrown1,
-                //                               width: 1,
-                //                               style: BorderStyle.solid,
-                //                             ),
-                //                             borderRadius:
-                //                                 BorderRadius.circular(5),
-                //                           ),
-                //                         ),
-                //                         onPressed: () {
-                //                           // Add your button click logic here
-                //                         },
-                //                         child: const Text(
-                //                           'Edit Profile',
-                //                           style: TextStyle(color: Colors.white),
-                //                         ),
-                //                       ),
-                //                       IconButton(
-                //                         iconSize: 40,
-                //                         padding: EdgeInsets.all(0),
-                //                         onPressed: () {
-                //                           Navigator.push(
-                //                             context,
-                //                             MaterialPageRoute(
-                //                                 builder: (context) =>
-                //                                     const Settings()),
-                //                           );
-                //                         },
-                //                         icon: const Icon(
-                //                           Icons.settings,
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ],
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       user.biography != null && user.biography != ""
-                //           ? Padding(
-                //               padding:
-                //                   const EdgeInsets.only(top: 10, bottom: 10),
-                //               child: Text(user.biography ?? "",
-                //                   textAlign: TextAlign.left),
-                //             )
-                //           : const SizedBox(
-                //               height: 0,
-                //             ),
-                //     ],
-                //   ),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 2),
-                //   child: Divider(
-                //     thickness: 1,
-                //     color: Colors.blueGrey[200],
-                //   ),
-                // ),
-
-                //   ],
-                // ),
-                // SizedBox(height: 10),
                 // Conditional content based on the selected tab
                 if (ref.read(selectedTabProvider.notifier).state == 'Selling')
                   ..._buildSellingItems(user.username),

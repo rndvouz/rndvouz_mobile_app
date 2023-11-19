@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
 import 'package:rndvouz/features/common/presentation/utils.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +12,7 @@ import 'package:rndvouz/features/user/data/user_providers.dart';
 import '../../user/data/user_db.dart';
 import '../../user/domain/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image/image.dart' as IMG;
 
 import 'setup_top_bar.dart';
 import 'individual/individual_setup_swipe.dart';
@@ -33,8 +37,7 @@ class SetupProfilePage extends ConsumerWidget {
   Widget _build(BuildContext context, WidgetRef ref, User newUser) {
     final displayNameController =
         TextEditingController(text: newUser.displayName);
-    final usernameController = TextEditingController(text: newUser.username);
-    final biographyController = TextEditingController();
+    final biographyController = TextEditingController(text: newUser.biography);
     Uint8List? selectedImage;
     return Scaffold(
       body: SafeArea(
@@ -75,10 +78,22 @@ class SetupProfilePage extends ConsumerWidget {
                           child: const Text('Back'),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            // newUser.displayName = displayNameController.text;
-                            // newUser.username = usernameController.text;
-                            // newUser.biography = biographyController.text;
+                          onPressed: () async {
+                            if (selectedImage == null) {
+                              GlobalSnackBar.show("Please select an image");
+                              return;
+                            }
+                            final imageData =
+                                base64Encode(selectedImage!.toList());
+                            final updatedUser = newUser.copyWith(
+                                displayName: displayNameController.text,
+                                biography: biographyController.text,
+                                imagePath: imageData);
+
+                            final userDB = ref.watch(userDBProvider);
+                            await userDB.updateUser(updatedUser);
+                            GlobalNavigatorKey.navigatorKey.currentState!
+                                .pushNamed("/home");
                             // //newUser.imagePath =
                             // // Handle 'Next' button action
                             // try {
@@ -156,6 +171,7 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
   void selectImage(ImageSource source) async {
     Uint8List? img = await pickAndCropImage(source);
     if (img != null) {
+      print(img.lengthInBytes);
       setState(() {
         _image = img;
       });
