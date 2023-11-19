@@ -1,5 +1,5 @@
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
-import 'package:rndvouz/features/user/domain/user_db.dart';
+import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
