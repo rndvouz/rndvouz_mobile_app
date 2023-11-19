@@ -32,10 +32,16 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final UserDB userDB = ref.watch(userDBProvider);
-    final FirebaseAuth auth = ref.watch(firebaseAuthProvider);
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
+
+    return _build(context, usernameController, passwordController, ref);
+  }
+
+  Widget _build(BuildContext context, TextEditingController usernameController,
+      TextEditingController passwordController, WidgetRef ref) {
+    final UserDB userDB = ref.watch(userDBProvider);
+    final FirebaseAuth auth = ref.watch(firebaseAuthProvider);
 
     final errorMessage = ref.watch(errorMessageProvider);
 
@@ -64,7 +70,7 @@ class LoginPage extends ConsumerWidget {
                 }
               },
               builder: (context, state, ctrl, child) {
-                if (state is AwaitingEmailAndPassword) {
+                if (state is AwaitingEmailAndPassword || state is AuthFailed) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
