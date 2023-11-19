@@ -22,7 +22,7 @@ enum MerchColors {
   beige
 }
 
-enum Purpose { setup, browse, search, all }
+enum Purpose { setup, browse, all }
 
 class Merchandise {
   final int id;
