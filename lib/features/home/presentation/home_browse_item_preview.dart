@@ -63,24 +63,30 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
                   Row(
                     children: [
                       IconButton(
-                        icon: isLiked == true
-                            ? const Icon(Icons.favorite)
-                            : const Icon(Icons.favorite_border),
+                        icon: Icon(
+                          isLiked ? Icons.favorite : Icons.favorite_border,
+                          color: isLiked ? Colors.red : null,
+                        ),
                         onPressed: () {
+                          print('Like button pressed');
                           setState(() {
                             isLiked = !isLiked;
+                            print(isLiked);
                             UpdateLike(isLiked);
                           });
                         },
                       ),
+
                       Text('${widget.merchandise.likes}'),
                     ],
                   ),
                   IconButton(
-                    icon: isClicked == true
-                        ? const Icon(Icons.bookmark)
-                        : const Icon(Icons.bookmark_border),
+                    icon: Icon(
+                        isClicked? Icons.bookmark
+                        : Icons.bookmark_border
+                    ),
                     onPressed: () {
+                      print("Bookmark button pressed");
                       setState(() {
                         isClicked = !isClicked;
                         // Save to User's profile for bookmarked items
@@ -236,12 +242,15 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
   }
 
   void UpdateLike(bool liked) {
-    if (liked) {
-      widget.merchandise.likes + 1;
-    } else {
-      widget.merchandise.likes - 1;
-    }
+    setState(() {
+      if (liked) {
+        widget.merchandise.likes += 1; // Increment likes
+      } else {
+        widget.merchandise.likes -= 1; // Decrement likes
+      }
+    });
   }
+
 
   String formatAvailability(Availability state) {
     switch (state) {
