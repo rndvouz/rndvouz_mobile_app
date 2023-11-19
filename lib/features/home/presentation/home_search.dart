@@ -37,6 +37,7 @@ class _HomeSearchState extends State<HomeSearch> {
                     ),
                   ),
                   prefixIcon: Icon(Icons.search),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10.0),
                 ),
               ),
             ),
