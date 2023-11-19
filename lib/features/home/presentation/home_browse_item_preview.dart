@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rndvouz/features/common/domain/measurements.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
-import '../common/data/colors.dart';
+import '../../common/data/colors.dart';
 
 class HomeBrowseItemPreview extends StatefulWidget {
   final Merchandise merchandise;

@@ -3,6 +3,7 @@ import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
 import '../../merchandise/domain/merchandise_db.dart';
 import '../../merchandise/domain/merchandise_garment.dart';
+import 'home_browse_item_preview.dart';
 
 class HomeSearch extends StatefulWidget {
   const HomeSearch({Key? key}) : super(key: key);
@@ -65,7 +66,7 @@ class _HomeSearchState extends State<HomeSearch> {
                       crossAxisSpacing: 15.0,
                       mainAxisSpacing: 15.0,
                       children: filteredSearch.map((merch) {
-                        return searchCard(merch);
+                        return searchCard(context, merch);
                       }).toList(),
                     ),
         ),
@@ -153,7 +154,7 @@ class GarmentResults extends StatelessWidget {
       }
 
       return merchandiseGarment.map((merch) {
-        return searchCard(merch);
+        return searchCard(context, merch);
       }).toList();
     }
 
@@ -188,40 +189,51 @@ class GarmentResults extends StatelessWidget {
   }
 }
 
-Card searchCard(Merchandise merch) {
+Card searchCard(BuildContext context, Merchandise merch) {
   return Card(
     elevation: 0.0,
     margin: EdgeInsets.all(0.5),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.0),
     ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
-          child: AspectRatio(
-            aspectRatio: 12 / 8,
-            child: Image.asset(
-              "${merch.assetImages}.jpg",
-              fit: BoxFit.cover,
+    child: InkWell(
+      onTap: () {
+        // Navigate to the detail page when a merchandise item is clicked
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeBrowseItemPreview(merchandise: merch),
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+            child: AspectRatio(
+              aspectRatio: 12 / 8,
+              child: Image.asset(
+                "${merch.assetImages}.jpg",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Text(
-                merch.merchName,
-                style: TextStyle(
-                  fontSize: 13.0,
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Text(
+                  merch.merchName,
+                  style: TextStyle(
+                    fontSize: 13.0,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

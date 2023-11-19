@@ -1,11 +1,10 @@
-import 'package:rndvouz/features/home/home_browse_item_preview.dart';
+import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
 import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/data/colors.dart';
-import '../../merchandise/domain/merchandise_garment.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
 class HomeBrowseOrSwipe extends StatelessWidget {
