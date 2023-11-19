@@ -17,7 +17,7 @@ class GetStartedPage extends ConsumerWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return _build(context, snapshot.data, ref);
           } else {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
         });
   }

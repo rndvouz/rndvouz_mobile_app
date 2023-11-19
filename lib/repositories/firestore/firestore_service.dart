@@ -33,7 +33,8 @@ class FirestoreService {
             routeName = GetStartedPage.routeName;
           }
         }
-        GlobalNavigatorKey.navigatorKey.currentState!.pushNamed(routeName);
+        GlobalNavigatorKey.navigatorKey.currentState!
+            .pushNamedAndRemoveUntil(routeName, (route) => false);
         // WidgetsBinding.instance.addPostFrameCallback((_) {
         // });
       }

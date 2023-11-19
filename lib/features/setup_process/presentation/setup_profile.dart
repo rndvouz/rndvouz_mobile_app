@@ -124,7 +124,7 @@ class SetupProfilePage extends ConsumerWidget {
     return Container(
       width: width, // Set the width
       height: height, // Set the height
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextField(
         controller: controller,
@@ -144,11 +144,10 @@ class SetupProfilePage extends ConsumerWidget {
 class ImageSelectionButton extends StatefulWidget {
   final Function(Uint8List?) onImageSelected;
 
-  const ImageSelectionButton({Key? key, required this.onImageSelected})
-      : super(key: key);
+  const ImageSelectionButton({super.key, required this.onImageSelected});
 
   @override
-  _ImageSelectionButtonState createState() => _ImageSelectionButtonState();
+  State<ImageSelectionButton> createState() => _ImageSelectionButtonState();
 }
 
 class _ImageSelectionButtonState extends State<ImageSelectionButton> {
