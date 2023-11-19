@@ -20,7 +20,7 @@ class MerchandiseDB {
         bust: 20.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 7,
       likes: 40,
     ),
     Merchandise(
@@ -38,8 +38,8 @@ class MerchandiseDB {
         sleeveLength: 30.0,
         length: 60.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 34,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
       likes: 40,
     ),
     Merchandise(
@@ -58,9 +58,12 @@ class MerchandiseDB {
         sleeveLength: 30.0,
         length: 63.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
+      likes: 80,
     ),
     Merchandise(
       id: 3,
@@ -79,7 +82,7 @@ class MerchandiseDB {
         sleeveLength: 15.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 5,
       likes: 40,
     ),
     Merchandise(
@@ -97,7 +100,7 @@ class MerchandiseDB {
         inseam: 7.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 16,
       likes: 40,
     ),
     Merchandise(
@@ -115,8 +118,11 @@ class MerchandiseDB {
         hips: 32.0,
         length: 40.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -136,8 +142,8 @@ class MerchandiseDB {
         length: 90.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 22,
+      likes: 41,
     ),
     Merchandise(
       id: 7,
@@ -156,7 +162,7 @@ class MerchandiseDB {
       ),
       sellingMethod: SellingMethod.selling,
       price: 13,
-      likes: 40,
+      likes: 64,
     ),
     Merchandise(
       id: 8,
@@ -174,8 +180,11 @@ class MerchandiseDB {
         sleeveLength: 30.0,
         length: 90.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -192,9 +201,9 @@ class MerchandiseDB {
         sleeveLength: 40.0,
         length: 50.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
+      likes: 77,
     ),
     Merchandise(
       id: 10,
@@ -212,9 +221,12 @@ class MerchandiseDB {
         hips: 30.0,
         length: 61.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
+      likes: 20,
     ),
     Merchandise(
       id: 11,
@@ -233,7 +245,7 @@ class MerchandiseDB {
         length: 69.1,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 23,
       likes: 40,
     ),
     Merchandise(
@@ -249,8 +261,11 @@ class MerchandiseDB {
         sleeveLength: 42.0,
         length: 48.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -269,8 +284,8 @@ class MerchandiseDB {
         inseam: 6.2,
         length: 70.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
       likes: 40,
     ),
     Merchandise(
@@ -288,7 +303,7 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 8,
       likes: 40,
     ),
     Merchandise(
@@ -306,7 +321,7 @@ class MerchandiseDB {
         length: 41.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 7.5,
       likes: 40,
     ),
     Merchandise(
@@ -323,9 +338,12 @@ class MerchandiseDB {
         hips: 31.0,
         length: 24.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
+      likes: 5,
     ),
     Merchandise(
       id: 17,
@@ -344,8 +362,8 @@ class MerchandiseDB {
         length: 50.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 10,
+      likes: 41,
     ),
     Merchandise(
       id: 18,
@@ -369,7 +387,7 @@ class MerchandiseDB {
         length: 72.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 24,
       likes: 40,
     ),
     Merchandise(
@@ -387,8 +405,11 @@ class MerchandiseDB {
         length: 57.0,
         sleeveLength: 15.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -405,8 +426,8 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 17,
+      likes: 42,
     ),
     Merchandise(
       id: 21,
@@ -421,8 +442,8 @@ class MerchandiseDB {
         bust: 20.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 6.5,
+      likes: 0,
     ),
     Merchandise(
       id: 22,
@@ -438,8 +459,8 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 34,
+      likes: 89,
     ),
     Merchandise(
       id: 23,
@@ -457,8 +478,8 @@ class MerchandiseDB {
         length: 72.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 57.9,
+      likes: 8,
     ),
     Merchandise(
       id: 24,
@@ -475,8 +496,11 @@ class MerchandiseDB {
         inseam: 6.2,
         length: 70.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -494,7 +518,7 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 12,
       likes: 40,
     ),
     Merchandise(
@@ -511,8 +535,11 @@ class MerchandiseDB {
         waist: 40.0,
         length: 34.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -530,7 +557,7 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 20,
       likes: 40,
     ),
     Merchandise(
@@ -547,8 +574,11 @@ class MerchandiseDB {
         length: 57.0,
         sleeveLength: 15.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
       likes: 40,
     ),
     Merchandise(
@@ -567,8 +597,8 @@ class MerchandiseDB {
         length: 90.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 24.4,
+      likes: 41,
     ),
     Merchandise(
       id: 30,
@@ -584,9 +614,9 @@ class MerchandiseDB {
         length: 57.0,
         sleeveLength: 15.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
+      likes: 7,
     ),
     Merchandise(
       id: 31,
@@ -605,7 +635,7 @@ class MerchandiseDB {
         length: 65.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 10,
       likes: 40,
     ),
     Merchandise(
@@ -622,8 +652,8 @@ class MerchandiseDB {
         waist: 40.0,
         length: 33.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
       likes: 40,
     ),
     Merchandise(
@@ -640,7 +670,7 @@ class MerchandiseDB {
         length: 48.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 7,
       likes: 40,
     ),
     Merchandise(
@@ -659,8 +689,8 @@ class MerchandiseDB {
         length: 65.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 17,
+      likes: 6,
     ),
     Merchandise(
       id: 35,
@@ -678,8 +708,8 @@ class MerchandiseDB {
         length: 73.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      price: 19,
+      likes: 21,
     ),
     Merchandise(
       id: 36,
@@ -696,8 +726,8 @@ class MerchandiseDB {
         sleeveLength: 30.0,
         length: 60.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
       likes: 40,
     ),
     Merchandise(
@@ -714,7 +744,7 @@ class MerchandiseDB {
         length: 57.0,
       ),
       sellingMethod: SellingMethod.selling,
-      price: 13,
+      price: 6,
       likes: 40,
     ),
     Merchandise(
@@ -730,9 +760,12 @@ class MerchandiseDB {
         sleeveLength: 42.0,
         length: 48.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.negotiate,
+      priceRange: PriceRange(
+        minPrice: 12.0,
+        maxPrice: 15.0,
+      ),
+      likes: 5,
     ),
     Merchandise(
       id: 39,
@@ -748,9 +781,9 @@ class MerchandiseDB {
         length: 57.0,
         sleeveLength: 15.0,
       ),
-      sellingMethod: SellingMethod.selling,
-      price: 13,
-      likes: 40,
+      sellingMethod: SellingMethod.trading,
+      desiredTrade: "Vintage Doc Marins",
+      likes: 25,
     ),
   ];
 

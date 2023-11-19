@@ -33,13 +33,13 @@ class Merchandise {
   final SecondaryStyle? secondaryStyle;
   final Garment garment;
   final Set<MerchColors> merchColors;
-  final String merchName;
-  final Measurements merchMeasurements;
-  final SellingMethod sellingMethod;
-  final int price; // for selling
-  final PriceRange? priceRange; // for negotiating
-  final String? desiredTrade; // for trading
-  final int likes;
+  String merchName;
+  Measurements merchMeasurements;
+  SellingMethod sellingMethod;
+  double price; // for selling
+  PriceRange? priceRange; // for negotiating
+  String? desiredTrade; // for trading
+  int likes;
 
   Merchandise({
     required this.id,
@@ -67,8 +67,8 @@ class Merchandise {
 }
 
 class PriceRange {
-  final int minPrice;
-  final int maxPrice;
+  final double minPrice;
+  final double maxPrice;
 
   const PriceRange({required this.minPrice, required this.maxPrice});
 }

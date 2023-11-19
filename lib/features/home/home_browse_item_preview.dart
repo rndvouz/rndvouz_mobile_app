@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:rndvouz/features/common/domain/measurements.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
 import '../common/data/colors.dart';
 
-class HomeBrowseItemPreview extends StatelessWidget {
+class HomeBrowseItemPreview extends StatefulWidget {
   final Merchandise merchandise;
 
   const HomeBrowseItemPreview({Key? key, required this.merchandise})
       : super(key: key);
 
+  @override
+  HomeBrowseItemPreviewState createState() => HomeBrowseItemPreviewState();
+}
+
+class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
   @override
   Widget build(BuildContext context) {
     const OutlinedBorder roundBorder = RoundedRectangleBorder(
@@ -18,10 +24,13 @@ class HomeBrowseItemPreview extends StatelessWidget {
             bottomLeft: Radius.circular(50),
             bottomRight: Radius.circular(50)));
 
+    bool isLiked = false;
+    bool isClicked = false;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${merchandise.merchName}",
+          "${widget.merchandise.merchName}",
           style: TextStyle(fontSize: 19.0),
         ),
         leading: IconButton(
@@ -36,21 +45,51 @@ class HomeBrowseItemPreview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(
-                  top: 25.0,
-                  left: 25.0,
-                  bottom: 25.0), // Adjust the padding values as needed
+              padding: EdgeInsets.only(top: 25.0, left: 25.0, bottom: 25.0),
               child: Text(
-                "${merchandise.ownerUsername}",
+                "${widget.merchandise.ownerUsername}",
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ),
             Image.asset(
-              "${merchandise.assetImages}.jpg",
-              fit:
-                  BoxFit.cover, // Use BoxFit.cover to maintain the aspect ratio
+              "${widget.merchandise.assetImages}.jpg",
+              fit: BoxFit.cover,
             ),
-            SizedBox(height: 15.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: isLiked == true
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border),
+                        onPressed: () {
+                          setState(() {
+                            isLiked = !isLiked;
+                            UpdateLike(isLiked);
+                          });
+                        },
+                      ),
+                      Text('${widget.merchandise.likes}'),
+                    ],
+                  ),
+                  IconButton(
+                    icon: isClicked == true
+                        ? const Icon(Icons.bookmark)
+                        : const Icon(Icons.bookmark_border),
+                    onPressed: () {
+                      setState(() {
+                        isClicked = !isClicked;
+                        // Save to User's profile for bookmarked items
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               width: double.infinity,
               child: Padding(
@@ -62,16 +101,15 @@ class HomeBrowseItemPreview extends StatelessWidget {
                       children: [
                         Chip(
                           label: Text(
-                            "${formatAvailability(merchandise.state)}",
+                            "${formatAvailability(widget.merchandise.state)}",
                           ),
                           shape: roundBorder,
                           backgroundColor: colorGreen2,
                         ),
-                        SizedBox(
-                            width: 8.0), // Add some spacing between the chips
+                        SizedBox(width: 8.0),
                         Chip(
                           label: Text(
-                              "${formatSellingMethod(merchandise.sellingMethod)}"),
+                              "${formatSellingMethod(widget.merchandise.sellingMethod)}"),
                           shape: roundBorder,
                           backgroundColor: colorGreen2,
                         ),
@@ -80,17 +118,17 @@ class HomeBrowseItemPreview extends StatelessWidget {
                     SizedBox(height: 10.0),
                     Row(
                       children: [
-                        Text("${formatText(merchandise.sellingMethod)}",
+                        Text("${formatText(widget.merchandise.sellingMethod)}",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(
-                            "${formatSellingDisplay(merchandise.sellingMethod)}",
-                            style: TextStyle(fontSize: 16.0)),
+                          "${formatSellingDisplay(widget.merchandise.sellingMethod)}",
+                        ),
                       ],
                     ),
                     SizedBox(height: 10.0),
                     Row(
                       children: [
-                        Text("Item Description",
+                        Text("Description",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
@@ -114,7 +152,7 @@ class HomeBrowseItemPreview extends StatelessWidget {
                     SizedBox(height: 10.0),
                     Row(
                       children: [
-                        Text("Item Measurements",
+                        Text("Measurements",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
@@ -124,15 +162,40 @@ class HomeBrowseItemPreview extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '15" x 4" x 10"',
+                          formatMeasurements(
+                              widget.merchandise.merchMeasurements),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: 15.0,
+                    ),
+                    Divider(),
+                    Row(
+                      children: [
+                        Text(
+                          'Comments',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10.0),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(
+                            'No comments yet',
+                            style: TextStyle(
+                              color: Colors.grey, // Light gray color
+                            ),
+                          ),
+                          // Populate comments here
+                        ),
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -140,12 +203,11 @@ class HomeBrowseItemPreview extends StatelessWidget {
                               width: double.infinity,
                               height: 45.0,
                               child: TextField(
-                                maxLines: null, // Allow multiple lines of text
+                                maxLines: null,
                                 decoration: InputDecoration(
                                   hintText: '   Type your comment..',
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        20.0), // Set the border radius
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   contentPadding:
                                       EdgeInsets.symmetric(vertical: 10.0),
@@ -153,18 +215,12 @@ class HomeBrowseItemPreview extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                              width:
-                                  10.0), // Add some spacing between the input field and button
-                          ElevatedButton(
+                          SizedBox(width: 10.0),
+                          IconButton(
+                            icon: Icon(Icons.send),
                             onPressed: () {
-                              // Handle button click
+                              // Handle like button click
                             },
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: Size(30.0,
-                                  30.0), // Set the fixed size of the button
-                            ),
-                            child: Icon(Icons.send),
                           ),
                         ],
                       ),
@@ -177,6 +233,14 @@ class HomeBrowseItemPreview extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void UpdateLike(bool liked) {
+    if (liked) {
+      widget.merchandise.likes + 1;
+    } else {
+      widget.merchandise.likes - 1;
+    }
   }
 
   String formatAvailability(Availability state) {
@@ -204,13 +268,16 @@ class HomeBrowseItemPreview extends StatelessWidget {
   }
 
   String formatSellingDisplay(SellingMethod method) {
+    final minPrice = widget.merchandise.priceRange?.minPrice;
+    final maxPrice = widget.merchandise.priceRange?.maxPrice;
+
     switch (method) {
       case SellingMethod.selling:
-        return '${merchandise.price}';
+        return '\$${widget.merchandise.price}';
       case SellingMethod.trading:
-        return '${merchandise.desiredTrade}';
+        return '${widget.merchandise.desiredTrade}';
       case SellingMethod.negotiate:
-        return '${merchandise.priceRange}';
+        return '\$${minPrice ?? 'N/A'} - \$${maxPrice ?? 'N/A'}';
       default:
         return 'Unable to retrieve selling method';
     }
@@ -221,11 +288,36 @@ class HomeBrowseItemPreview extends StatelessWidget {
       case SellingMethod.selling:
         return 'Price ';
       case SellingMethod.trading:
-        return 'Trading for\n';
+        return 'Trading for ';
       case SellingMethod.negotiate:
         return 'Price Range ';
       default:
         return 'Unable to retrieve selling method';
     }
+  }
+
+  String formatMeasurements(Measurements measurements) {
+    final List<String> lines = [];
+
+    if (measurements.bust != null) {
+      lines.add('Bust: ${measurements.bust}');
+    }
+    if (measurements.waist != null) {
+      lines.add('Waist: ${measurements.waist}');
+    }
+    if (measurements.hips != null) {
+      lines.add('Hips: ${measurements.hips}');
+    }
+    if (measurements.inseam != null) {
+      lines.add('Inseam: ${measurements.inseam}');
+    }
+    if (measurements.sleeveLength != null) {
+      lines.add('Sleeve Length: ${measurements.sleeveLength}');
+    }
+    if (measurements.length != null) {
+      lines.add('Full Length: ${measurements.length}');
+    }
+
+    return lines.join('\n');
   }
 }
