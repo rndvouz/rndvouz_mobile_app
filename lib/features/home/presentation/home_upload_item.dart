@@ -1,22 +1,28 @@
 import 'dart:typed_data';
 
-import 'package:rndvouz/features/home/presentation/upload_body.dart';
+import 'package:rndvouz/features/home/presentation/upload_menu.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
 import 'package:rndvouz/features/common/presentation/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../user/domain/user_db.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../data/upload_item_providers.dart';
 
 class HomeUploadItem extends ConsumerWidget {
   const HomeUploadItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayNameController = TextEditingController(text: 'hi');
-    final usernameController = TextEditingController(text: 'cry');
-    final biographyController = TextEditingController();
+    final MerchandiseDB? theItem = ref.watch(uploadItemProvider);
+
+    final itemNameController = TextEditingController();
+    final descriptionController = TextEditingController();
+
     Uint8List? selectedImage;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -34,13 +40,12 @@ class HomeUploadItem extends ConsumerWidget {
                           selectedImage = image;
                         },
                       ),
-                      UploadBody(),
+                      UploadMenu(),
                       const SizedBox(height: 20),
-                      _buildTextField("Display Name", displayNameController),
-                      _buildTextField("Username", usernameController),
-                      _buildTextField('Biography', biographyController,
-                          width: 500, height: 120, lines: 3),
+                      _buildTextField("Item Name", itemNameController),
+                      _buildTextField("Description", descriptionController),
                       const SizedBox(height: 40),
+                      ElevatedButton(onPressed: () {}, child: Text("Add"))
                     ],
                   ),
                 ),
