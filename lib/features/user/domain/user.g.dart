@@ -17,10 +17,8 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       address: json['address'] as String?,
       favoriteColors: json['favoriteColors'] as String?,
       biography: json['biography'] as String?,
-      userMeasurements: json['userMeasurements'] == null
-          ? null
-          : Measurements.fromJson(
-              json['userMeasurements'] as Map<String, dynamic>),
+      userMeasurements: const MeasurementsConverter()
+          .fromJson(json['userMeasurements'] as Map<String, dynamic>?),
       style:
           (json['style'] as List<dynamic>?)?.map((e) => e as String).toList(),
       follower: (json['follower'] as List<dynamic>?)
@@ -36,7 +34,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
                   (e) => ContactInformation.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      setupStep: json['setupStep'] as String? ?? "setupProfile",
+      setupStep: json['setupStep'] as String? ?? "setupBegin",
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -51,7 +49,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'address': instance.address,
       'favoriteColors': instance.favoriteColors,
       'biography': instance.biography,
-      'userMeasurements': instance.userMeasurements,
+      'userMeasurements':
+          const MeasurementsConverter().toJson(instance.userMeasurements),
       'style': instance.style,
       'follower': instance.follower,
       'following': instance.following,

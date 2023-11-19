@@ -7,7 +7,11 @@ import 'package:rndvouz/features/home/presentation/home_bottom_nav_bar.dart';
 import 'package:rndvouz/features/settings/data/theme_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
+import 'package:rndvouz/features/setup_process/presentation/individual/individual_setup_size.dart';
+import 'package:rndvouz/features/setup_process/presentation/individual/individual_setup_swipe.dart';
+import 'package:rndvouz/features/setup_process/presentation/setup_complete.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_profile.dart';
+import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
 import 'features/settings/presentation/app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -37,6 +41,13 @@ class RndvouzApp extends ConsumerWidget {
             const SetupProfilePage(),
         GetStartedPage.routeName: (BuildContext context) =>
             const GetStartedPage(),
+        IndividualSetupSwipe.routeName: (BuildContext context) =>
+            const IndividualSetupSwipe(),
+        SetupStyle.routeName: (BuildContext context) => const SetupStyle(),
+        IndividualSetupSize.routeName: (BuildContext context) =>
+            const IndividualSetupSize(),
+
+        SetupComplete.routeName: (BuildContext context) => const SetupComplete(),
       },
     );
 

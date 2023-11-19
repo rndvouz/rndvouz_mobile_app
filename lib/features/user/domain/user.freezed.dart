@@ -30,6 +30,7 @@ mixin _$User {
   String? get address => throw _privateConstructorUsedError;
   String? get favoriteColors => throw _privateConstructorUsedError;
   String? get biography => throw _privateConstructorUsedError;
+  @MeasurementsConverter()
   Measurements? get userMeasurements => throw _privateConstructorUsedError;
   List<String>? get style => throw _privateConstructorUsedError;
   List<String> get follower => throw _privateConstructorUsedError;
@@ -58,7 +59,7 @@ abstract class $UserCopyWith<$Res> {
       String? address,
       String? favoriteColors,
       String? biography,
-      Measurements? userMeasurements,
+      @MeasurementsConverter() Measurements? userMeasurements,
       List<String>? style,
       List<String> follower,
       List<String> following,
@@ -197,7 +198,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? address,
       String? favoriteColors,
       String? biography,
-      Measurements? userMeasurements,
+      @MeasurementsConverter() Measurements? userMeasurements,
       List<String>? style,
       List<String> follower,
       List<String> following,
@@ -318,12 +319,12 @@ class _$UserImpl extends _User {
       this.address,
       this.favoriteColors,
       this.biography,
-      this.userMeasurements,
+      @MeasurementsConverter() this.userMeasurements,
       final List<String>? style,
       final List<String> follower = const [],
       final List<String> following = const [],
       final List<ContactInformation> contact = const [],
-      this.setupStep = "setupProfile"})
+      this.setupStep = "setupBegin"})
       : _style = style,
         _follower = follower,
         _following = following,
@@ -354,6 +355,7 @@ class _$UserImpl extends _User {
   @override
   final String? biography;
   @override
+  @MeasurementsConverter()
   final Measurements? userMeasurements;
   final List<String>? _style;
   @override
@@ -480,7 +482,7 @@ abstract class _User extends User {
       final String? address,
       final String? favoriteColors,
       final String? biography,
-      final Measurements? userMeasurements,
+      @MeasurementsConverter() final Measurements? userMeasurements,
       final List<String>? style,
       final List<String> follower,
       final List<String> following,
@@ -511,6 +513,7 @@ abstract class _User extends User {
   @override
   String? get biography;
   @override
+  @MeasurementsConverter()
   Measurements? get userMeasurements;
   @override
   List<String>? get style;

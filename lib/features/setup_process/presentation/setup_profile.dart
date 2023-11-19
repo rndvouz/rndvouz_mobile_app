@@ -38,7 +38,7 @@ class SetupProfilePage extends ConsumerWidget {
     final displayNameController =
         TextEditingController(text: newUser.displayName);
     final biographyController = TextEditingController(text: newUser.biography);
-    Uint8List? selectedImage;
+    Uint8List? selectedImage = base64Decode(newUser.imagePath!);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -88,31 +88,13 @@ class SetupProfilePage extends ConsumerWidget {
                             final updatedUser = newUser.copyWith(
                                 displayName: displayNameController.text,
                                 biography: biographyController.text,
-                                imagePath: imageData);
+                                imagePath: imageData,
+                                setupStep: "setupSwipe");
 
                             final userDB = ref.watch(userDBProvider);
                             await userDB.updateUser(updatedUser);
                             GlobalNavigatorKey.navigatorKey.currentState!
-                                .pushNamed("/home");
-                            // //newUser.imagePath =
-                            // // Handle 'Next' button action
-                            // try {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => newUser.isBusiness
-                            //               ? SetupStyle(newUser: newUser)
-                            //               : IndividualSetupSwipe(
-                            //                   newUser: newUser)));
-                            // } catch (e) {
-                            //   final exceptionMessage =
-                            //       e.toString().replaceAll("Exception:", "");
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(exceptionMessage),
-                            //     ),
-                            //   );
-                            // }
+                                .pushNamed("/setupSwipe");
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 0),
@@ -171,7 +153,6 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
   void selectImage(ImageSource source) async {
     Uint8List? img = await pickAndCropImage(source);
     if (img != null) {
-      print(img.lengthInBytes);
       setState(() {
         _image = img;
       });

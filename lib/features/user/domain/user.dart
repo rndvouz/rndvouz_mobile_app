@@ -21,12 +21,12 @@ class User with _$User {
     String? address,
     String? favoriteColors,
     String? biography,
-    Measurements? userMeasurements,
+    @MeasurementsConverter() Measurements? userMeasurements,
     List<String>? style,
     @Default([]) List<String> follower,
     @Default([]) List<String> following,
     @Default([]) List<ContactInformation> contact,
-    @Default("setupProfile") String setupStep,
+    @Default("setupBegin") String setupStep,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -48,4 +48,25 @@ class ContactInformation with _$ContactInformation {
 
   factory ContactInformation.fromJson(Map<String, dynamic> json) =>
       _$ContactInformationFromJson(json);
+}
+
+class MeasurementsConverter
+    extends JsonConverter<Measurements?, Map<String, dynamic>?> {
+  const MeasurementsConverter();
+
+  @override
+  Measurements? fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+    return Measurements.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(Measurements? object) {
+    if (object == null) {
+      return null;
+    }
+    return object.toJson();
+  }
 }
