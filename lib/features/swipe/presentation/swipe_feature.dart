@@ -38,7 +38,7 @@ class _SwipeFeature extends State<SwipeFeature> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Center(
+        return const Center(
           child: Text(
             "That's all of the available clothes for now. Come back later!",
             style: TextStyle(fontSize: 10.0),
@@ -56,7 +56,7 @@ class _SwipeFeature extends State<SwipeFeature> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
             Flexible(
@@ -103,7 +103,7 @@ class _SwipeFeature extends State<SwipeFeature> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                 ],
