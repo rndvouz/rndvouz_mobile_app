@@ -42,7 +42,20 @@ class _AwaitVerifyPageState extends ConsumerState<AwaitVerifyPage> {
     //TODO: Implement your amazing waiting screen here
     return Scaffold(
       body: Center(
-        child: Text("Waiting for email verification"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Waiting for email verification :)",
+                style: Theme.of(context).textTheme.titleLarge),
+            ElevatedButton(
+              onPressed: () {
+                GlobalNavigatorKey.navigatorKey.currentState
+                    ?.pushNamed("/login");
+              },
+              child: const Text("Go Back to Log In"),
+            ),
+          ],
+        ),
       ),
     );
   }

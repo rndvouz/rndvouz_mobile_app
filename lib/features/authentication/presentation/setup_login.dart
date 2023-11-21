@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:rndvouz/features/authentication/presentation/login_page.dart';
+import 'package:rndvouz/features/common/data/colors.dart';
 import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_top_bar.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
@@ -75,6 +76,9 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       TextEditingController retypePasswordController,
       bool isBusiness,
       WidgetRef ref) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -82,7 +86,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.all(screenWidth * 0.08),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,28 +98,28 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const SizedBox(height: 40),
+                        SizedBox(height: screenHeight * 0.05),
                         _buildTextField(
                           "Email Address",
                           emailController,
                           listUsers: listUsers,
                           ref: ref,
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: screenHeight * 0.025),
                         _buildTextField(
                           "Username",
                           usernameController,
                           listUsers: listUsers,
                           ref: ref,
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: screenHeight * 0.025),
                         _buildTextField(
                           "Password",
                           passwordController,
                           isObscure: true,
                           ref: ref,
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: screenHeight * 0.025),
                         _buildTextField(
                           "Re-type Password",
                           retypePasswordController,
@@ -123,7 +127,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
                           isObscure: true,
                           ref: ref,
                         ),
-                        const SizedBox(height: 25),
+                        SizedBox(height: screenHeight * 0.05),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -191,7 +195,11 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       List<User>? listUsers,
       WidgetRef? ref}) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      decoration: BoxDecoration(
+        color: colorCream0,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      // padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();

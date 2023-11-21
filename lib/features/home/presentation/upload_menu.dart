@@ -41,13 +41,19 @@ class UploadMenu extends ConsumerWidget {
                     },
                     child: Column(
                       children: [
-                        Text("Sell"),
+                        Text(
+                          "Sell",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ),
                   Column(
                     children: [
-                      Text("|"),
+                      Text(
+                        "|",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                   GestureDetector(
@@ -60,13 +66,19 @@ class UploadMenu extends ConsumerWidget {
                     },
                     child: Column(
                       children: [
-                        Text("Negotiate"),
+                        Text(
+                          "Negotiate",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ),
                   Column(
                     children: [
-                      Text("|"),
+                      Text(
+                        "|",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                   GestureDetector(
@@ -79,7 +91,10 @@ class UploadMenu extends ConsumerWidget {
                     },
                     child: Column(
                       children: [
-                        Text("Trade"),
+                        Text(
+                          "Trade",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ),

@@ -12,9 +12,6 @@ class UploadFields extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
     final priceController = TextEditingController();
@@ -24,16 +21,16 @@ class UploadFields extends ConsumerWidget {
 
     return Column(children: [
       theState == SellingMethod.selling
-          ? _buildTextField("Price", priceController)
+          ? _buildTextField(context, "Price", priceController)
           : Container(),
       theState == SellingMethod.negotiate
-          ? _buildTextField("Price", priceController)
+          ? _buildTextField(context, "Price", priceController)
           : Container(),
       theState == SellingMethod.negotiate
-          ? _buildTextField("Negotiation Range", negotiationController)
+          ? _buildTextField(context, "Negotiation Range", negotiationController)
           : Container(),
-      _buildTextField("Title", titleController),
-      _buildTextField("Description", descriptionController),
+      _buildTextField(context, "Title", titleController),
+      _buildTextField(context, "Description", descriptionController),
       const SizedBox(height: 40),
       ElevatedButton(
         onPressed: () {},
@@ -42,26 +39,37 @@ class UploadFields extends ConsumerWidget {
     ]);
   }
 
-  Widget _buildTextField(String label, TextEditingController controller,
-      {bool isObscure = false,
-      double width = 500,
-      double height = 60,
-      int lines = 1}) {
-    return Container(
-      width: width, // Set the width
-      height: height, // Set the height
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextField(
-        controller: controller,
-        obscureText: isObscure,
-        maxLines: lines,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(
+  Widget _buildTextField(
+      BuildContext context, String label, TextEditingController controller,
+      {bool isObscure = false, int lines = 1}) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: colorCream0,
             borderRadius: BorderRadius.circular(10.0),
           ),
+          width: screenWidth * 0.9, // Set the width
+          height: screenHeight * 0.05, // Set the height
+          // padding: const EdgeInsets.symmetric(vertical: 8),
+          child: TextField(
+            controller: controller,
+            obscureText: isObscure,
+            maxLines: lines,
+            decoration: InputDecoration(
+              labelText: label,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+          ),
         ),
-      ),
+        SizedBox(
+          height: screenHeight * 0.02,
+        )
+      ],
     );
   }
 }

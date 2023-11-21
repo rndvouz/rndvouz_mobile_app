@@ -29,7 +29,6 @@ class _HomeNotificationState extends State<HomeNotification> {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
         flexibleSpace: SafeArea(
           child: Container(
             padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
@@ -39,9 +38,9 @@ class _HomeNotificationState extends State<HomeNotification> {
                 Text(
                   "Message",
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 SizedBox(
@@ -49,7 +48,7 @@ class _HomeNotificationState extends State<HomeNotification> {
                 ),
                 Icon(
                   Icons.settings,
-                  color: Colors.black54,
+                  color: Colors.white,
                 ),
               ],
             ),
@@ -84,7 +83,6 @@ class _HomeNotificationState extends State<HomeNotification> {
         elevation: 0,
         child: Container(
           height: 60.0,
-          color: Colors.transparent,
         ),
       ),
     );
