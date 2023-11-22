@@ -166,10 +166,10 @@ class HomeProfile extends ConsumerWidget {
                                       children: [
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: colorBrown1,
+                                            backgroundColor: secondaryBrown,
                                             shape: RoundedRectangleBorder(
                                               side: const BorderSide(
-                                                color: colorBrown1,
+                                                color: secondaryBrown,
                                                 width: 1,
                                                 style: BorderStyle.solid,
                                               ),
@@ -182,13 +182,11 @@ class HomeProfile extends ConsumerWidget {
                                           },
                                           child: const Text(
                                             'Edit Profile',
-                                            style:
-                                                TextStyle(color: Colors.white),
                                           ),
                                         ),
                                         FittedBox(
                                           child: IconButton(
-                                            color: colorBrown1,
+                                            color: secondaryBrown,
                                             iconSize: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.04,
@@ -266,7 +264,7 @@ class HomeProfile extends ConsumerWidget {
                                       'Selling'
                                   ? const Border(
                                       bottom: BorderSide(
-                                          color: Colors.blue, width: 2),
+                                          color: tertiaryBlue, width: 2),
                                     )
                                   : null,
                             ),
@@ -285,7 +283,7 @@ class HomeProfile extends ConsumerWidget {
                                                   selectedTabProvider.notifier)
                                               .state ==
                                           'Selling'
-                                      ? Colors.blue
+                                      ? tertiaryBlue
                                       : Colors.black,
                                 ),
                               ),
@@ -300,7 +298,7 @@ class HomeProfile extends ConsumerWidget {
                                       'Sold'
                                   ? const Border(
                                       bottom: BorderSide(
-                                          color: Colors.blue, width: 2),
+                                          color: tertiaryBlue, width: 2),
                                     )
                                   : null,
                             ),
@@ -319,7 +317,7 @@ class HomeProfile extends ConsumerWidget {
                                                   selectedTabProvider.notifier)
                                               .state ==
                                           'Sold'
-                                      ? Colors.blue
+                                      ? tertiaryBlue
                                       : Colors.black,
                                 ),
                               ),

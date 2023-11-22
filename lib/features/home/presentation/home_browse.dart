@@ -5,6 +5,7 @@ import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/data/colors.dart';
+
 // Change to Stateful when you can tap on image to view more information about it
 class HomeBrowseOrSwipe extends StatelessWidget {
   const HomeBrowseOrSwipe({Key? key}) : super(key: key);

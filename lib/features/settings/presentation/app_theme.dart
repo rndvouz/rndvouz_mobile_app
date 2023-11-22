@@ -28,36 +28,60 @@ ThemeData _buildAppTheme(String mode) {
         primary: primaryGreen,
         secondary: secondaryBrown,
         tertiary: tertiaryBlue,
-        neutral: neutralGrey,
+        neutral: colorCream1,
       ).toScheme(),
     );
   }
 
-  return base.copyWith(
-    // colorScheme: base.colorScheme.copyWith(
-    //   primary: colorGreen1,
-    //   secondary: colorBrown1,
-    //   error: errorRed,
-    // ),
-    // useMaterial3: false,
-    // splashColor: Colors.transparent,
-    // highlightColor: Colors.transparent,
-    // hoverColor: Colors.transparent,
-    // scaffoldBackgroundColor: colorCream1,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: primaryGreen,
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: primaryGreen,
-    ),
-    // cardTheme: CardTheme(
-    //   color: colorCream2,
-    // ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(25.0),
-    )))),
-  );
+  return mode == 'light'
+      ? base.copyWith(
+          // colorScheme: base.colorScheme.copyWith(
+          //   primary: colorGreen1,
+          //   secondary: colorBrown1,
+          //   error: errorRed,
+          // ),
+          // useMaterial3: false,
+          // splashColor: Colors.transparent,
+          // highlightColor: Colors.transparent,
+          // hoverColor: Colors.transparent,
+          scaffoldBackgroundColor: colorCream1,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: primaryGreen,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: primaryGreen,
+          ),
+          cardTheme: CardTheme(
+            color: colorCream0,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          )))),
+        )
+      : base.copyWith(
+          // colorScheme: base.colorScheme.copyWith(
+          //   primary: colorGreen1,
+          //   secondary: colorBrown1,
+          //   error: errorRed,
+          // ),
+          // useMaterial3: false,
+          // splashColor: Colors.transparent,
+          // highlightColor: Colors.transparent,
+          // hoverColor: Colors.transparent,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: primaryGreen,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: primaryGreen,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          )))),
+        );
 }
