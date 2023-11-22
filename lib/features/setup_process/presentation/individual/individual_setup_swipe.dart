@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Database Packages
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';

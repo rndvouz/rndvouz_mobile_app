@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
-import '../../merchandise/domain/merchandise_db.dart';
+import '../../merchandise/data/merchandise_db.dart';
 import '../../merchandise/domain/merchandise_garment.dart';
 import 'home_browse_item_preview.dart';
 

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:rndvouz/features/home/presentation/upload_fields.dart';
 import 'package:rndvouz/features/home/presentation/upload_menu.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
 import 'package:rndvouz/features/common/presentation/utils.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
 import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
