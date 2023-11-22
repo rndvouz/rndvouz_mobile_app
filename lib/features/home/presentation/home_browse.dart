@@ -1,4 +1,4 @@
-import 'package:rndvouz/features/home/home_browse_item_preview.dart';
+import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
 import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
@@ -25,7 +25,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
     return allMerchandise.map((merch) {
       return Card(
         elevation: 0.0,
-        margin: EdgeInsets.all(0.5),
+        margin: const EdgeInsets.all(0.5),
         child: InkWell(
           onTap: () {
             // Navigate to the detail page when a merchandise item is clicked

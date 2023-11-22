@@ -1,6 +1,6 @@
 enum Garment {
   // tops
-  tshirt,
+  shirt,
   top,
   blouse,
   longsleeve,

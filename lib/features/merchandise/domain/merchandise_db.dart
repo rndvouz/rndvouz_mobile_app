@@ -48,7 +48,7 @@ class MerchandiseDB {
       purpose: Purpose.browse,
       primaryStyle: PrimaryStyle.edgy,
       secondaryStyle: SecondaryStyle.casual,
-      garment: Garment.tshirt,
+      garment: Garment.shirt,
       merchColors: {MerchColors.beige},
       merchName: "Cozy Beige Jacket",
       merchMeasurements: Measurements(
@@ -71,7 +71,7 @@ class MerchandiseDB {
       purpose: Purpose.setup,
       primaryStyle: PrimaryStyle.edgy,
       secondaryStyle: SecondaryStyle.casual,
-      garment: Garment.tshirt,
+      garment: Garment.shirt,
       merchColors: {MerchColors.black, MerchColors.white},
       merchName: "White Japanese Art T-Shirt",
       merchMeasurements: Measurements(
@@ -395,7 +395,7 @@ class MerchandiseDB {
       state: Availability.selling,
       purpose: Purpose.browse,
       primaryStyle: PrimaryStyle.casual,
-      garment: Garment.tshirt,
+      garment: Garment.shirt,
       merchColors: {MerchColors.white},
       merchName: "Cute Casual T-Shirt",
       merchMeasurements: Measurements(
@@ -565,7 +565,7 @@ class MerchandiseDB {
       state: Availability.selling,
       purpose: Purpose.browse,
       primaryStyle: PrimaryStyle.casual,
-      garment: Garment.tshirt,
+      garment: Garment.shirt,
       merchColors: {MerchColors.white},
       merchName: "Casual White T-Shirt",
       merchMeasurements: Measurements(
@@ -772,7 +772,7 @@ class MerchandiseDB {
       state: Availability.sold,
       purpose: Purpose.setup,
       primaryStyle: PrimaryStyle.streetwear,
-      garment: Garment.tshirt,
+      garment: Garment.shirt,
       merchColors: {MerchColors.yellow},
       merchName: "Dirty Mustard Yellow Street T-Shirt",
       merchMeasurements: Measurements(
@@ -800,7 +800,9 @@ class MerchandiseDB {
     } else {
       // use for searching feature
       return allGarments.where((Merchandise m) {
-        return m.purpose == purpose;
+        // Check if garment is provided and matches
+        final garmentMatches = garment == null || m.garment == garment;
+        return m.purpose == purpose && garmentMatches;
       }).toList();
     }
   }

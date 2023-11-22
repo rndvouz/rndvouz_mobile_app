@@ -1,12 +1,9 @@
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
-import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
-import 'package:rndvouz/features/setup_process/presentation/business/business_setup_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'individual/individual_setup_size.dart';
 import 'setup_top_bar.dart';
 
 class SetupStyle extends ConsumerWidget {
