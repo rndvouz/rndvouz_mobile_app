@@ -1,16 +1,19 @@
-class Measurements {
-  final double? bust;
-  final double? waist;
-  final double? hips;
-  final double? inseam;
-  final double? length;
-  final double? sleeveLength;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Measurements(
-      {this.bust,
-      this.waist,
-      this.hips,
-      this.inseam,
-      this.length,
-      this.sleeveLength});
+part 'measurements.freezed.dart';
+part 'measurements.g.dart';
+
+@freezed
+class Measurements with _$Measurements{
+  const factory Measurements({
+    double? bust,
+    double? waist,
+    double? hips,
+    double? inseam,
+    double? sleeve,
+    double? length,
+    double? sleeveLength,
+  }) = _Measurements;
+
+  factory Measurements.fromJson(Map<String, dynamic> json) => _$MeasurementsFromJson(json);
 }

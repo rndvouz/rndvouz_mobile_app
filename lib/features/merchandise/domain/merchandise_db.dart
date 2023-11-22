@@ -807,5 +807,4 @@ class MerchandiseDB {
     }
   }
 }
-
 MerchandiseDB merchandiseDB = MerchandiseDB();

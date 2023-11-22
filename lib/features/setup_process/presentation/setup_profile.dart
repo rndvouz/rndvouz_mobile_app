@@ -1,27 +1,39 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:rndvouz/features/setup_process/presentation/setup_style.dart';
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/common/presentation/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../user/domain/user_db.dart';
+import 'package:rndvouz/features/user/data/user_providers.dart';
+import '../../user/domain/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'setup_top_bar.dart';
-import 'individual/individual_setup_swipe.dart';
 
 class SetupProfilePage extends ConsumerWidget {
-  final User newUser;
+  const SetupProfilePage({super.key});
 
-  const SetupProfilePage({Key? key, required this.newUser}) : super(key: key);
+  static const String routeName = '/setupProfile';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUserAsyncValue = ref.watch(currentUserProvider);
+
+    return currentUserAsyncValue.when(
+        data: (user) {
+          return _build(context, ref, user);
+        },
+        loading: () => const CircularProgressIndicator(),
+        error: (error, stacktrace) => const Text("Something went wrong"));
+  }
+
+  Widget _build(BuildContext context, WidgetRef ref, User newUser) {
     final displayNameController =
         TextEditingController(text: newUser.displayName);
-    final usernameController = TextEditingController(text: newUser.username);
-    final biographyController = TextEditingController();
-    Uint8List? selectedImage;
+    final biographyController = TextEditingController(text: newUser.biography);
+    Uint8List? selectedImage = base64Decode(newUser.imagePath!);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -32,68 +44,61 @@ class SetupProfilePage extends ConsumerWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(height: 20), // Add spacing
-                      ImageSelectionButton(
-                        onImageSelected: (image) {
-                          selectedImage = image;
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _buildTextField("Display Name", displayNameController),
-                      _buildTextField("Username", usernameController),
-                      _buildTextField('Biography', biographyController,
-                          width: 500, height: 120, lines: 3),
-                      const SizedBox(height: 40),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 0),
-                            ),
-                            child: const Text('Back'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ImageSelectionButton(
+                      onImageSelected: (image) {
+                        selectedImage = image;
+                      },
+                    ),
+                    Column(
+                      children: [
+                        _buildTextField("Display Name", displayNameController),
+                        _buildTextField('Biography', biographyController,
+                            width: 500, height: 120, lines: 3),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              newUser.displayName = displayNameController.text;
-                              newUser.username = usernameController.text;
-                              newUser.biography = biographyController.text;
-                              //newUser.imagePath =
-                              // Handle 'Next' button action
-                              try {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => newUser.isBusiness
-                                            ? SetupStyle(newUser: newUser)
-                                            : IndividualSetupSwipe(
-                                                newUser: newUser)));
-                              } catch (e) {
-                                final exceptionMessage =
-                                    e.toString().replaceAll("Exception:", "");
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(exceptionMessage),
-                                  ),
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 0),
-                            ),
-                            child: const Text('Next'),
+                          child: const Text('Back'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (selectedImage == null) {
+                              GlobalSnackBar.show("Please select an image");
+                              return;
+                            }
+                            final imageData =
+                                base64Encode(selectedImage!.toList());
+                            final updatedUser = newUser.copyWith(
+                                displayName: displayNameController.text,
+                                biography: biographyController.text,
+                                imagePath: imageData,
+                                setupStep: "setupSwipe");
+
+                            final userDB = ref.watch(userDBProvider);
+                            await userDB.updateUser(updatedUser);
+                            GlobalNavigatorKey.navigatorKey.currentState!
+                                .pushNamed("/setupSwipe");
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          child: const Text('Next'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -111,6 +116,7 @@ class SetupProfilePage extends ConsumerWidget {
     return Container(
       width: width, // Set the width
       height: height, // Set the height
+      margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextField(
         controller: controller,
@@ -130,8 +136,7 @@ class SetupProfilePage extends ConsumerWidget {
 class ImageSelectionButton extends StatefulWidget {
   final Function(Uint8List?) onImageSelected;
 
-  const ImageSelectionButton({Key? key, required this.onImageSelected})
-      : super(key: key);
+  const ImageSelectionButton({super.key, required this.onImageSelected});
 
   @override
   State<ImageSelectionButton> createState() => _ImageSelectionButtonState();
@@ -158,8 +163,7 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
             context, (imageSource) => selectImage(imageSource));
       },
       child: Container(
-        width: 250,
-        height: 250,
+        height: MediaQuery.of(context).size.height * 0.36,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.grey[300],

@@ -1,5 +1,7 @@
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/common/domain/measurements.dart';
-import 'package:rndvouz/features/user/domain/user_db.dart';
+import 'package:rndvouz/features/user/data/user_db.dart';
+import 'package:rndvouz/features/user/domain/user.dart';
 import 'package:rndvouz/features/setup_process/presentation/setup_complete.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -9,15 +11,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../setup_top_bar.dart';
 
 class IndividualSetupSize extends ConsumerWidget {
-  final User newUser;
+  static const String routeName = '/setupSize';
 
-  const IndividualSetupSize({Key? key, required this.newUser})
-      : super(key: key);
+  const IndividualSetupSize({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("setupSize");
     final UserDB userDB = ref.watch(userDBProvider);
-    Measurements userMeasurements = Measurements(
+    final newUser = ref.watch(currentUserProvider);
+    return newUser.when(
+      data: (user) {
+        return _build(context, ref, user, userDB);
+      },
+      loading: () => const CircularProgressIndicator(),
+      error: (error, stacktrace) => const Text("Something went wrong"),
+    );
+  }
+
+  Widget _build(
+      BuildContext context, WidgetRef ref, User newUser, UserDB userDB) {
+    Measurements userMeasurements = const Measurements(
         bust: 34,
         waist: 26,
         hips: 37,
@@ -59,25 +73,14 @@ class IndividualSetupSize extends ConsumerWidget {
                         Column(
                           children: <Widget>[
                             ElevatedButton(
-                              onPressed: () {
-                                try {
-                                  newUser.userMeasurements = userMeasurements;
-                                  userDB.addUser(newUser);
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SetupComplete(newUser: newUser)),
-                                      (r) => false);
-                                } catch (e) {
-                                  final exceptionMessage =
-                                      e.toString().replaceAll("Exception:", "");
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(exceptionMessage),
-                                    ),
-                                  );
-                                }
+                              onPressed: () async {
+                                final updateUser = newUser.copyWith(
+                                    userMeasurements: userMeasurements,
+                                    setupStep: "completed");
+                                await userDB.updateUser(updateUser);
+                                GlobalNavigatorKey.navigatorKey.currentState!
+                                    .pushNamed(SetupComplete.routeName,
+                                        arguments: newUser);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: const Size(140.0, 48.0)),

@@ -6,7 +6,8 @@ pickAndCropImage(ImageSource source) async {
   final ImagePicker imagePicker = ImagePicker();
   final ImageCropper imageCropper = ImageCropper();
 
-  XFile? file = await imagePicker.pickImage(source: source);
+  XFile? file = await imagePicker.pickImage(
+      maxHeight: 800, maxWidth: 800, imageQuality: 100, source: source);
 
   if (file == null) {
     return null;

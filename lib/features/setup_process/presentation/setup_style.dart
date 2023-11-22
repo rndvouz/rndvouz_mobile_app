@@ -1,18 +1,27 @@
-import 'package:rndvouz/features/user/domain/user_db.dart';
-import 'package:rndvouz/features/setup_process/presentation/business/business_setup_contact.dart';
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/user/data/user_providers.dart';
+import 'package:rndvouz/features/user/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'individual/individual_setup_size.dart';
 import 'setup_top_bar.dart';
 
 class SetupStyle extends ConsumerWidget {
-  final User newUser;
-
-  const SetupStyle({Key? key, required this.newUser}) : super(key: key);
-
+  const SetupStyle({super.key});
+  static const String routeName = '/setupStyle';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUserAsyncValue = ref.watch(currentUserProvider);
+
+    return currentUserAsyncValue.when(
+        data: (user) {
+          return _build(context, ref, user);
+        },
+        loading: () => const CircularProgressIndicator(),
+        error: (error, stacktrace) => const Text("Something went wrong"));
+  }
+
+  Widget _build(BuildContext context, WidgetRef ref, User newUser) {
     List<String>? style = [
       "Athleisure",
       "Casual"
@@ -189,17 +198,15 @@ class SetupStyle extends ConsumerWidget {
                             Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    newUser.style = style;
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                newUser.isBusiness
-                                                    ? BusinessSetupContact(
-                                                        newUser: newUser)
-                                                    : IndividualSetupSize(
-                                                        newUser: newUser)));
+                                  onPressed: () async {
+                                    final userDB = ref.read(userDBProvider);
+                                    final updateUser = newUser.copyWith(
+                                        style: style, setupStep: "setupSize");
+                                    await userDB.updateUser(updateUser);
+
+                                    GlobalNavigatorKey
+                                        .navigatorKey.currentState!
+                                        .pushNamed("/setupSize");
                                   },
                                   child: const Text('Next'),
                                 ))

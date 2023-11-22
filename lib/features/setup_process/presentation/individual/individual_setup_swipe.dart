@@ -1,10 +1,13 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Database Packages
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
-import 'package:rndvouz/features/user/domain/user_db.dart';
+import 'package:rndvouz/features/user/data/user_db.dart';
+import 'package:rndvouz/features/user/data/user_providers.dart';
+import 'package:rndvouz/features/user/domain/user.dart';
 
 // Components
 import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
@@ -14,17 +17,16 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../setup_style.dart';
 import '../setup_top_bar.dart';
 
-class IndividualSetupSwipe extends StatefulWidget {
-  final User newUser;
-
-  const IndividualSetupSwipe({Key? key, required this.newUser})
-      : super(key: key);
+class IndividualSetupSwipe extends ConsumerStatefulWidget {
+  static const String routeName = '/setupSwipe';
+  const IndividualSetupSwipe({super.key});
 
   @override
-  State<IndividualSetupSwipe> createState() => _IndividualSetupSwipeState();
+  ConsumerState<IndividualSetupSwipe> createState() =>
+      _IndividualSetupSwipeState();
 }
 
-class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
+class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
   final CardSwiperController controller = CardSwiperController();
   final List<Merchandise> merchandises =
       merchandiseDB.loadMerchanise(Purpose.setup);
@@ -47,15 +49,31 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
     return true;
   }
 
-  void endSwipe() {
+  void endSwipe(UserDB userDB, User? newUser) async {
+    final updateUser = newUser!.copyWith(setupStep: "setupStyle");
+    await userDB.updateUser(updateUser);
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SetupStyle(newUser: widget.newUser)));
+        context, MaterialPageRoute(builder: (context) => const SetupStyle()));
   }
 
   @override
   Widget build(BuildContext context) {
+    final newUser = ref.watch(currentUserProvider);
+
+    return newUser.when(
+        data: (user) {
+          return _build(context, ref, user);
+        },
+        loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+        error: (error, stacktrace) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+  }
+
+  Widget _build(BuildContext context, WidgetRef ref, User newUser) {
+    final userDB = ref.watch(userDBProvider);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -84,7 +102,7 @@ class _IndividualSetupSwipeState extends State<IndividualSetupSwipe> {
                   merchandise: merchandises[index],
                   setup: true,
                 ),
-                onEnd: endSwipe,
+                onEnd: () => endSwipe(userDB, newUser),
               ),
             ),
             Padding(
