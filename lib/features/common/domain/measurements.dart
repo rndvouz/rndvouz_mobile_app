@@ -3,7 +3,6 @@ class Measurements {
   final double? waist;
   final double? hips;
   final double? inseam;
-  final double? sleeve;
   final double? length;
   final double? sleeveLength;
 
@@ -12,7 +11,6 @@ class Measurements {
       this.waist,
       this.hips,
       this.inseam,
-      this.sleeve,
       this.length,
       this.sleeveLength});
 }
