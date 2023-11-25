@@ -29,14 +29,14 @@ enum MerchColors {
 
 enum Purpose { setup, browse, all }
 
-@freezed
+@unfreezed
 // _$Merchandise is a mixin. It's needed to define various properties/methods.
 class Merchandise with _$Merchandise {
   // Constructor without parameters.
   const Merchandise._();
 
   // Defining a constructor in a Freezed class.
-  const factory Merchandise({
+  factory Merchandise({
     required String id,
     required String ownerUsername,
     required Availability state,
@@ -59,18 +59,22 @@ class Merchandise with _$Merchandise {
   factory Merchandise.fromJson(Map<String, dynamic> json) =>
       _$MerchandiseFromJson(json);
 
-  // String get assetId => '${Merchandise.id}.jpg';
-  // String get assetImages => 'assets/images/$id';
+  String get assetId => '${id}.jpg';
+  String get assetImages => 'assets/images/$id';
+
+  // set likes(count) {
+  //   likes = count;
+  // }
 
   // @override
   // String toString() => '$title (id=$id)';
 }
 
-@freezed
+@unfreezed
 class PriceRange with _$PriceRange {
   const PriceRange._();
 
-  const factory PriceRange({
+  factory PriceRange({
     required double minPrice,
     required double maxPrice,
   }) = _PriceRange;

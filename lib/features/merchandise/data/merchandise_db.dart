@@ -105,4 +105,8 @@ class MerchandiseDB {
             ))
         .toList();
   }
+
+  // Future<List<Merchandise>> filterSearch() {
+
+  // }
 }

@@ -21,21 +21,40 @@ Merchandise _$MerchandiseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Merchandise {
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get ownerUsername => throw _privateConstructorUsedError;
+  set ownerUsername(String value) => throw _privateConstructorUsedError;
   Availability get state => throw _privateConstructorUsedError;
+  set state(Availability value) => throw _privateConstructorUsedError;
   Purpose get purpose => throw _privateConstructorUsedError;
+  set purpose(Purpose value) => throw _privateConstructorUsedError;
   PrimaryStyle get primaryStyle => throw _privateConstructorUsedError;
+  set primaryStyle(PrimaryStyle value) => throw _privateConstructorUsedError;
   SecondaryStyle? get secondaryStyle => throw _privateConstructorUsedError;
+  set secondaryStyle(SecondaryStyle? value) =>
+      throw _privateConstructorUsedError;
   Garment get garment => throw _privateConstructorUsedError;
+  set garment(Garment value) => throw _privateConstructorUsedError;
   Set<MerchColors>? get merchColors => throw _privateConstructorUsedError;
+  set merchColors(Set<MerchColors>? value) =>
+      throw _privateConstructorUsedError;
   String get merchName => throw _privateConstructorUsedError;
+  set merchName(String value) => throw _privateConstructorUsedError;
   Measurements get merchMeasurements => throw _privateConstructorUsedError;
+  set merchMeasurements(Measurements value) =>
+      throw _privateConstructorUsedError;
   SellingMethod get sellingMethod => throw _privateConstructorUsedError;
+  set sellingMethod(SellingMethod value) => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
+  set price(double? value) => throw _privateConstructorUsedError;
   @PriceRangeConverter()
   PriceRange? get priceRange => throw _privateConstructorUsedError;
+  @PriceRangeConverter()
+  set priceRange(PriceRange? value) => throw _privateConstructorUsedError;
   String? get desiredTrade => throw _privateConstructorUsedError;
+  set desiredTrade(String? value) => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
+  set likes(int value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -272,7 +291,7 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
           : garment // ignore: cast_nullable_to_non_nullable
               as Garment,
       merchColors: freezed == merchColors
-          ? _value._merchColors
+          ? _value.merchColors
           : merchColors // ignore: cast_nullable_to_non_nullable
               as Set<MerchColors>?,
       merchName: null == merchName
@@ -310,7 +329,7 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MerchandiseImpl extends _Merchandise {
-  const _$MerchandiseImpl(
+  _$MerchandiseImpl(
       {required this.id,
       required this.ownerUsername,
       required this.state,
@@ -318,7 +337,7 @@ class _$MerchandiseImpl extends _Merchandise {
       required this.primaryStyle,
       this.secondaryStyle,
       required this.garment,
-      final Set<MerchColors>? merchColors,
+      this.merchColors,
       required this.merchName,
       required this.merchMeasurements,
       required this.sellingMethod,
@@ -326,107 +345,47 @@ class _$MerchandiseImpl extends _Merchandise {
       @PriceRangeConverter() this.priceRange,
       this.desiredTrade,
       required this.likes})
-      : _merchColors = merchColors,
-        super._();
+      : super._();
 
   factory _$MerchandiseImpl.fromJson(Map<String, dynamic> json) =>
       _$$MerchandiseImplFromJson(json);
 
   @override
-  final String id;
+  String id;
   @override
-  final String ownerUsername;
+  String ownerUsername;
   @override
-  final Availability state;
+  Availability state;
   @override
-  final Purpose purpose;
+  Purpose purpose;
   @override
-  final PrimaryStyle primaryStyle;
+  PrimaryStyle primaryStyle;
   @override
-  final SecondaryStyle? secondaryStyle;
+  SecondaryStyle? secondaryStyle;
   @override
-  final Garment garment;
-  final Set<MerchColors>? _merchColors;
+  Garment garment;
   @override
-  Set<MerchColors>? get merchColors {
-    final value = _merchColors;
-    if (value == null) return null;
-    if (_merchColors is EqualUnmodifiableSetView) return _merchColors;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(value);
-  }
-
+  Set<MerchColors>? merchColors;
   @override
-  final String merchName;
+  String merchName;
   @override
-  final Measurements merchMeasurements;
+  Measurements merchMeasurements;
   @override
-  final SellingMethod sellingMethod;
+  SellingMethod sellingMethod;
   @override
-  final double? price;
+  double? price;
   @override
   @PriceRangeConverter()
-  final PriceRange? priceRange;
+  PriceRange? priceRange;
   @override
-  final String? desiredTrade;
+  String? desiredTrade;
   @override
-  final int likes;
+  int likes;
 
   @override
   String toString() {
     return 'Merchandise(id: $id, ownerUsername: $ownerUsername, state: $state, purpose: $purpose, primaryStyle: $primaryStyle, secondaryStyle: $secondaryStyle, garment: $garment, merchColors: $merchColors, merchName: $merchName, merchMeasurements: $merchMeasurements, sellingMethod: $sellingMethod, price: $price, priceRange: $priceRange, desiredTrade: $desiredTrade, likes: $likes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MerchandiseImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.ownerUsername, ownerUsername) ||
-                other.ownerUsername == ownerUsername) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.purpose, purpose) || other.purpose == purpose) &&
-            (identical(other.primaryStyle, primaryStyle) ||
-                other.primaryStyle == primaryStyle) &&
-            (identical(other.secondaryStyle, secondaryStyle) ||
-                other.secondaryStyle == secondaryStyle) &&
-            (identical(other.garment, garment) || other.garment == garment) &&
-            const DeepCollectionEquality()
-                .equals(other._merchColors, _merchColors) &&
-            (identical(other.merchName, merchName) ||
-                other.merchName == merchName) &&
-            (identical(other.merchMeasurements, merchMeasurements) ||
-                other.merchMeasurements == merchMeasurements) &&
-            (identical(other.sellingMethod, sellingMethod) ||
-                other.sellingMethod == sellingMethod) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.priceRange, priceRange) ||
-                other.priceRange == priceRange) &&
-            (identical(other.desiredTrade, desiredTrade) ||
-                other.desiredTrade == desiredTrade) &&
-            (identical(other.likes, likes) || other.likes == likes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      ownerUsername,
-      state,
-      purpose,
-      primaryStyle,
-      secondaryStyle,
-      garment,
-      const DeepCollectionEquality().hash(_merchColors),
-      merchName,
-      merchMeasurements,
-      sellingMethod,
-      price,
-      priceRange,
-      desiredTrade,
-      likes);
 
   @JsonKey(ignore: true)
   @override
@@ -443,22 +402,22 @@ class _$MerchandiseImpl extends _Merchandise {
 }
 
 abstract class _Merchandise extends Merchandise {
-  const factory _Merchandise(
-      {required final String id,
-      required final String ownerUsername,
-      required final Availability state,
-      required final Purpose purpose,
-      required final PrimaryStyle primaryStyle,
-      final SecondaryStyle? secondaryStyle,
-      required final Garment garment,
-      final Set<MerchColors>? merchColors,
-      required final String merchName,
-      required final Measurements merchMeasurements,
-      required final SellingMethod sellingMethod,
-      final double? price,
-      @PriceRangeConverter() final PriceRange? priceRange,
-      final String? desiredTrade,
-      required final int likes}) = _$MerchandiseImpl;
+  factory _Merchandise(
+      {required String id,
+      required String ownerUsername,
+      required Availability state,
+      required Purpose purpose,
+      required PrimaryStyle primaryStyle,
+      SecondaryStyle? secondaryStyle,
+      required Garment garment,
+      Set<MerchColors>? merchColors,
+      required String merchName,
+      required Measurements merchMeasurements,
+      required SellingMethod sellingMethod,
+      double? price,
+      @PriceRangeConverter() PriceRange? priceRange,
+      String? desiredTrade,
+      required int likes}) = _$MerchandiseImpl;
   const _Merchandise._() : super._();
 
   factory _Merchandise.fromJson(Map<String, dynamic> json) =
@@ -466,35 +425,51 @@ abstract class _Merchandise extends Merchandise {
 
   @override
   String get id;
+  set id(String value);
   @override
   String get ownerUsername;
+  set ownerUsername(String value);
   @override
   Availability get state;
+  set state(Availability value);
   @override
   Purpose get purpose;
+  set purpose(Purpose value);
   @override
   PrimaryStyle get primaryStyle;
+  set primaryStyle(PrimaryStyle value);
   @override
   SecondaryStyle? get secondaryStyle;
+  set secondaryStyle(SecondaryStyle? value);
   @override
   Garment get garment;
+  set garment(Garment value);
   @override
   Set<MerchColors>? get merchColors;
+  set merchColors(Set<MerchColors>? value);
   @override
   String get merchName;
+  set merchName(String value);
   @override
   Measurements get merchMeasurements;
+  set merchMeasurements(Measurements value);
   @override
   SellingMethod get sellingMethod;
+  set sellingMethod(SellingMethod value);
   @override
   double? get price;
+  set price(double? value);
   @override
   @PriceRangeConverter()
   PriceRange? get priceRange;
+  @PriceRangeConverter()
+  set priceRange(PriceRange? value);
   @override
   String? get desiredTrade;
+  set desiredTrade(String? value);
   @override
   int get likes;
+  set likes(int value);
   @override
   @JsonKey(ignore: true)
   _$$MerchandiseImplCopyWith<_$MerchandiseImpl> get copyWith =>
@@ -508,7 +483,9 @@ PriceRange _$PriceRangeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceRange {
   double get minPrice => throw _privateConstructorUsedError;
+  set minPrice(double value) => throw _privateConstructorUsedError;
   double get maxPrice => throw _privateConstructorUsedError;
+  set maxPrice(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -595,36 +572,21 @@ class __$$PriceRangeImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PriceRangeImpl extends _PriceRange {
-  const _$PriceRangeImpl({required this.minPrice, required this.maxPrice})
+  _$PriceRangeImpl({required this.minPrice, required this.maxPrice})
       : super._();
 
   factory _$PriceRangeImpl.fromJson(Map<String, dynamic> json) =>
       _$$PriceRangeImplFromJson(json);
 
   @override
-  final double minPrice;
+  double minPrice;
   @override
-  final double maxPrice;
+  double maxPrice;
 
   @override
   String toString() {
     return 'PriceRange(minPrice: $minPrice, maxPrice: $maxPrice)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PriceRangeImpl &&
-            (identical(other.minPrice, minPrice) ||
-                other.minPrice == minPrice) &&
-            (identical(other.maxPrice, maxPrice) ||
-                other.maxPrice == maxPrice));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, minPrice, maxPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -641,9 +603,8 @@ class _$PriceRangeImpl extends _PriceRange {
 }
 
 abstract class _PriceRange extends PriceRange {
-  const factory _PriceRange(
-      {required final double minPrice,
-      required final double maxPrice}) = _$PriceRangeImpl;
+  factory _PriceRange({required double minPrice, required double maxPrice}) =
+      _$PriceRangeImpl;
   const _PriceRange._() : super._();
 
   factory _PriceRange.fromJson(Map<String, dynamic> json) =
@@ -651,8 +612,10 @@ abstract class _PriceRange extends PriceRange {
 
   @override
   double get minPrice;
+  set minPrice(double value);
   @override
   double get maxPrice;
+  set maxPrice(double value);
   @override
   @JsonKey(ignore: true)
   _$$PriceRangeImplCopyWith<_$PriceRangeImpl> get copyWith =>

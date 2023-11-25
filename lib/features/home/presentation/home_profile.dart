@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
@@ -330,9 +331,9 @@ class HomeProfile extends ConsumerWidget {
                 ),
                 // Conditional content based on the selected tab
                 if (ref.read(selectedTabProvider.notifier).state == 'Selling')
-                  ..._buildSellingItems(user.username),
+                  ..._buildSellingItems(user.username, ref),
                 if (ref.read(selectedTabProvider.notifier).state == 'Sold')
-                  ..._buildSoldItems(user.username),
+                  ..._buildSoldItems(user.username, ref),
               ],
             ),
           ),
@@ -341,9 +342,11 @@ class HomeProfile extends ConsumerWidget {
     );
   }
 
-  List<Widget> _buildSellingItems(String currentUser) {
-    List<Merchandise> allMerchandise =
-        merchandiseDB.findByOwnerAndState(currentUser, Availability.selling);
+  List<Widget> _buildSellingItems(String currentUser, WidgetRef ref) {
+    final merchandiseDB = ref.watch(merchandiseDBProvider);
+
+    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(
+        currentUser, Availability.selling) as List<Merchandise>;
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {
@@ -390,9 +393,11 @@ class HomeProfile extends ConsumerWidget {
     return sellingItems;
   }
 
-  List<Widget> _buildSoldItems(String currentUser) {
-    List<Merchandise> allMerchandise =
-        merchandiseDB.findByOwnerAndState(currentUser, Availability.sold);
+  List<Widget> _buildSoldItems(String currentUser, WidgetRef ref) {
+    final merchandiseDB = ref.watch(merchandiseDBProvider);
+
+    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(
+        currentUser, Availability.sold) as List<Merchandise>;
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {

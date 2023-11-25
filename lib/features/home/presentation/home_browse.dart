@@ -1,21 +1,25 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
-import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
+
 import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/data/colors.dart';
 
 // Change to Stateful when you can tap on image to view more information about it
-class HomeBrowseOrSwipe extends StatelessWidget {
-  const HomeBrowseOrSwipe({Key? key}) : super(key: key);
+class HomeBrowseOrSwipe extends ConsumerWidget {
+  const HomeBrowseOrSwipe({super.key});
 
   static const List<String> titles = <String>['Browse', 'Swipe'];
 
   // Items for Browsing Feature
-  List<Card> _buildGridMerchCards(BuildContext context) {
+  List<Card> _buildGridMerchCards(BuildContext context, WidgetRef ref) {
+    final merchandiseDB = ref.watch(merchandiseDBProvider);
+
     List<Merchandise> allMerchandise =
-        merchandiseDB.loadMerchanise(Purpose.browse);
+        merchandiseDB.loadMerchanise(Purpose.browse) as List<Merchandise>;
 
     if (allMerchandise.isEmpty) {
       // Maybe provide an error message here
@@ -56,7 +60,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
   // Items for Swiping Feature
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const int tabsCount = 2;
 
     return DefaultTabController(
@@ -85,7 +89,7 @@ class HomeBrowseOrSwipe extends StatelessWidget {
           children: <Widget>[
             GridView.count(
               crossAxisCount: 3,
-              children: _buildGridMerchCards(context),
+              children: _buildGridMerchCards(context, ref),
             ),
             const SwipeFeature(),
           ],
