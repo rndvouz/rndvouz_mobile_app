@@ -21,17 +21,17 @@ Merchandise _$MerchandiseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Merchandise {
   String get id => throw _privateConstructorUsedError;
-  String get owner => throw _privateConstructorUsedError;
-  Availability get availability => throw _privateConstructorUsedError;
+  String get ownerUsername => throw _privateConstructorUsedError;
+  Availability get state => throw _privateConstructorUsedError;
   Purpose get purpose => throw _privateConstructorUsedError;
   PrimaryStyle get primaryStyle => throw _privateConstructorUsedError;
   SecondaryStyle? get secondaryStyle => throw _privateConstructorUsedError;
   Garment get garment => throw _privateConstructorUsedError;
-  Set<MerchColors>? get colors => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  Measurements get measurements => throw _privateConstructorUsedError;
+  Set<MerchColors>? get merchColors => throw _privateConstructorUsedError;
+  String get merchName => throw _privateConstructorUsedError;
+  Measurements get merchMeasurements => throw _privateConstructorUsedError;
   SellingMethod get sellingMethod => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   @PriceRangeConverter()
   PriceRange? get priceRange => throw _privateConstructorUsedError;
   String? get desiredTrade => throw _privateConstructorUsedError;
@@ -51,22 +51,22 @@ abstract class $MerchandiseCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String owner,
-      Availability availability,
+      String ownerUsername,
+      Availability state,
       Purpose purpose,
       PrimaryStyle primaryStyle,
       SecondaryStyle? secondaryStyle,
       Garment garment,
-      Set<MerchColors>? colors,
-      String title,
-      Measurements measurements,
+      Set<MerchColors>? merchColors,
+      String merchName,
+      Measurements merchMeasurements,
       SellingMethod sellingMethod,
-      double price,
+      double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
       int likes});
 
-  $MeasurementsCopyWith<$Res> get measurements;
+  $MeasurementsCopyWith<$Res> get merchMeasurements;
   $PriceRangeCopyWith<$Res>? get priceRange;
 }
 
@@ -84,17 +84,17 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
   @override
   $Res call({
     Object? id = null,
-    Object? owner = null,
-    Object? availability = null,
+    Object? ownerUsername = null,
+    Object? state = null,
     Object? purpose = null,
     Object? primaryStyle = null,
     Object? secondaryStyle = freezed,
     Object? garment = null,
-    Object? colors = freezed,
-    Object? title = null,
-    Object? measurements = null,
+    Object? merchColors = freezed,
+    Object? merchName = null,
+    Object? merchMeasurements = null,
     Object? sellingMethod = null,
-    Object? price = null,
+    Object? price = freezed,
     Object? priceRange = freezed,
     Object? desiredTrade = freezed,
     Object? likes = null,
@@ -104,13 +104,13 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      owner: null == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
+      ownerUsername: null == ownerUsername
+          ? _value.ownerUsername
+          : ownerUsername // ignore: cast_nullable_to_non_nullable
               as String,
-      availability: null == availability
-          ? _value.availability
-          : availability // ignore: cast_nullable_to_non_nullable
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as Availability,
       purpose: null == purpose
           ? _value.purpose
@@ -128,26 +128,26 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
           ? _value.garment
           : garment // ignore: cast_nullable_to_non_nullable
               as Garment,
-      colors: freezed == colors
-          ? _value.colors
-          : colors // ignore: cast_nullable_to_non_nullable
+      merchColors: freezed == merchColors
+          ? _value.merchColors
+          : merchColors // ignore: cast_nullable_to_non_nullable
               as Set<MerchColors>?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      merchName: null == merchName
+          ? _value.merchName
+          : merchName // ignore: cast_nullable_to_non_nullable
               as String,
-      measurements: null == measurements
-          ? _value.measurements
-          : measurements // ignore: cast_nullable_to_non_nullable
+      merchMeasurements: null == merchMeasurements
+          ? _value.merchMeasurements
+          : merchMeasurements // ignore: cast_nullable_to_non_nullable
               as Measurements,
       sellingMethod: null == sellingMethod
           ? _value.sellingMethod
           : sellingMethod // ignore: cast_nullable_to_non_nullable
               as SellingMethod,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       priceRange: freezed == priceRange
           ? _value.priceRange
           : priceRange // ignore: cast_nullable_to_non_nullable
@@ -165,9 +165,9 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
 
   @override
   @pragma('vm:prefer-inline')
-  $MeasurementsCopyWith<$Res> get measurements {
-    return $MeasurementsCopyWith<$Res>(_value.measurements, (value) {
-      return _then(_value.copyWith(measurements: value) as $Val);
+  $MeasurementsCopyWith<$Res> get merchMeasurements {
+    return $MeasurementsCopyWith<$Res>(_value.merchMeasurements, (value) {
+      return _then(_value.copyWith(merchMeasurements: value) as $Val);
     });
   }
 
@@ -194,23 +194,23 @@ abstract class _$$MerchandiseImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String owner,
-      Availability availability,
+      String ownerUsername,
+      Availability state,
       Purpose purpose,
       PrimaryStyle primaryStyle,
       SecondaryStyle? secondaryStyle,
       Garment garment,
-      Set<MerchColors>? colors,
-      String title,
-      Measurements measurements,
+      Set<MerchColors>? merchColors,
+      String merchName,
+      Measurements merchMeasurements,
       SellingMethod sellingMethod,
-      double price,
+      double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
       int likes});
 
   @override
-  $MeasurementsCopyWith<$Res> get measurements;
+  $MeasurementsCopyWith<$Res> get merchMeasurements;
   @override
   $PriceRangeCopyWith<$Res>? get priceRange;
 }
@@ -227,17 +227,17 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? owner = null,
-    Object? availability = null,
+    Object? ownerUsername = null,
+    Object? state = null,
     Object? purpose = null,
     Object? primaryStyle = null,
     Object? secondaryStyle = freezed,
     Object? garment = null,
-    Object? colors = freezed,
-    Object? title = null,
-    Object? measurements = null,
+    Object? merchColors = freezed,
+    Object? merchName = null,
+    Object? merchMeasurements = null,
     Object? sellingMethod = null,
-    Object? price = null,
+    Object? price = freezed,
     Object? priceRange = freezed,
     Object? desiredTrade = freezed,
     Object? likes = null,
@@ -247,13 +247,13 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      owner: null == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
+      ownerUsername: null == ownerUsername
+          ? _value.ownerUsername
+          : ownerUsername // ignore: cast_nullable_to_non_nullable
               as String,
-      availability: null == availability
-          ? _value.availability
-          : availability // ignore: cast_nullable_to_non_nullable
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as Availability,
       purpose: null == purpose
           ? _value.purpose
@@ -271,26 +271,26 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
           ? _value.garment
           : garment // ignore: cast_nullable_to_non_nullable
               as Garment,
-      colors: freezed == colors
-          ? _value._colors
-          : colors // ignore: cast_nullable_to_non_nullable
+      merchColors: freezed == merchColors
+          ? _value._merchColors
+          : merchColors // ignore: cast_nullable_to_non_nullable
               as Set<MerchColors>?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      merchName: null == merchName
+          ? _value.merchName
+          : merchName // ignore: cast_nullable_to_non_nullable
               as String,
-      measurements: null == measurements
-          ? _value.measurements
-          : measurements // ignore: cast_nullable_to_non_nullable
+      merchMeasurements: null == merchMeasurements
+          ? _value.merchMeasurements
+          : merchMeasurements // ignore: cast_nullable_to_non_nullable
               as Measurements,
       sellingMethod: null == sellingMethod
           ? _value.sellingMethod
           : sellingMethod // ignore: cast_nullable_to_non_nullable
               as SellingMethod,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       priceRange: freezed == priceRange
           ? _value.priceRange
           : priceRange // ignore: cast_nullable_to_non_nullable
@@ -312,21 +312,21 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
 class _$MerchandiseImpl extends _Merchandise {
   const _$MerchandiseImpl(
       {required this.id,
-      required this.owner,
-      required this.availability,
+      required this.ownerUsername,
+      required this.state,
       required this.purpose,
       required this.primaryStyle,
       this.secondaryStyle,
       required this.garment,
-      final Set<MerchColors>? colors,
-      required this.title,
-      required this.measurements,
+      final Set<MerchColors>? merchColors,
+      required this.merchName,
+      required this.merchMeasurements,
       required this.sellingMethod,
-      required this.price,
+      this.price,
       @PriceRangeConverter() this.priceRange,
       this.desiredTrade,
       required this.likes})
-      : _colors = colors,
+      : _merchColors = merchColors,
         super._();
 
   factory _$MerchandiseImpl.fromJson(Map<String, dynamic> json) =>
@@ -335,9 +335,9 @@ class _$MerchandiseImpl extends _Merchandise {
   @override
   final String id;
   @override
-  final String owner;
+  final String ownerUsername;
   @override
-  final Availability availability;
+  final Availability state;
   @override
   final Purpose purpose;
   @override
@@ -346,24 +346,24 @@ class _$MerchandiseImpl extends _Merchandise {
   final SecondaryStyle? secondaryStyle;
   @override
   final Garment garment;
-  final Set<MerchColors>? _colors;
+  final Set<MerchColors>? _merchColors;
   @override
-  Set<MerchColors>? get colors {
-    final value = _colors;
+  Set<MerchColors>? get merchColors {
+    final value = _merchColors;
     if (value == null) return null;
-    if (_colors is EqualUnmodifiableSetView) return _colors;
+    if (_merchColors is EqualUnmodifiableSetView) return _merchColors;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(value);
   }
 
   @override
-  final String title;
+  final String merchName;
   @override
-  final Measurements measurements;
+  final Measurements merchMeasurements;
   @override
   final SellingMethod sellingMethod;
   @override
-  final double price;
+  final double? price;
   @override
   @PriceRangeConverter()
   final PriceRange? priceRange;
@@ -374,7 +374,7 @@ class _$MerchandiseImpl extends _Merchandise {
 
   @override
   String toString() {
-    return 'Merchandise(id: $id, owner: $owner, availability: $availability, purpose: $purpose, primaryStyle: $primaryStyle, secondaryStyle: $secondaryStyle, garment: $garment, colors: $colors, title: $title, measurements: $measurements, sellingMethod: $sellingMethod, price: $price, priceRange: $priceRange, desiredTrade: $desiredTrade, likes: $likes)';
+    return 'Merchandise(id: $id, ownerUsername: $ownerUsername, state: $state, purpose: $purpose, primaryStyle: $primaryStyle, secondaryStyle: $secondaryStyle, garment: $garment, merchColors: $merchColors, merchName: $merchName, merchMeasurements: $merchMeasurements, sellingMethod: $sellingMethod, price: $price, priceRange: $priceRange, desiredTrade: $desiredTrade, likes: $likes)';
   }
 
   @override
@@ -383,19 +383,21 @@ class _$MerchandiseImpl extends _Merchandise {
         (other.runtimeType == runtimeType &&
             other is _$MerchandiseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.owner, owner) || other.owner == owner) &&
-            (identical(other.availability, availability) ||
-                other.availability == availability) &&
+            (identical(other.ownerUsername, ownerUsername) ||
+                other.ownerUsername == ownerUsername) &&
+            (identical(other.state, state) || other.state == state) &&
             (identical(other.purpose, purpose) || other.purpose == purpose) &&
             (identical(other.primaryStyle, primaryStyle) ||
                 other.primaryStyle == primaryStyle) &&
             (identical(other.secondaryStyle, secondaryStyle) ||
                 other.secondaryStyle == secondaryStyle) &&
             (identical(other.garment, garment) || other.garment == garment) &&
-            const DeepCollectionEquality().equals(other._colors, _colors) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.measurements, measurements) ||
-                other.measurements == measurements) &&
+            const DeepCollectionEquality()
+                .equals(other._merchColors, _merchColors) &&
+            (identical(other.merchName, merchName) ||
+                other.merchName == merchName) &&
+            (identical(other.merchMeasurements, merchMeasurements) ||
+                other.merchMeasurements == merchMeasurements) &&
             (identical(other.sellingMethod, sellingMethod) ||
                 other.sellingMethod == sellingMethod) &&
             (identical(other.price, price) || other.price == price) &&
@@ -411,15 +413,15 @@ class _$MerchandiseImpl extends _Merchandise {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      owner,
-      availability,
+      ownerUsername,
+      state,
       purpose,
       primaryStyle,
       secondaryStyle,
       garment,
-      const DeepCollectionEquality().hash(_colors),
-      title,
-      measurements,
+      const DeepCollectionEquality().hash(_merchColors),
+      merchName,
+      merchMeasurements,
       sellingMethod,
       price,
       priceRange,
@@ -443,17 +445,17 @@ class _$MerchandiseImpl extends _Merchandise {
 abstract class _Merchandise extends Merchandise {
   const factory _Merchandise(
       {required final String id,
-      required final String owner,
-      required final Availability availability,
+      required final String ownerUsername,
+      required final Availability state,
       required final Purpose purpose,
       required final PrimaryStyle primaryStyle,
       final SecondaryStyle? secondaryStyle,
       required final Garment garment,
-      final Set<MerchColors>? colors,
-      required final String title,
-      required final Measurements measurements,
+      final Set<MerchColors>? merchColors,
+      required final String merchName,
+      required final Measurements merchMeasurements,
       required final SellingMethod sellingMethod,
-      required final double price,
+      final double? price,
       @PriceRangeConverter() final PriceRange? priceRange,
       final String? desiredTrade,
       required final int likes}) = _$MerchandiseImpl;
@@ -465,9 +467,9 @@ abstract class _Merchandise extends Merchandise {
   @override
   String get id;
   @override
-  String get owner;
+  String get ownerUsername;
   @override
-  Availability get availability;
+  Availability get state;
   @override
   Purpose get purpose;
   @override
@@ -477,15 +479,15 @@ abstract class _Merchandise extends Merchandise {
   @override
   Garment get garment;
   @override
-  Set<MerchColors>? get colors;
+  Set<MerchColors>? get merchColors;
   @override
-  String get title;
+  String get merchName;
   @override
-  Measurements get measurements;
+  Measurements get merchMeasurements;
   @override
   SellingMethod get sellingMethod;
   @override
-  double get price;
+  double? get price;
   @override
   @PriceRangeConverter()
   PriceRange? get priceRange;

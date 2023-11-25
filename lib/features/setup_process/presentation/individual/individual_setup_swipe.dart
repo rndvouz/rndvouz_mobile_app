@@ -1,6 +1,7 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 
 // Database Packages
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
@@ -28,23 +29,20 @@ class IndividualSetupSwipe extends ConsumerStatefulWidget {
 
 class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
   final CardSwiperController controller = CardSwiperController();
-  final List<Merchandise> merchandises =
-      merchandiseDB.loadMerchanise(Purpose.setup);
+
+  // final List<Merchandise> merchandises =
+  //     merchandiseDB.loadMerchanise(Purpose.setup);
 
   int displayedIndex = 0;
 
-  bool _onSwipe(
-    int previousIndex,
-    int? currentIndex,
-    CardSwiperDirection direction,
-  ) {
+  _onSwipe({required int length}) async {
     setState(() {
-      displayedIndex = (displayedIndex + 1) % merchandises.length;
+      displayedIndex = (displayedIndex + 1) % length;
     });
 
-    debugPrint(
-      'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
-    );
+    // debugPrint(
+    //   'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
+    // );
 
     return true;
   }
@@ -74,6 +72,11 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
 
   Widget _build(BuildContext context, WidgetRef ref, User newUser) {
     final userDB = ref.watch(userDBProvider);
+    final merchDB = ref.watch(merchandiseDBProvider);
+
+    final List<Merchandise> merchandises =
+        merchDB.loadMerchanise(Purpose.setup) as List<Merchandise>;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -93,7 +96,7 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                 maxAngle: 70,
                 allowedSwipeDirection:
                     AllowedSwipeDirection.only(left: true, right: true),
-                onSwipe: _onSwipe,
+                onSwipe: _onSwipe(length: merchandises.length),
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(30, 10),
                 cardBuilder: (context, index, horizontalOffsetPercentage,

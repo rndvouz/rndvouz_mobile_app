@@ -9,21 +9,21 @@ part of 'merchandise.dart';
 _$MerchandiseImpl _$$MerchandiseImplFromJson(Map<String, dynamic> json) =>
     _$MerchandiseImpl(
       id: json['id'] as String,
-      owner: json['owner'] as String,
-      availability: $enumDecode(_$AvailabilityEnumMap, json['availability']),
+      ownerUsername: json['ownerUsername'] as String,
+      state: $enumDecode(_$AvailabilityEnumMap, json['state']),
       purpose: $enumDecode(_$PurposeEnumMap, json['purpose']),
       primaryStyle: $enumDecode(_$PrimaryStyleEnumMap, json['primaryStyle']),
       secondaryStyle:
           $enumDecodeNullable(_$SecondaryStyleEnumMap, json['secondaryStyle']),
       garment: $enumDecode(_$GarmentEnumMap, json['garment']),
-      colors: (json['colors'] as List<dynamic>?)
+      merchColors: (json['merchColors'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$MerchColorsEnumMap, e))
           .toSet(),
-      title: json['title'] as String,
-      measurements:
-          Measurements.fromJson(json['measurements'] as Map<String, dynamic>),
+      merchName: json['merchName'] as String,
+      merchMeasurements: Measurements.fromJson(
+          json['merchMeasurements'] as Map<String, dynamic>),
       sellingMethod: $enumDecode(_$SellingMethodEnumMap, json['sellingMethod']),
-      price: (json['price'] as num).toDouble(),
+      price: (json['price'] as num?)?.toDouble(),
       priceRange: const PriceRangeConverter()
           .fromJson(json['priceRange'] as Map<String, dynamic>?),
       desiredTrade: json['desiredTrade'] as String?,
@@ -33,15 +33,16 @@ _$MerchandiseImpl _$$MerchandiseImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$MerchandiseImplToJson(_$MerchandiseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'owner': instance.owner,
-      'availability': _$AvailabilityEnumMap[instance.availability]!,
+      'ownerUsername': instance.ownerUsername,
+      'state': _$AvailabilityEnumMap[instance.state]!,
       'purpose': _$PurposeEnumMap[instance.purpose]!,
       'primaryStyle': _$PrimaryStyleEnumMap[instance.primaryStyle]!,
       'secondaryStyle': _$SecondaryStyleEnumMap[instance.secondaryStyle],
       'garment': _$GarmentEnumMap[instance.garment]!,
-      'colors': instance.colors?.map((e) => _$MerchColorsEnumMap[e]!).toList(),
-      'title': instance.title,
-      'measurements': instance.measurements,
+      'merchColors':
+          instance.merchColors?.map((e) => _$MerchColorsEnumMap[e]!).toList(),
+      'merchName': instance.merchName,
+      'merchMeasurements': instance.merchMeasurements,
       'sellingMethod': _$SellingMethodEnumMap[instance.sellingMethod]!,
       'price': instance.price,
       'priceRange': const PriceRangeConverter().toJson(instance.priceRange),
