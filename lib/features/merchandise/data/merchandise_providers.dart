@@ -13,6 +13,5 @@ final merchandiseDBProvider = Provider<MerchandiseDB>((ref) {
 @riverpod
 Stream<List<Merchandise>> merchandise(MerchandiseRef ref) {
   final database = ref.watch(merchandiseDBProvider);
-
   return database.watchMerchandises();
 }

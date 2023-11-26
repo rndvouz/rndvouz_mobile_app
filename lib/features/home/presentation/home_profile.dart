@@ -347,6 +347,7 @@ class HomeProfile extends ConsumerWidget {
 
     List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(
         currentUser, Availability.selling) as List<Merchandise>;
+
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {

@@ -1,7 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/presentation/agc_error.dart';
+import 'package:rndvouz/features/common/presentation/agc_loading.dart';
 import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 
 import 'package:rndvouz/features/swipe/presentation/swipe_feature.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +18,10 @@ class HomeBrowseOrSwipe extends ConsumerWidget {
   static const List<String> titles = <String>['Browse', 'Swipe'];
 
   // Items for Browsing Feature
-  List<Card> _buildGridMerchCards(BuildContext context, WidgetRef ref) {
-    final merchandiseDB = ref.watch(merchandiseDBProvider);
-
+  List<Card> _buildGridMerchCards(
+      BuildContext context, MerchandiseCollection merchandiseCollection) {
     List<Merchandise> allMerchandise =
-        merchandiseDB.loadMerchanise(Purpose.browse) as List<Merchandise>;
+        merchandiseCollection.loadMerchanise(Purpose.browse);
 
     if (allMerchandise.isEmpty) {
       // Maybe provide an error message here
@@ -61,7 +63,23 @@ class HomeBrowseOrSwipe extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<Merchandise>> asyncMerchData =
+        ref.watch(merchandiseProvider);
+
+    return asyncMerchData.when(
+        data: (merchData) => _build(
+              context: context,
+              merch: merchData,
+            ),
+        loading: () => const AGCLoading(),
+        error: (error, st) => AGCError(error.toString(), st.toString()));
+  }
+
+  Widget _build(
+      {required BuildContext context, required List<Merchandise> merch}) {
     const int tabsCount = 2;
+
+    MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
 
     return DefaultTabController(
       initialIndex: 0,
@@ -89,7 +107,7 @@ class HomeBrowseOrSwipe extends ConsumerWidget {
           children: <Widget>[
             GridView.count(
               crossAxisCount: 3,
-              children: _buildGridMerchCards(context, ref),
+              children: _buildGridMerchCards(context, merchandiseCollection),
             ),
             const SwipeFeature(),
           ],
