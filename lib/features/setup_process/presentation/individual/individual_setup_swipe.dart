@@ -1,11 +1,15 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/domain/all_data_provider.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 
 // Database Packages
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
@@ -56,26 +60,33 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
 
   @override
   Widget build(BuildContext context) {
-    final newUser = ref.watch(currentUserProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
 
-    return newUser.when(
-        data: (user) {
-          return _build(context, ref, user);
+    return asyncAllData.when(
+        data: (allData) {
+          return _build(
+            context: context,
+            newUser: allData.currentUser,
+            merch: allData.merchandise,
+            ref: ref,
+          );
         },
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-        error: (error, stacktrace) => const Center(
-              child: CircularProgressIndicator(),
-            ));
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
   }
 
-  Widget _build(BuildContext context, WidgetRef ref, User newUser) {
+  Widget _build(
+      {required BuildContext context,
+      required WidgetRef ref,
+      required User newUser,
+      required List<Merchandise> merch}) {
     final userDB = ref.watch(userDBProvider);
-    final merchDB = ref.watch(merchandiseDBProvider);
+
+    final MerchandiseCollection merchandiseCollection =
+        MerchandiseCollection(merch);
 
     final List<Merchandise> merchandises =
-        merchDB.loadMerchanise(Purpose.setup) as List<Merchandise>;
+        merchandiseCollection.loadMerchanise(Purpose.setup);
 
     return Scaffold(
       body: SafeArea(

@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -49,9 +52,24 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
 
   @override
   Widget build(BuildContext context) {
-    final merchandiseDB = ref.watch(merchandiseDBProvider);
+    final AsyncValue<List<Merchandise>> asyncMerchData =
+        ref.watch(merchandiseProvider);
+
+    return asyncMerchData.when(
+        data: (merchData) => _build(
+              context: context,
+              merch: merchData,
+            ),
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
+  }
+
+  Widget _build(
+      {required BuildContext context, required List<Merchandise> merch}) {
+    MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
+
     final List<Merchandise> swipeMerchandises =
-        merchandiseDB.loadMerchanise(Purpose.browse) as List<Merchandise>;
+        merchandiseCollection.loadMerchanise(Purpose.browse);
     return Scaffold(
       body: SafeArea(
         child: Column(
