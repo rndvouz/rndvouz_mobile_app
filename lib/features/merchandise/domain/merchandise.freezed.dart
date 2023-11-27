@@ -418,7 +418,7 @@ abstract class _Merchandise extends Merchandise {
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
       required int likes}) = _$MerchandiseImpl;
-  const _Merchandise._() : super._();
+  _Merchandise._() : super._();
 
   factory _Merchandise.fromJson(Map<String, dynamic> json) =
       _$MerchandiseImpl.fromJson;
@@ -605,7 +605,7 @@ class _$PriceRangeImpl extends _PriceRange {
 abstract class _PriceRange extends PriceRange {
   factory _PriceRange({required double minPrice, required double maxPrice}) =
       _$PriceRangeImpl;
-  const _PriceRange._() : super._();
+  _PriceRange._() : super._();
 
   factory _PriceRange.fromJson(Map<String, dynamic> json) =
       _$PriceRangeImpl.fromJson;

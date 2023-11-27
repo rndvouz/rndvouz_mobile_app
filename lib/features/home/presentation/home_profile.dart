@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
+import 'package:rndvouz/features/common/domain/all_data_provider.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
@@ -18,27 +22,48 @@ class HomeProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final UserDB userDB = ref.watch(userDBProvider);
     ref.watch(selectedTabProvider);
-    final AsyncValue<User> user = ref.watch(currentUserProvider);
 
-    return user.when(
-      data: (user) {
-        return _build(
-          context,
-          userDB,
-          user,
-          ref,
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stacktrace) {
-        return const Center(child: Text('Something went wrong'));
-      },
-    );
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+    return asyncAllData.when(
+        data: (allData) {
+          return _build(
+            context: context,
+            userDB: allData.users,
+            user: allData.currentUser,
+            merch: allData.merchandise,
+            ref: ref,
+          );
+        },
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
+
+    // final UserDB userDB = ref.watch(userDBProvider);
+    // final AsyncValue<User> user = ref.watch(currentUserProvider);
+
+    // return user.when(
+    //   data: (user) {
+    //     return _build(
+    //       context,
+    //       userDB,
+    //       user,
+    //       ref,
+    //     );
+    //   },
+    //   loading: () => const Center(child: CircularProgressIndicator()),
+    //   error: (error, stacktrace) {
+    //     return const Center(child: Text('Something went wrong'));
+    //   },
+    // );
   }
 
-  Widget _build(BuildContext context, UserDB userDB, User user, WidgetRef ref) {
+  Widget _build(
+      {required BuildContext context,
+      required UserDB userDB,
+      required User user,
+      required List<Merchandise> merch,
+      required WidgetRef ref}) {
     return Container(
       color: colorGreen1,
       child: SafeArea(
@@ -331,9 +356,9 @@ class HomeProfile extends ConsumerWidget {
                 ),
                 // Conditional content based on the selected tab
                 if (ref.read(selectedTabProvider.notifier).state == 'Selling')
-                  ..._buildSellingItems(user.username, ref),
+                  ..._buildSellingItems(user.username, ref, merch),
                 if (ref.read(selectedTabProvider.notifier).state == 'Sold')
-                  ..._buildSoldItems(user.username, ref),
+                  ..._buildSoldItems(user.username, ref, merch),
               ],
             ),
           ),
@@ -342,12 +367,12 @@ class HomeProfile extends ConsumerWidget {
     );
   }
 
-  List<Widget> _buildSellingItems(String currentUser, WidgetRef ref) {
-    final merchandiseDB = ref.watch(merchandiseDBProvider);
+  List<Widget> _buildSellingItems(
+      String currentUser, WidgetRef ref, List<Merchandise> merch) {
+    MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
 
-    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(
-        currentUser, Availability.selling) as List<Merchandise>;
-
+    List<Merchandise> allMerchandise = merchandiseCollection
+        .findByOwnerAndState(currentUser, Availability.selling);
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {
@@ -394,11 +419,12 @@ class HomeProfile extends ConsumerWidget {
     return sellingItems;
   }
 
-  List<Widget> _buildSoldItems(String currentUser, WidgetRef ref) {
-    final merchandiseDB = ref.watch(merchandiseDBProvider);
+  List<Widget> _buildSoldItems(
+      String currentUser, WidgetRef ref, List<Merchandise> merch) {
+    MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
 
-    List<Merchandise> allMerchandise = merchandiseDB.findByOwnerAndState(
-        currentUser, Availability.sold) as List<Merchandise>;
+    List<Merchandise> allMerchandise = merchandiseCollection
+        .findByOwnerAndState(currentUser, Availability.selling);
     List<Widget> sellingItems = [];
 
     for (int i = 0; i < allMerchandise.length; i += 3) {

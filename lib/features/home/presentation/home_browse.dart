@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rndvouz/features/common/presentation/agc_error.dart';
-import 'package:rndvouz/features/common/presentation/agc_loading.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
 import 'package:rndvouz/features/home/presentation/home_browse_item_preview.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
+import 'package:rndvouz/features/merchandise/domain/add_merch.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 
@@ -71,8 +72,8 @@ class HomeBrowseOrSwipe extends ConsumerWidget {
               context: context,
               merch: merchData,
             ),
-        loading: () => const AGCLoading(),
-        error: (error, st) => AGCError(error.toString(), st.toString()));
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
   }
 
   Widget _build(

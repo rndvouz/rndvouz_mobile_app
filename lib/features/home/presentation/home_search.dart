@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
 import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 
 import '../../merchandise/data/merchandise_db.dart';
 import '../../merchandise/domain/merchandise_garment.dart';
@@ -134,10 +137,27 @@ class GarmentResults extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<Merchandise>> asyncMerchData =
+        ref.watch(merchandiseProvider);
+
+    return asyncMerchData.when(
+        data: (merchData) => _build(
+              context: context,
+              merch: merchData,
+            ),
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
+  }
+
+  @override
+  Widget _build(
+      {required BuildContext context, required List<Merchandise> merch}) {
     List<Card> _buildGridGarmentCards(BuildContext context) {
-      final merchandiseDB = ref.watch(merchandiseDBProvider);
-      List<Merchandise> merchandiseGarment = merchandiseDB.loadMerchanise(
-          Purpose.browse, garment) as List<Merchandise>;
+      MerchandiseCollection merchandiseCollection =
+          MerchandiseCollection(merch);
+
+      List<Merchandise> merchandiseGarment =
+          merchandiseCollection.loadMerchanise(Purpose.browse, garment);
 
       if (merchandiseGarment.isEmpty) {
         return [

@@ -32,9 +32,7 @@ enum Purpose { setup, browse, all }
 @unfreezed
 // _$Merchandise is a mixin. It's needed to define various properties/methods.
 class Merchandise with _$Merchandise {
-  // Constructor without parameters.
   const Merchandise._();
-
   // Defining a constructor in a Freezed class.
   factory Merchandise({
     required String id,

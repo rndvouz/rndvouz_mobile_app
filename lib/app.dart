@@ -4,6 +4,7 @@ import 'package:rndvouz/features/authentication/presentation/setup_login.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/common/presentation/global_snackbar.dart';
 import 'package:rndvouz/features/home/presentation/home_bottom_nav_bar.dart';
+import 'package:rndvouz/features/merchandise/domain/add_merch.dart';
 import 'package:rndvouz/features/settings/data/theme_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
@@ -18,6 +19,11 @@ import 'package:flutter/material.dart';
 
 class RndvouzApp extends ConsumerWidget {
   const RndvouzApp({Key? key}) : super(key: key);
+
+  @override
+  void initState() {
+    AddMerch();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,8 +52,8 @@ class RndvouzApp extends ConsumerWidget {
         SetupStyle.routeName: (BuildContext context) => const SetupStyle(),
         IndividualSetupSize.routeName: (BuildContext context) =>
             const IndividualSetupSize(),
-
-        SetupComplete.routeName: (BuildContext context) => const SetupComplete(),
+        SetupComplete.routeName: (BuildContext context) =>
+            const SetupComplete(),
       },
     );
 
