@@ -29,6 +29,7 @@ enum MerchColors {
 
 enum Purpose { setup, browse, all }
 
+// Used unfreezed instead of freezed to define a mutable class.
 @unfreezed
 // _$Merchandise is a mixin. It's needed to define various properties/methods.
 class Merchandise with _$Merchandise {
@@ -44,7 +45,7 @@ class Merchandise with _$Merchandise {
     required Garment garment,
     Set<MerchColors>? merchColors,
     required String merchName,
-    required Measurements merchMeasurements,
+    @MeasurementsConverter() Measurements? merchMeasurements,
     required SellingMethod sellingMethod,
     double? price,
     @PriceRangeConverter() PriceRange? priceRange,
@@ -57,12 +58,8 @@ class Merchandise with _$Merchandise {
   factory Merchandise.fromJson(Map<String, dynamic> json) =>
       _$MerchandiseFromJson(json);
 
-  String get assetId => '${id}.jpg';
+  String get assetId => '$id.jpg';
   String get assetImages => 'assets/images/$id';
-
-  // set likes(count) {
-  //   likes = count;
-  // }
 
   // @override
   // String toString() => '$title (id=$id)';
@@ -81,6 +78,7 @@ class PriceRange with _$PriceRange {
       _$PriceRangeFromJson(json);
 }
 
+// Custom converter
 class PriceRangeConverter
     extends JsonConverter<PriceRange?, Map<String, dynamic>?> {
   const PriceRangeConverter();
@@ -101,55 +99,3 @@ class PriceRangeConverter
     return object.toJson();
   }
 }
-
-// Old code
-/*
-class Merchandise {
-  final int id;
-  final String ownerUsername;
-  final Availability state;
-  final Purpose purpose;
-  final PrimaryStyle primaryStyle;
-  final SecondaryStyle? secondaryStyle;
-  final Garment garment;
-  final Set<MerchColors> merchColors;
-  String merchName;
-  Measurements merchMeasurements;
-  SellingMethod sellingMethod;
-  double price; // for selling
-  PriceRange? priceRange; // for negotiating
-  String? desiredTrade; // for trading
-  int likes;
-
-  Merchandise({
-    required this.id,
-    required this.ownerUsername,
-    required this.state,
-    required this.purpose,
-    required this.primaryStyle,
-    this.secondaryStyle,
-    required this.garment,
-    required this.merchColors,
-    required this.merchName,
-    required this.merchMeasurements,
-    required this.sellingMethod,
-    this.price = 0,
-    this.priceRange, // default null
-    this.desiredTrade, // default null
-    this.likes = 0, // default value
-  });
-
-  String get assetId => '$id.jpg';
-  String get assetImages => 'assets/images/$id';
-
-  @override
-  String toString() => '$merchName (id=$id)';
-}
-
-class PriceRange {
-  final double minPrice;
-  final double maxPrice;
-
-  const PriceRange({required this.minPrice, required this.maxPrice});
-}
-*/

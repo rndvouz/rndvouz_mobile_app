@@ -40,8 +40,10 @@ mixin _$Merchandise {
       throw _privateConstructorUsedError;
   String get merchName => throw _privateConstructorUsedError;
   set merchName(String value) => throw _privateConstructorUsedError;
-  Measurements get merchMeasurements => throw _privateConstructorUsedError;
-  set merchMeasurements(Measurements value) =>
+  @MeasurementsConverter()
+  Measurements? get merchMeasurements => throw _privateConstructorUsedError;
+  @MeasurementsConverter()
+  set merchMeasurements(Measurements? value) =>
       throw _privateConstructorUsedError;
   SellingMethod get sellingMethod => throw _privateConstructorUsedError;
   set sellingMethod(SellingMethod value) => throw _privateConstructorUsedError;
@@ -78,14 +80,14 @@ abstract class $MerchandiseCopyWith<$Res> {
       Garment garment,
       Set<MerchColors>? merchColors,
       String merchName,
-      Measurements merchMeasurements,
+      @MeasurementsConverter() Measurements? merchMeasurements,
       SellingMethod sellingMethod,
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
       int likes});
 
-  $MeasurementsCopyWith<$Res> get merchMeasurements;
+  $MeasurementsCopyWith<$Res>? get merchMeasurements;
   $PriceRangeCopyWith<$Res>? get priceRange;
 }
 
@@ -111,7 +113,7 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
     Object? garment = null,
     Object? merchColors = freezed,
     Object? merchName = null,
-    Object? merchMeasurements = null,
+    Object? merchMeasurements = freezed,
     Object? sellingMethod = null,
     Object? price = freezed,
     Object? priceRange = freezed,
@@ -155,10 +157,10 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
           ? _value.merchName
           : merchName // ignore: cast_nullable_to_non_nullable
               as String,
-      merchMeasurements: null == merchMeasurements
+      merchMeasurements: freezed == merchMeasurements
           ? _value.merchMeasurements
           : merchMeasurements // ignore: cast_nullable_to_non_nullable
-              as Measurements,
+              as Measurements?,
       sellingMethod: null == sellingMethod
           ? _value.sellingMethod
           : sellingMethod // ignore: cast_nullable_to_non_nullable
@@ -184,8 +186,12 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
 
   @override
   @pragma('vm:prefer-inline')
-  $MeasurementsCopyWith<$Res> get merchMeasurements {
-    return $MeasurementsCopyWith<$Res>(_value.merchMeasurements, (value) {
+  $MeasurementsCopyWith<$Res>? get merchMeasurements {
+    if (_value.merchMeasurements == null) {
+      return null;
+    }
+
+    return $MeasurementsCopyWith<$Res>(_value.merchMeasurements!, (value) {
       return _then(_value.copyWith(merchMeasurements: value) as $Val);
     });
   }
@@ -221,7 +227,7 @@ abstract class _$$MerchandiseImplCopyWith<$Res>
       Garment garment,
       Set<MerchColors>? merchColors,
       String merchName,
-      Measurements merchMeasurements,
+      @MeasurementsConverter() Measurements? merchMeasurements,
       SellingMethod sellingMethod,
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
@@ -229,7 +235,7 @@ abstract class _$$MerchandiseImplCopyWith<$Res>
       int likes});
 
   @override
-  $MeasurementsCopyWith<$Res> get merchMeasurements;
+  $MeasurementsCopyWith<$Res>? get merchMeasurements;
   @override
   $PriceRangeCopyWith<$Res>? get priceRange;
 }
@@ -254,7 +260,7 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
     Object? garment = null,
     Object? merchColors = freezed,
     Object? merchName = null,
-    Object? merchMeasurements = null,
+    Object? merchMeasurements = freezed,
     Object? sellingMethod = null,
     Object? price = freezed,
     Object? priceRange = freezed,
@@ -298,10 +304,10 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
           ? _value.merchName
           : merchName // ignore: cast_nullable_to_non_nullable
               as String,
-      merchMeasurements: null == merchMeasurements
+      merchMeasurements: freezed == merchMeasurements
           ? _value.merchMeasurements
           : merchMeasurements // ignore: cast_nullable_to_non_nullable
-              as Measurements,
+              as Measurements?,
       sellingMethod: null == sellingMethod
           ? _value.sellingMethod
           : sellingMethod // ignore: cast_nullable_to_non_nullable
@@ -339,7 +345,7 @@ class _$MerchandiseImpl extends _Merchandise {
       required this.garment,
       this.merchColors,
       required this.merchName,
-      required this.merchMeasurements,
+      @MeasurementsConverter() this.merchMeasurements,
       required this.sellingMethod,
       this.price,
       @PriceRangeConverter() this.priceRange,
@@ -369,7 +375,8 @@ class _$MerchandiseImpl extends _Merchandise {
   @override
   String merchName;
   @override
-  Measurements merchMeasurements;
+  @MeasurementsConverter()
+  Measurements? merchMeasurements;
   @override
   SellingMethod sellingMethod;
   @override
@@ -412,7 +419,7 @@ abstract class _Merchandise extends Merchandise {
       required Garment garment,
       Set<MerchColors>? merchColors,
       required String merchName,
-      required Measurements merchMeasurements,
+      @MeasurementsConverter() Measurements? merchMeasurements,
       required SellingMethod sellingMethod,
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
@@ -451,8 +458,10 @@ abstract class _Merchandise extends Merchandise {
   String get merchName;
   set merchName(String value);
   @override
-  Measurements get merchMeasurements;
-  set merchMeasurements(Measurements value);
+  @MeasurementsConverter()
+  Measurements? get merchMeasurements;
+  @MeasurementsConverter()
+  set merchMeasurements(Measurements? value);
   @override
   SellingMethod get sellingMethod;
   set sellingMethod(SellingMethod value);

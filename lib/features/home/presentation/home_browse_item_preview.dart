@@ -163,10 +163,10 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
                     ),
                     Row(
                       children: [
-                        Text(
-                          formatMeasurements(
-                              widget.merchandise.merchMeasurements),
-                        ),
+                        // Text(
+                        //   formatMeasurements(
+                        //       widget.merchandise.merchMeasurements),
+                        // ),
                       ],
                     ),
                     SizedBox(

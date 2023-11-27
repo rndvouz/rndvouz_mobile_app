@@ -21,14 +21,8 @@ class RndvouzApp extends ConsumerWidget {
   const RndvouzApp({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    AddMerch();
-  }
-
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final curThemeMode = ref.watch(curThemeModeStateProvider);
-
+    // final curThemeMode = ref.watch(curThemeModeStateProvider);
     return MaterialApp(
       scaffoldMessengerKey: GlobalSnackBar.key,
       navigatorKey: GlobalNavigatorKey.navigatorKey,

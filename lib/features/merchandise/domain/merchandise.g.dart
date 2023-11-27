@@ -20,8 +20,8 @@ _$MerchandiseImpl _$$MerchandiseImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => $enumDecode(_$MerchColorsEnumMap, e))
           .toSet(),
       merchName: json['merchName'] as String,
-      merchMeasurements: Measurements.fromJson(
-          json['merchMeasurements'] as Map<String, dynamic>),
+      merchMeasurements: const MeasurementsConverter()
+          .fromJson(json['merchMeasurements'] as Map<String, dynamic>?),
       sellingMethod: $enumDecode(_$SellingMethodEnumMap, json['sellingMethod']),
       price: (json['price'] as num?)?.toDouble(),
       priceRange: const PriceRangeConverter()
@@ -42,7 +42,8 @@ Map<String, dynamic> _$$MerchandiseImplToJson(_$MerchandiseImpl instance) =>
       'merchColors':
           instance.merchColors?.map((e) => _$MerchColorsEnumMap[e]!).toList(),
       'merchName': instance.merchName,
-      'merchMeasurements': instance.merchMeasurements,
+      'merchMeasurements':
+          const MeasurementsConverter().toJson(instance.merchMeasurements),
       'sellingMethod': _$SellingMethodEnumMap[instance.sellingMethod]!,
       'price': instance.price,
       'priceRange': const PriceRangeConverter().toJson(instance.priceRange),

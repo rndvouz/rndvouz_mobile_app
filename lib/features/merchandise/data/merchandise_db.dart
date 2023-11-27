@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 import 'package:rndvouz/repositories/firestore/firestore_path.dart';
 import 'package:rndvouz/repositories/firestore/firestore_service.dart';
 
 import '../domain/merchandise.dart';
-import '../domain/merchandise_garment.dart';
 
 class MerchandiseDB {
   MerchandiseDB(this.ref) {
@@ -43,8 +41,4 @@ class MerchandiseDB {
       path: FirestorePath.merchandise(merch.id),
       data: merch.toJson(),
       merge: true);
-
-  // Future<List<Merchandise>> filterSearch() {
-
-  // }
 }
