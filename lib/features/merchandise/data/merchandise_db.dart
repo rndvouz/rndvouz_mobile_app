@@ -44,68 +44,6 @@ class MerchandiseDB {
       data: merch.toJson(),
       merge: true);
 
-  Future<List<Merchandise>> findByOwnerAndState(
-      // Future<dynamic> findByOwnerAndState(
-      String owner,
-      Availability availability) async {
-    // Access the entire Firestore collection of merchandise.
-    final reference = FirebaseFirestore.instance
-        .collection("merchandise")
-        // Makes a query object tha returns results based on parameters.
-        .where((m) => m.ownerUsername == owner && m.state == availability);
-
-    // Need to use get() to retrieve the results from the query object.
-    // This is a snapshot of the query object (QuerySnapshot).
-    final snap = await reference.get();
-
-    return snap.docs
-        .map((doc) => Merchandise(
-              id: doc.id,
-              ownerUsername: doc.data()["ownerUsername"],
-              state: doc.data()["state"],
-              purpose: doc.data()["purpose"],
-              primaryStyle: doc.data()["primaryStyle"],
-              garment: doc.data()["garment"],
-              merchName: doc.data()["merchName"],
-              merchMeasurements: doc.data()["merchMeasurements"],
-              sellingMethod: doc.data()["sellingMethod"],
-              likes: doc.data()["likes"],
-            ))
-        .toList();
-  }
-
-  Future<List<Merchandise>> loadMerchanise(Purpose purpose,
-      // Future<QuerySnapshot<Map<String, dynamic>>> loadMerchanise(Purpose purpose,
-      [Garment? garment,
-      String? owner]) async {
-    Query<Map<String, dynamic>> reference =
-        FirebaseFirestore.instance.collection("merchandise");
-    if (purpose != Purpose.all) {
-      // use for searching feature
-      reference = reference.where((Merchandise m) {
-        // Check if garment is provided and matches
-        final garmentMatches = garment == null || m.garment == garment;
-        return m.purpose == purpose && garmentMatches;
-      });
-    }
-    final snap = await reference.get();
-
-    return snap.docs
-        .map((doc) => Merchandise(
-              id: doc.id,
-              ownerUsername: doc.data()["ownerUsername"],
-              state: doc.data()["state"],
-              purpose: doc.data()["purpose"],
-              primaryStyle: doc.data()["primaryStyle"],
-              garment: doc.data()["garment"],
-              merchName: doc.data()["merchName"],
-              merchMeasurements: doc.data()["merchMeasurements"],
-              sellingMethod: doc.data()["sellingMethod"],
-              likes: doc.data()["likes"],
-            ))
-        .toList();
-  }
-
   // Future<List<Merchandise>> filterSearch() {
 
   // }
