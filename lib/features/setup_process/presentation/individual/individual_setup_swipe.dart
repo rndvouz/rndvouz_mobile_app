@@ -1,6 +1,7 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/common/domain/all_data_provider.dart';
 import 'package:rndvouz/features/common/presentation/error_page.dart';
 import 'package:rndvouz/features/common/presentation/loading.dart';
@@ -36,14 +37,15 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
 
   // final List<Merchandise> merchandises =
   //     merchandiseDB.loadMerchanise(Purpose.setup);
-
+  Function? setDisplayedIndex;
   int displayedIndex = 0;
+  bool updatingDB = false;
 
-  _onSwipe({required int length}) async {
-    setState(() {
+  _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
+      {required int length}) {
+    setDisplayedIndex?.call(() {
       displayedIndex = (displayedIndex + 1) % length;
     });
-
     // debugPrint(
     //   'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     // );
@@ -51,11 +53,18 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
     return true;
   }
 
-  void endSwipe(UserDB userDB, User? newUser) async {
+  void endSwipe(WidgetRef ref, User? newUser) async {
+    setState(() {
+      updatingDB = true;
+    });
+    final UserDB userDB = ref.read(userDBProvider);
     final updateUser = newUser!.copyWith(setupStep: "setupStyle");
     await userDB.updateUser(updateUser);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const SetupStyle()));
+    setState(() {
+      updatingDB = false;
+    });
+    GlobalNavigatorKey.navigatorKey.currentState
+        ?.pushNamed(SetupStyle.routeName);
   }
 
   @override
@@ -64,12 +73,16 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
 
     return asyncAllData.when(
         data: (allData) {
-          return _build(
-            context: context,
-            newUser: allData.currentUser,
-            merch: allData.merchandise,
-            ref: ref,
-          );
+          if (updatingDB == false) {
+            return _build(
+              context: context,
+              newUser: allData.currentUser,
+              merch: allData.merchandise,
+              ref: ref,
+            );
+          } else {
+            return const Loading();
+          }
         },
         loading: () => const Loading(),
         error: (error, st) => ErrorPage(error.toString(), st.toString()));
@@ -80,8 +93,6 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
       required WidgetRef ref,
       required User newUser,
       required List<Merchandise> merch}) {
-    final userDB = ref.watch(userDBProvider);
-
     final MerchandiseCollection merchandiseCollection =
         MerchandiseCollection(merch);
 
@@ -103,11 +114,13 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                 controller: controller,
                 cardsCount: merchandises.length,
                 initialIndex: 0,
-                isLoop: false,
+                isLoop: true,
                 maxAngle: 70,
                 allowedSwipeDirection:
                     AllowedSwipeDirection.only(left: true, right: true),
-                onSwipe: _onSwipe(length: merchandises.length),
+                onSwipe: (prevIndex, currIndex, direction) => _onSwipe(
+                    prevIndex, currIndex, direction,
+                    length: merchandises.length),
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(30, 10),
                 cardBuilder: (context, index, horizontalOffsetPercentage,
@@ -116,7 +129,7 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                   merchandise: merchandises[index],
                   setup: true,
                 ),
-                onEnd: () => endSwipe(userDB, newUser),
+                onEnd: () => endSwipe(ref, newUser),
               ),
             ),
             Padding(
@@ -148,7 +161,11 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("$displayedIndex of ${merchandises.length}"),
+                      StatefulBuilder(builder: (context, setDisplayedIndex) {
+                        this.setDisplayedIndex = setDisplayedIndex;
+                        return Text(
+                            "${displayedIndex + 1} of ${merchandises.length}");
+                      }),
                     ],
                   )
                 ],

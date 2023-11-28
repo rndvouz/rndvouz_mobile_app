@@ -77,8 +77,6 @@ class SetupTopBar extends StatelessWidget {
     final user = state.contains('Business') ? business : individual;
     int index = 0;
     for (int i = 0; i < user.length; i++) {
-      ;
-
       if (state.toLowerCase().contains(user[i]['state']!.toLowerCase())) {
         index = i;
         break;
