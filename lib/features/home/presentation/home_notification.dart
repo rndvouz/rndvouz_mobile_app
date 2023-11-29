@@ -50,7 +50,7 @@ class _HomepageState extends State<HomeNotification> {
     // dispaly all user except current user
     if (_auth.currentUser!.email! != data['email']) {
       return ListTile(
-        title: Text(data['email']),
+        title: Text(data['displayName']),
         onTap: () {
           Navigator.push(
             context,
