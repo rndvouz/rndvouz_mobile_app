@@ -31,7 +31,7 @@ class IndividualSetupSize extends ConsumerWidget {
 
   Widget _build(
       BuildContext context, WidgetRef ref, User newUser, UserDB userDB) {
-    Measurements userMeasurements = const Measurements(
+    Measurements userMeasurements = Measurements(
         bust: 34,
         waist: 26,
         hips: 37,

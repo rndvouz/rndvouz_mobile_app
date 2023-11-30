@@ -42,10 +42,11 @@ class GetStartedPage extends ConsumerWidget {
                       final userDB = ref.read(userDBProvider);
                       userDB.setUser(user.copyWith(setupStep: "setupProfile"));
                       GlobalNavigatorKey.navigatorKey.currentState
-                          ?.pushNamed("/setupProfile");
+                          ?.pushReplacementNamed("/setupProfile");
+                    } else {
+                      GlobalNavigatorKey.navigatorKey.currentState
+                          ?.pushNamed(routeName);
                     }
-                    GlobalNavigatorKey.navigatorKey.currentState
-                        ?.pushNamed(routeName);
                   },
                   child: user.setupStep == "setupBegin"
                       ? const Text("Begin Setup")

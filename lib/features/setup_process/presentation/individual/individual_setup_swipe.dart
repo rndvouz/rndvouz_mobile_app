@@ -1,10 +1,16 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/data/global_navigator_key.dart';
+import 'package:rndvouz/features/common/domain/all_data_provider.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 
 // Database Packages
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 import 'package:rndvouz/features/user/data/user_db.dart';
 import 'package:rndvouz/features/user/data/user_providers.dart';
 import 'package:rndvouz/features/user/domain/user.dart';
@@ -28,52 +34,71 @@ class IndividualSetupSwipe extends ConsumerStatefulWidget {
 
 class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
   final CardSwiperController controller = CardSwiperController();
-  final List<Merchandise> merchandises =
-      merchandiseDB.loadMerchanise(Purpose.setup);
 
+  // final List<Merchandise> merchandises =
+  //     merchandiseDB.loadMerchanise(Purpose.setup);
+  Function? setDisplayedIndex;
   int displayedIndex = 0;
+  bool updatingDB = false;
 
-  bool _onSwipe(
-    int previousIndex,
-    int? currentIndex,
-    CardSwiperDirection direction,
-  ) {
-    setState(() {
-      displayedIndex = (displayedIndex + 1) % merchandises.length;
+  _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
+      {required int length}) {
+    setDisplayedIndex?.call(() {
+      displayedIndex = (displayedIndex + 1) % length;
     });
-
-    debugPrint(
-      'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
-    );
+    // debugPrint(
+    //   'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
+    // );
 
     return true;
   }
 
-  void endSwipe(UserDB userDB, User? newUser) async {
+  void endSwipe(WidgetRef ref, User? newUser) async {
+    setState(() {
+      updatingDB = true;
+    });
+    final UserDB userDB = ref.read(userDBProvider);
     final updateUser = newUser!.copyWith(setupStep: "setupStyle");
     await userDB.updateUser(updateUser);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const SetupStyle()));
+    setState(() {
+      updatingDB = false;
+    });
+    GlobalNavigatorKey.navigatorKey.currentState
+        ?.pushNamed(SetupStyle.routeName);
   }
 
   @override
   Widget build(BuildContext context) {
-    final newUser = ref.watch(currentUserProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
 
-    return newUser.when(
-        data: (user) {
-          return _build(context, ref, user);
+    return asyncAllData.when(
+        data: (allData) {
+          if (updatingDB == false) {
+            return _build(
+              context: context,
+              newUser: allData.currentUser,
+              merch: allData.merchandise,
+              ref: ref,
+            );
+          } else {
+            return const Loading();
+          }
         },
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-        error: (error, stacktrace) => const Center(
-              child: CircularProgressIndicator(),
-            ));
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
   }
 
-  Widget _build(BuildContext context, WidgetRef ref, User newUser) {
-    final userDB = ref.watch(userDBProvider);
+  Widget _build(
+      {required BuildContext context,
+      required WidgetRef ref,
+      required User newUser,
+      required List<Merchandise> merch}) {
+    final MerchandiseCollection merchandiseCollection =
+        MerchandiseCollection(merch);
+
+    final List<Merchandise> merchandises =
+        merchandiseCollection.loadMerchanise(Purpose.setup);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -89,11 +114,13 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                 controller: controller,
                 cardsCount: merchandises.length,
                 initialIndex: 0,
-                isLoop: false,
+                isLoop: true,
                 maxAngle: 70,
                 allowedSwipeDirection:
                     AllowedSwipeDirection.only(left: true, right: true),
-                onSwipe: _onSwipe,
+                onSwipe: (prevIndex, currIndex, direction) => _onSwipe(
+                    prevIndex, currIndex, direction,
+                    length: merchandises.length),
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(30, 10),
                 cardBuilder: (context, index, horizontalOffsetPercentage,
@@ -102,7 +129,7 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                   merchandise: merchandises[index],
                   setup: true,
                 ),
-                onEnd: () => endSwipe(userDB, newUser),
+                onEnd: () => endSwipe(ref, newUser),
               ),
             ),
             Padding(
@@ -134,7 +161,11 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("$displayedIndex of ${merchandises.length}"),
+                      StatefulBuilder(builder: (context, setDisplayedIndex) {
+                        this.setDisplayedIndex = setDisplayedIndex;
+                        return Text(
+                            "${displayedIndex + 1} of ${merchandises.length}");
+                      }),
                     ],
                   )
                 ],

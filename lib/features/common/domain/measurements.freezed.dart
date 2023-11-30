@@ -21,12 +21,19 @@ Measurements _$MeasurementsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Measurements {
   double? get bust => throw _privateConstructorUsedError;
+  set bust(double? value) => throw _privateConstructorUsedError;
   double? get waist => throw _privateConstructorUsedError;
+  set waist(double? value) => throw _privateConstructorUsedError;
   double? get hips => throw _privateConstructorUsedError;
+  set hips(double? value) => throw _privateConstructorUsedError;
   double? get inseam => throw _privateConstructorUsedError;
+  set inseam(double? value) => throw _privateConstructorUsedError;
   double? get sleeve => throw _privateConstructorUsedError;
+  set sleeve(double? value) => throw _privateConstructorUsedError;
   double? get length => throw _privateConstructorUsedError;
+  set length(double? value) => throw _privateConstructorUsedError;
   double? get sleeveLength => throw _privateConstructorUsedError;
+  set sleeveLength(double? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -176,58 +183,39 @@ class __$$MeasurementsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MeasurementsImpl implements _Measurements {
-  const _$MeasurementsImpl(
+class _$MeasurementsImpl extends _Measurements {
+  _$MeasurementsImpl(
       {this.bust,
       this.waist,
       this.hips,
       this.inseam,
       this.sleeve,
       this.length,
-      this.sleeveLength});
+      this.sleeveLength})
+      : super._();
 
   factory _$MeasurementsImpl.fromJson(Map<String, dynamic> json) =>
       _$$MeasurementsImplFromJson(json);
 
   @override
-  final double? bust;
+  double? bust;
   @override
-  final double? waist;
+  double? waist;
   @override
-  final double? hips;
+  double? hips;
   @override
-  final double? inseam;
+  double? inseam;
   @override
-  final double? sleeve;
+  double? sleeve;
   @override
-  final double? length;
+  double? length;
   @override
-  final double? sleeveLength;
+  double? sleeveLength;
 
   @override
   String toString() {
     return 'Measurements(bust: $bust, waist: $waist, hips: $hips, inseam: $inseam, sleeve: $sleeve, length: $length, sleeveLength: $sleeveLength)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MeasurementsImpl &&
-            (identical(other.bust, bust) || other.bust == bust) &&
-            (identical(other.waist, waist) || other.waist == waist) &&
-            (identical(other.hips, hips) || other.hips == hips) &&
-            (identical(other.inseam, inseam) || other.inseam == inseam) &&
-            (identical(other.sleeve, sleeve) || other.sleeve == sleeve) &&
-            (identical(other.length, length) || other.length == length) &&
-            (identical(other.sleeveLength, sleeveLength) ||
-                other.sleeveLength == sleeveLength));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, bust, waist, hips, inseam, sleeve, length, sleeveLength);
 
   @JsonKey(ignore: true)
   @override
@@ -243,33 +231,41 @@ class _$MeasurementsImpl implements _Measurements {
   }
 }
 
-abstract class _Measurements implements Measurements {
-  const factory _Measurements(
-      {final double? bust,
-      final double? waist,
-      final double? hips,
-      final double? inseam,
-      final double? sleeve,
-      final double? length,
-      final double? sleeveLength}) = _$MeasurementsImpl;
+abstract class _Measurements extends Measurements {
+  factory _Measurements(
+      {double? bust,
+      double? waist,
+      double? hips,
+      double? inseam,
+      double? sleeve,
+      double? length,
+      double? sleeveLength}) = _$MeasurementsImpl;
+  _Measurements._() : super._();
 
   factory _Measurements.fromJson(Map<String, dynamic> json) =
       _$MeasurementsImpl.fromJson;
 
   @override
   double? get bust;
+  set bust(double? value);
   @override
   double? get waist;
+  set waist(double? value);
   @override
   double? get hips;
+  set hips(double? value);
   @override
   double? get inseam;
+  set inseam(double? value);
   @override
   double? get sleeve;
+  set sleeve(double? value);
   @override
   double? get length;
+  set length(double? value);
   @override
   double? get sleeveLength;
+  set sleeveLength(double? value);
   @override
   @JsonKey(ignore: true)
   _$$MeasurementsImplCopyWith<_$MeasurementsImpl> get copyWith =>

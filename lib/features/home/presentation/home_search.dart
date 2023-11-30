@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rndvouz/features/common/presentation/error_page.dart';
+import 'package:rndvouz/features/common/presentation/loading.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_providers.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
+import 'package:rndvouz/features/merchandise/domain/merchandise_collection.dart';
 
-import '../../merchandise/domain/merchandise_db.dart';
+import '../../merchandise/data/merchandise_db.dart';
 import '../../merchandise/domain/merchandise_garment.dart';
 import 'home_browse_item_preview.dart';
 
-class HomeSearch extends StatefulWidget {
+class HomeSearch extends ConsumerStatefulWidget {
   const HomeSearch({Key? key}) : super(key: key);
 
   @override
-  State<HomeSearch> createState() => _HomeSearchState();
+  ConsumerState<HomeSearch> createState() => _HomeSearchState();
 }
 
-class _HomeSearchState extends State<HomeSearch> {
+class _HomeSearchState extends ConsumerState<HomeSearch> {
   TextEditingController searchController = TextEditingController();
   List<Merchandise> filteredSearch = [];
   @override
@@ -76,15 +81,16 @@ class _HomeSearchState extends State<HomeSearch> {
 
   void onSearchText(String text) {
     setState(() {
-      filteredSearch = merchandiseDB.allGarments
-          .where((merch) =>
-              (merch.merchName.toLowerCase().contains(text.toLowerCase()) ||
-                  merch.garment
-                      .toString()
-                      .toLowerCase()
-                      .contains(text.toLowerCase())) &&
-              merch.purpose != Purpose.setup)
-          .toList();
+      // final merchandiseDB = ref.watch(merchandiseDBProvider);
+      // filteredSearch = merchandiseDB
+      //     .where((merch) =>
+      //         (merch.merchName.toLowerCase().contains(text.toLowerCase()) ||
+      //             merch.garment
+      //                 .toString()
+      //                 .toLowerCase()
+      //                 .contains(text.toLowerCase())) &&
+      //         merch.purpose != Purpose.setup)
+      //     .toList();
     });
   }
 }
@@ -124,16 +130,34 @@ extension StringExtension on String {
   }
 }
 
-class GarmentResults extends StatelessWidget {
+class GarmentResults extends ConsumerWidget {
   final Garment garment;
 
   GarmentResults({required this.garment});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<Merchandise>> asyncMerchData =
+        ref.watch(merchandiseProvider);
+
+    return asyncMerchData.when(
+        data: (merchData) => _build(
+              context: context,
+              merch: merchData,
+            ),
+        loading: () => const Loading(),
+        error: (error, st) => ErrorPage(error.toString(), st.toString()));
+  }
+
+  @override
+  Widget _build(
+      {required BuildContext context, required List<Merchandise> merch}) {
     List<Card> _buildGridGarmentCards(BuildContext context) {
+      MerchandiseCollection merchandiseCollection =
+          MerchandiseCollection(merch);
+
       List<Merchandise> merchandiseGarment =
-          merchandiseDB.loadMerchanise(Purpose.browse, garment);
+          merchandiseCollection.loadMerchanise(Purpose.browse, garment);
 
       if (merchandiseGarment.isEmpty) {
         return [

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/global_navigator_key.dart';
 import 'package:rndvouz/features/setup_process/presentation/get_started.dart';
-import 'package:rndvouz/features/setup_process/presentation/setup_profile.dart';
+import 'package:rndvouz/repositories/firestore/firestore_providers.dart';
 
 class AwaitVerifyPage extends ConsumerStatefulWidget {
   const AwaitVerifyPage({Key? key}) : super(key: key);
@@ -49,8 +49,7 @@ class _AwaitVerifyPageState extends ConsumerState<AwaitVerifyPage> {
                 style: Theme.of(context).textTheme.titleLarge),
             ElevatedButton(
               onPressed: () {
-                GlobalNavigatorKey.navigatorKey.currentState
-                    ?.pushNamed("/login");
+                ref.read(firebaseAuthProvider).signOut();
               },
               child: const Text("Go Back to Log In"),
             ),

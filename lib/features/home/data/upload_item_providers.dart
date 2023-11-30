@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rndvouz/features/merchandise/domain/merchandise_db.dart';
+import 'package:rndvouz/features/merchandise/data/merchandise_db.dart';
 
 import '../../merchandise/domain/merchandise.dart';
 

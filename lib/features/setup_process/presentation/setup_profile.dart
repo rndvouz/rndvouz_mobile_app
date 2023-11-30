@@ -33,7 +33,7 @@ class SetupProfilePage extends ConsumerWidget {
     final displayNameController =
         TextEditingController(text: newUser.displayName);
     final biographyController = TextEditingController(text: newUser.biography);
-    Uint8List? selectedImage = base64Decode(newUser.imagePath!);
+    Uint8List? selectedImage = base64Decode(newUser.imagePath ?? "");
     return Scaffold(
       body: SafeArea(
         child: Column(

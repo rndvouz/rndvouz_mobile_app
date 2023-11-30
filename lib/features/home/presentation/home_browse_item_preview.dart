@@ -26,8 +26,6 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
             bottomLeft: Radius.circular(50),
             bottomRight: Radius.circular(50)));
 
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -77,15 +75,12 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
                           });
                         },
                       ),
-
                       Text('${widget.merchandise.likes}'),
                     ],
                   ),
                   IconButton(
                     icon: Icon(
-                        isClicked? Icons.bookmark
-                        : Icons.bookmark_border
-                    ),
+                        isClicked ? Icons.bookmark : Icons.bookmark_border),
                     onPressed: () {
                       print("Bookmark button pressed");
                       setState(() {
@@ -168,10 +163,10 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
                     ),
                     Row(
                       children: [
-                        Text(
-                          formatMeasurements(
-                              widget.merchandise.merchMeasurements),
-                        ),
+                        // Text(
+                        //   formatMeasurements(
+                        //       widget.merchandise.merchMeasurements),
+                        // ),
                       ],
                     ),
                     SizedBox(
@@ -251,7 +246,6 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
       }
     });
   }
-
 
   String formatAvailability(Availability state) {
     switch (state) {
