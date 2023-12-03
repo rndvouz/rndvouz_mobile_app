@@ -50,6 +50,7 @@ class Merchandise with _$Merchandise {
     double? price,
     @PriceRangeConverter() PriceRange? priceRange,
     String? desiredTrade,
+    String? description,
     required int likes,
   }) = _Merchandise;
 

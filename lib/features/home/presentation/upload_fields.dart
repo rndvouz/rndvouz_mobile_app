@@ -1,42 +1,39 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
 
-import 'dart:developer' as developer;
-
 import '../data/upload_item_providers.dart';
 
 class UploadFields extends ConsumerWidget {
-  const UploadFields({Key? key}) : super(key: key);
+  const UploadFields(Uint8List? selectedImage, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final titleController = TextEditingController();
+    final merchNameController = TextEditingController();
     final descriptionController = TextEditingController();
     final priceController = TextEditingController();
-    final negotiationController = TextEditingController();
+    final negotiationRangeController = TextEditingController();
+    final desiredTradeController = TextEditingController();
+
+    final bustController = TextEditingController();
+    final waistController = TextEditingController();
+    final hipsController = TextEditingController();
+    final inseamController = TextEditingController();
+    final sleeveLengthController = TextEditingController();
+    final lengthController = TextEditingController();
 
     final theState = ref.watch(sellingMethodStateProvider);
 
-    return Column(children: [
-      theState == SellingMethod.selling
-          ? _buildTextField(context, "Price", priceController)
-          : Container(),
-      theState == SellingMethod.negotiate
-          ? _buildTextField(context, "Price", priceController)
-          : Container(),
-      theState == SellingMethod.negotiate
-          ? _buildTextField(context, "Negotiation Range", negotiationController)
-          : Container(),
-      _buildTextField(context, "Title", titleController),
-      _buildTextField(context, "Description", descriptionController),
-      const SizedBox(height: 40),
-      ElevatedButton(
-        onPressed: () {},
-        child: Text("Add"),
-      ),
-    ]);
+    if (theState == SellingMethod.selling) {
+      return _buildSellingFields();
+    } else if (theState == SellingMethod.negotiate) {
+      return _buildNegotiateFields();
+    } else {
+      return _buildTradeFields();
+    }
   }
 
   Widget _buildTextField(
@@ -71,5 +68,17 @@ class UploadFields extends ConsumerWidget {
         )
       ],
     );
+  }
+
+  Widget _buildSellingFields() {
+    return Text("selling");
+  }
+
+  Widget _buildNegotiateFields() {
+    return Text("negotiate");
+  }
+
+  Widget _buildTradeFields() {
+    return Text("trade");
   }
 }

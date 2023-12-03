@@ -21,11 +21,10 @@ class HomeUploadItem extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            children: [
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -38,13 +37,13 @@ class HomeUploadItem extends ConsumerWidget {
                       ),
                       UploadMenu(),
                       const SizedBox(height: 20),
-                      UploadFields(),
+                      UploadFields(selectedImage),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -89,7 +88,7 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
           color: Colors.grey[300],
         ),
         child: _image != null
-            ? ClipOval(
+            ? ClipRRect(
                 child: Image.memory(
                   _image!,
                   fit: BoxFit.cover,

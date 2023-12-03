@@ -27,6 +27,7 @@ _$MerchandiseImpl _$$MerchandiseImplFromJson(Map<String, dynamic> json) =>
       priceRange: const PriceRangeConverter()
           .fromJson(json['priceRange'] as Map<String, dynamic>?),
       desiredTrade: json['desiredTrade'] as String?,
+      description: json['description'] as String?,
       likes: json['likes'] as int,
     );
 
@@ -48,6 +49,7 @@ Map<String, dynamic> _$$MerchandiseImplToJson(_$MerchandiseImpl instance) =>
       'price': instance.price,
       'priceRange': const PriceRangeConverter().toJson(instance.priceRange),
       'desiredTrade': instance.desiredTrade,
+      'description': instance.description,
       'likes': instance.likes,
     };
 
