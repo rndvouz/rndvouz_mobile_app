@@ -22,7 +22,7 @@ class RndvouzApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final curThemeMode = ref.watch(curThemeModeStateProvider);
+    final curThemeMode = ref.watch(curThemeModeStateProvider);
     return MaterialApp(
       scaffoldMessengerKey: GlobalSnackBar.key,
       navigatorKey: GlobalNavigatorKey.navigatorKey,
