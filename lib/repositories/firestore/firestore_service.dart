@@ -138,4 +138,17 @@ class FirestoreService {
     final snapshot = await reference.get();
     return builder(snapshot.data(), snapshot.id);
   }
+
+  Future<void> updateArrayField({
+    required String path,
+    required String field,
+    required dynamic value,
+  }) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    Map<String, dynamic> updateData = {
+      field: FieldValue.arrayUnion([value])
+    };
+
+    await reference.update(updateData);
+  }
 }

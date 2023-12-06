@@ -32,9 +32,9 @@ class UserDB {
 
   Future<void> setUser(User user) =>
       _service.setData(path: FirestorePath.user(user.id), data: user.toJson());
-  
-  Future<void> updateUser(User user) =>
-      _service.setData(path: FirestorePath.user(user.id), data: user.toJson(), merge: true);
+
+  Future<void> updateUser(User user) => _service.setData(
+      path: FirestorePath.user(user.id), data: user.toJson(), merge: true);
 
   Stream<List<String>> watchUsernames() {
     final reference = FirebaseFirestore.instance.collection("users");
@@ -60,5 +60,16 @@ class UserDB {
     } else {
       return snap.docs[0]["email"];
     }
+  }
+
+  Future<void> updateSwipedRight(
+      String userId, SwipedRightItems swipedRightItem) async {
+    final userPath = FirestorePath.user(userId);
+
+    await _service.updateArrayField(
+      path: userPath,
+      field: 'swipedRight',
+      value: swipedRightItem.toJson(),
+    );
   }
 }

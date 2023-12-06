@@ -568,7 +568,7 @@ SwipedRightItems _$SwipedRightItemsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SwipedRightItems {
   String get ownerUser => throw _privateConstructorUsedError;
-  int get merchId => throw _privateConstructorUsedError;
+  String get merchId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -582,7 +582,7 @@ abstract class $SwipedRightItemsCopyWith<$Res> {
           SwipedRightItems value, $Res Function(SwipedRightItems) then) =
       _$SwipedRightItemsCopyWithImpl<$Res, SwipedRightItems>;
   @useResult
-  $Res call({String ownerUser, int merchId});
+  $Res call({String ownerUser, String merchId});
 }
 
 /// @nodoc
@@ -609,7 +609,7 @@ class _$SwipedRightItemsCopyWithImpl<$Res, $Val extends SwipedRightItems>
       merchId: null == merchId
           ? _value.merchId
           : merchId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ) as $Val);
   }
 }
@@ -622,7 +622,7 @@ abstract class _$$SwipedRightItemsImplCopyWith<$Res>
       __$$SwipedRightItemsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String ownerUser, int merchId});
+  $Res call({String ownerUser, String merchId});
 }
 
 /// @nodoc
@@ -647,7 +647,7 @@ class __$$SwipedRightItemsImplCopyWithImpl<$Res>
       merchId: null == merchId
           ? _value.merchId
           : merchId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -664,7 +664,7 @@ class _$SwipedRightItemsImpl implements _SwipedRightItems {
   @override
   final String ownerUser;
   @override
-  final int merchId;
+  final String merchId;
 
   @override
   String toString() {
@@ -703,7 +703,7 @@ class _$SwipedRightItemsImpl implements _SwipedRightItems {
 abstract class _SwipedRightItems implements SwipedRightItems {
   const factory _SwipedRightItems(
       {required final String ownerUser,
-      required final int merchId}) = _$SwipedRightItemsImpl;
+      required final String merchId}) = _$SwipedRightItemsImpl;
 
   factory _SwipedRightItems.fromJson(Map<String, dynamic> json) =
       _$SwipedRightItemsImpl.fromJson;
@@ -711,7 +711,7 @@ abstract class _SwipedRightItems implements SwipedRightItems {
   @override
   String get ownerUser;
   @override
-  int get merchId;
+  String get merchId;
   @override
   @JsonKey(ignore: true)
   _$$SwipedRightItemsImplCopyWith<_$SwipedRightItemsImpl> get copyWith =>

@@ -40,7 +40,7 @@ class User with _$User {
 class SwipedRightItems with _$SwipedRightItems {
   const factory SwipedRightItems({
     required String ownerUser,
-    required int merchId,
+    required String merchId,
   }) = _SwipedRightItems;
 
   factory SwipedRightItems.fromJson(Map<String, dynamic> json) =>

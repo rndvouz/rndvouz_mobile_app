@@ -10,6 +10,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import '../../../repositories/firestore/firestore_providers.dart';
 import '../../merchandise/domain/merchandise.dart';
+import '../../user/domain/user.dart';
 
 class SwipeFeature extends ConsumerStatefulWidget {
   // required this User logged in
@@ -28,11 +29,22 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
     int? currentIndex,
     CardSwiperDirection direction,
   ) {
-    setState(() {});
-
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     );
+
+    final User loggedInUser = ref.read(firebaseAuthProvider).currentUser;
+    final Merchandise currentMerch = swipeMerchandises[previousIndex];
+
+    if (direction.name == 'right') {
+      ref.read(firebaseAuthProvider).updateSwipedRight(
+            loggedInUser.id,
+            SwipedRightItems(
+              ownerUser: currentMerch.ownerUsername,
+              merchId: currentMerch.id,
+            ),
+          );
+    }
 
     return true;
   }

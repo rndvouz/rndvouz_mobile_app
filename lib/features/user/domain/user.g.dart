@@ -67,7 +67,7 @@ _$SwipedRightItemsImpl _$$SwipedRightItemsImplFromJson(
         Map<String, dynamic> json) =>
     _$SwipedRightItemsImpl(
       ownerUser: json['ownerUser'] as String,
-      merchId: json['merchId'] as int,
+      merchId: json['merchId'] as String,
     );
 
 Map<String, dynamic> _$$SwipedRightItemsImplToJson(
