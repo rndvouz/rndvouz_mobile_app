@@ -76,7 +76,16 @@ class _ChatPageState extends State<ChatPage> {
             // } else {
               receiverImagePath = snapshot.data?['imagePath'] ?? '';
               receiverDisplayName = snapshot.data?['displayName'] ?? '';
-              return Text(receiverDisplayName);
+              return Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(receiverImagePath),
+                    child: Icon(Icons.person),
+                  ),
+                  SizedBox(width: 8),
+                  Text(receiverDisplayName),
+                ],
+              );
           //  }
           },
         ),
