@@ -23,6 +23,7 @@ class User with _$User {
     @Default([]) List<String> follower,
     @Default([]) List<String> following,
     @Default([]) List<ContactInformation> contact,
+    @Default([]) List<SwipedRightItems> swipedRight,
     @Default("setupBegin") String setupStep,
   }) = _User;
 
@@ -33,6 +34,17 @@ class User with _$User {
     final regExp = RegExp(emailPattern);
     return regExp.hasMatch(email);
   }
+}
+
+@freezed
+class SwipedRightItems with _$SwipedRightItems {
+  const factory SwipedRightItems({
+    required String ownerUser,
+    required int merchId,
+  }) = _SwipedRightItems;
+
+  factory SwipedRightItems.fromJson(Map<String, dynamic> json) =>
+      _$SwipedRightItemsFromJson(json);
 }
 
 @freezed

@@ -8,6 +8,7 @@ import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
+import '../../../repositories/firestore/firestore_providers.dart';
 import '../../merchandise/domain/merchandise.dart';
 
 class SwipeFeature extends ConsumerStatefulWidget {
@@ -54,6 +55,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
   Widget build(BuildContext context) {
     final AsyncValue<List<Merchandise>> asyncMerchData =
         ref.watch(merchandiseProvider);
+    final auth = ref.watch(firebaseAuthProvider);
 
     return asyncMerchData.when(
         data: (merchData) => _build(

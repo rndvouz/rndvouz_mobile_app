@@ -34,6 +34,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
                   (e) => ContactInformation.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      swipedRight: (json['swipedRight'] as List<dynamic>?)
+              ?.map((e) => SwipedRightItems.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       setupStep: json['setupStep'] as String? ?? "setupBegin",
     );
 
@@ -55,7 +59,22 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'follower': instance.follower,
       'following': instance.following,
       'contact': instance.contact,
+      'swipedRight': instance.swipedRight,
       'setupStep': instance.setupStep,
+    };
+
+_$SwipedRightItemsImpl _$$SwipedRightItemsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SwipedRightItemsImpl(
+      ownerUser: json['ownerUser'] as String,
+      merchId: json['merchId'] as int,
+    );
+
+Map<String, dynamic> _$$SwipedRightItemsImplToJson(
+        _$SwipedRightItemsImpl instance) =>
+    <String, dynamic>{
+      'ownerUser': instance.ownerUser,
+      'merchId': instance.merchId,
     };
 
 _$ContactInformationImpl _$$ContactInformationImplFromJson(

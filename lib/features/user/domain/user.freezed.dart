@@ -36,6 +36,7 @@ mixin _$User {
   List<String> get follower => throw _privateConstructorUsedError;
   List<String> get following => throw _privateConstructorUsedError;
   List<ContactInformation> get contact => throw _privateConstructorUsedError;
+  List<SwipedRightItems> get swipedRight => throw _privateConstructorUsedError;
   String get setupStep => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -64,6 +65,7 @@ abstract class $UserCopyWith<$Res> {
       List<String> follower,
       List<String> following,
       List<ContactInformation> contact,
+      List<SwipedRightItems> swipedRight,
       String setupStep});
 
   $MeasurementsCopyWith<$Res>? get userMeasurements;
@@ -97,6 +99,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? follower = null,
     Object? following = null,
     Object? contact = null,
+    Object? swipedRight = null,
     Object? setupStep = null,
   }) {
     return _then(_value.copyWith(
@@ -160,6 +163,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
               as List<ContactInformation>,
+      swipedRight: null == swipedRight
+          ? _value.swipedRight
+          : swipedRight // ignore: cast_nullable_to_non_nullable
+              as List<SwipedRightItems>,
       setupStep: null == setupStep
           ? _value.setupStep
           : setupStep // ignore: cast_nullable_to_non_nullable
@@ -203,6 +210,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<String> follower,
       List<String> following,
       List<ContactInformation> contact,
+      List<SwipedRightItems> swipedRight,
       String setupStep});
 
   @override
@@ -234,6 +242,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? follower = null,
     Object? following = null,
     Object? contact = null,
+    Object? swipedRight = null,
     Object? setupStep = null,
   }) {
     return _then(_$UserImpl(
@@ -297,6 +306,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._contact
           : contact // ignore: cast_nullable_to_non_nullable
               as List<ContactInformation>,
+      swipedRight: null == swipedRight
+          ? _value._swipedRight
+          : swipedRight // ignore: cast_nullable_to_non_nullable
+              as List<SwipedRightItems>,
       setupStep: null == setupStep
           ? _value.setupStep
           : setupStep // ignore: cast_nullable_to_non_nullable
@@ -324,11 +337,13 @@ class _$UserImpl extends _User {
       final List<String> follower = const [],
       final List<String> following = const [],
       final List<ContactInformation> contact = const [],
+      final List<SwipedRightItems> swipedRight = const [],
       this.setupStep = "setupBegin"})
       : _style = style,
         _follower = follower,
         _following = following,
         _contact = contact,
+        _swipedRight = swipedRight,
         super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -394,13 +409,22 @@ class _$UserImpl extends _User {
     return EqualUnmodifiableListView(_contact);
   }
 
+  final List<SwipedRightItems> _swipedRight;
+  @override
+  @JsonKey()
+  List<SwipedRightItems> get swipedRight {
+    if (_swipedRight is EqualUnmodifiableListView) return _swipedRight;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_swipedRight);
+  }
+
   @override
   @JsonKey()
   final String setupStep;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, isBusiness: $isBusiness, displayName: $displayName, imagePath: $imagePath, type: $type, address: $address, favoriteColors: $favoriteColors, biography: $biography, userMeasurements: $userMeasurements, style: $style, follower: $follower, following: $following, contact: $contact, setupStep: $setupStep)';
+    return 'User(id: $id, username: $username, email: $email, isBusiness: $isBusiness, displayName: $displayName, imagePath: $imagePath, type: $type, address: $address, favoriteColors: $favoriteColors, biography: $biography, userMeasurements: $userMeasurements, style: $style, follower: $follower, following: $following, contact: $contact, swipedRight: $swipedRight, setupStep: $setupStep)';
   }
 
   @override
@@ -431,6 +455,8 @@ class _$UserImpl extends _User {
             const DeepCollectionEquality()
                 .equals(other._following, _following) &&
             const DeepCollectionEquality().equals(other._contact, _contact) &&
+            const DeepCollectionEquality()
+                .equals(other._swipedRight, _swipedRight) &&
             (identical(other.setupStep, setupStep) ||
                 other.setupStep == setupStep));
   }
@@ -454,6 +480,7 @@ class _$UserImpl extends _User {
       const DeepCollectionEquality().hash(_follower),
       const DeepCollectionEquality().hash(_following),
       const DeepCollectionEquality().hash(_contact),
+      const DeepCollectionEquality().hash(_swipedRight),
       setupStep);
 
   @JsonKey(ignore: true)
@@ -487,6 +514,7 @@ abstract class _User extends User {
       final List<String> follower,
       final List<String> following,
       final List<ContactInformation> contact,
+      final List<SwipedRightItems> swipedRight,
       final String setupStep}) = _$UserImpl;
   const _User._() : super._();
 
@@ -524,10 +552,169 @@ abstract class _User extends User {
   @override
   List<ContactInformation> get contact;
   @override
+  List<SwipedRightItems> get swipedRight;
+  @override
   String get setupStep;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SwipedRightItems _$SwipedRightItemsFromJson(Map<String, dynamic> json) {
+  return _SwipedRightItems.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SwipedRightItems {
+  String get ownerUser => throw _privateConstructorUsedError;
+  int get merchId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SwipedRightItemsCopyWith<SwipedRightItems> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SwipedRightItemsCopyWith<$Res> {
+  factory $SwipedRightItemsCopyWith(
+          SwipedRightItems value, $Res Function(SwipedRightItems) then) =
+      _$SwipedRightItemsCopyWithImpl<$Res, SwipedRightItems>;
+  @useResult
+  $Res call({String ownerUser, int merchId});
+}
+
+/// @nodoc
+class _$SwipedRightItemsCopyWithImpl<$Res, $Val extends SwipedRightItems>
+    implements $SwipedRightItemsCopyWith<$Res> {
+  _$SwipedRightItemsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ownerUser = null,
+    Object? merchId = null,
+  }) {
+    return _then(_value.copyWith(
+      ownerUser: null == ownerUser
+          ? _value.ownerUser
+          : ownerUser // ignore: cast_nullable_to_non_nullable
+              as String,
+      merchId: null == merchId
+          ? _value.merchId
+          : merchId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SwipedRightItemsImplCopyWith<$Res>
+    implements $SwipedRightItemsCopyWith<$Res> {
+  factory _$$SwipedRightItemsImplCopyWith(_$SwipedRightItemsImpl value,
+          $Res Function(_$SwipedRightItemsImpl) then) =
+      __$$SwipedRightItemsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String ownerUser, int merchId});
+}
+
+/// @nodoc
+class __$$SwipedRightItemsImplCopyWithImpl<$Res>
+    extends _$SwipedRightItemsCopyWithImpl<$Res, _$SwipedRightItemsImpl>
+    implements _$$SwipedRightItemsImplCopyWith<$Res> {
+  __$$SwipedRightItemsImplCopyWithImpl(_$SwipedRightItemsImpl _value,
+      $Res Function(_$SwipedRightItemsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ownerUser = null,
+    Object? merchId = null,
+  }) {
+    return _then(_$SwipedRightItemsImpl(
+      ownerUser: null == ownerUser
+          ? _value.ownerUser
+          : ownerUser // ignore: cast_nullable_to_non_nullable
+              as String,
+      merchId: null == merchId
+          ? _value.merchId
+          : merchId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SwipedRightItemsImpl implements _SwipedRightItems {
+  const _$SwipedRightItemsImpl(
+      {required this.ownerUser, required this.merchId});
+
+  factory _$SwipedRightItemsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SwipedRightItemsImplFromJson(json);
+
+  @override
+  final String ownerUser;
+  @override
+  final int merchId;
+
+  @override
+  String toString() {
+    return 'SwipedRightItems(ownerUser: $ownerUser, merchId: $merchId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SwipedRightItemsImpl &&
+            (identical(other.ownerUser, ownerUser) ||
+                other.ownerUser == ownerUser) &&
+            (identical(other.merchId, merchId) || other.merchId == merchId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, ownerUser, merchId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SwipedRightItemsImplCopyWith<_$SwipedRightItemsImpl> get copyWith =>
+      __$$SwipedRightItemsImplCopyWithImpl<_$SwipedRightItemsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SwipedRightItemsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SwipedRightItems implements SwipedRightItems {
+  const factory _SwipedRightItems(
+      {required final String ownerUser,
+      required final int merchId}) = _$SwipedRightItemsImpl;
+
+  factory _SwipedRightItems.fromJson(Map<String, dynamic> json) =
+      _$SwipedRightItemsImpl.fromJson;
+
+  @override
+  String get ownerUser;
+  @override
+  int get merchId;
+  @override
+  @JsonKey(ignore: true)
+  _$$SwipedRightItemsImplCopyWith<_$SwipedRightItemsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
