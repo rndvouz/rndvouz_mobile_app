@@ -70,28 +70,43 @@ class HomeProfile extends ConsumerWidget {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: RichText(
-                text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 20,
+            actions: [
+              FittedBox(
+                child: IconButton(
+                  color: colorCream2,
+                  iconSize: MediaQuery.sizeOf(context).height * 0.035,
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Settings()),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.settings,
                   ),
-                  children: <TextSpan>[
-                    const TextSpan(
-                      text: "Welcome, ",
-                    ),
-                    TextSpan(
-                      text: user.username,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const TextSpan(
-                      text: "!",
-                    )
-                  ],
                 ),
+              ),
+            ],
+            title: RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+                children: <TextSpan>[
+                  const TextSpan(
+                    text: "Welcome, ",
+                  ),
+                  TextSpan(
+                    text: user.username,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(
+                    text: "!",
+                  )
+                ],
               ),
             ),
             centerTitle: false,
@@ -129,7 +144,7 @@ class HomeProfile extends ConsumerWidget {
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
@@ -188,7 +203,8 @@ class HomeProfile extends ConsumerWidget {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
@@ -208,25 +224,8 @@ class HomeProfile extends ConsumerWidget {
                                           },
                                           child: const Text(
                                             'Edit Profile',
-                                          ),
-                                        ),
-                                        FittedBox(
-                                          child: IconButton(
-                                            color: secondaryBrown,
-                                            iconSize: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                0.04,
-                                            padding: EdgeInsets.all(0),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const Settings()),
-                                              );
-                                            },
-                                            icon: const Icon(
-                                              Icons.settings,
+                                            style: TextStyle(
+                                              color: Colors.white,
                                             ),
                                           ),
                                         ),
