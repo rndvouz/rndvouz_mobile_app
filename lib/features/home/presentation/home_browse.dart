@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rndvouz/features/common/presentation/error_page.dart';
 import 'package:rndvouz/features/common/presentation/loading.dart';
@@ -50,12 +48,10 @@ class HomeBrowseOrSwipe extends ConsumerWidget {
             children: <Widget>[
               AspectRatio(
                 aspectRatio: 1 / 1,
-                child: (merch.id.length < 3)
-                    ? Image.asset(
-                        "${merch.assetImages}.jpg",
-                        fit: BoxFit.fitWidth,
-                      )
-                    : Image.memory(base64Decode(merch.imagePath!)),
+                child: Image.asset(
+                  "${merch.assetImages}.jpg",
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ],
           ),

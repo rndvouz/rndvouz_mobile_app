@@ -55,14 +55,11 @@ ThemeData _buildAppTheme(String mode) {
             color: colorCream0,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-              ),
-            ),
-          ),
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          )))),
         )
       : base.copyWith(
           // colorScheme: base.colorScheme.copyWith(
