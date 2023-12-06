@@ -49,6 +49,7 @@ dependencies:
   stream_channel: ^2.1.1
   intl: ^0.18.1
   provider: ^6.1.1
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:

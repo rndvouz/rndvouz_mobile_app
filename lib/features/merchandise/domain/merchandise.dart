@@ -17,7 +17,7 @@ enum MerchColors {
   yellow,
   green,
   blue,
-  indigo,
+  pink,
   purple,
   gray,
   black,
@@ -50,6 +50,8 @@ class Merchandise with _$Merchandise {
     double? price,
     @PriceRangeConverter() PriceRange? priceRange,
     String? desiredTrade,
+    String? description,
+    String? imagePath,
     required int likes,
   }) = _Merchandise;
 

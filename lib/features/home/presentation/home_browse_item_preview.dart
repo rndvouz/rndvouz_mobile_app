@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rndvouz/features/common/domain/measurements.dart';
 import 'package:rndvouz/features/merchandise/domain/merchandise.dart';
@@ -50,10 +52,12 @@ class HomeBrowseItemPreviewState extends State<HomeBrowseItemPreview> {
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ),
-            Image.asset(
-              "${widget.merchandise.assetImages}.jpg",
-              fit: BoxFit.cover,
-            ),
+            (widget.merchandise.id.length < 3)
+                ? Image.asset(
+                    "${widget.merchandise.assetImages}.jpg",
+                    fit: BoxFit.fitWidth,
+                  )
+                : Image.memory(base64Decode(widget.merchandise.imagePath!)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(

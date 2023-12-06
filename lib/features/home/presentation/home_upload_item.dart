@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:rndvouz/features/home/presentation/upload_fields.dart';
@@ -17,34 +18,35 @@ class HomeUploadItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Uint8List? selectedImage;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(height: 20), // Add spacing
-                      ImageSelectionButton(
-                        onImageSelected: (image) {
-                          selectedImage = image;
-                        },
-                      ),
-                      UploadMenu(),
-                      const SizedBox(height: 20),
-                      UploadFields(),
-                    ],
+        child: Padding(
+          padding: EdgeInsets.all(screenWidth * 0.04),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ImageSelectionButton(
+                          onImageSelected: (image) {
+                            ref.read(imagePathProvider.notifier).state =
+                                base64Encode(image!.toList());
+                          },
+                        ),
+                        UploadMenu(),
+                        UploadFields(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -89,7 +91,7 @@ class _ImageSelectionButtonState extends State<ImageSelectionButton> {
           color: Colors.grey[300],
         ),
         child: _image != null
-            ? ClipOval(
+            ? ClipRRect(
                 child: Image.memory(
                   _image!,
                   fit: BoxFit.cover,
