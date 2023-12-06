@@ -1,69 +1,136 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rndvouz/features/chat/Presentation/chat.dart';
-import 'package:rndvouz/features/chat/domain/chat_service.dart';
-import 'package:provider/provider.dart';
 
 class HomeNotification extends StatefulWidget {
-  const HomeNotification({super.key});
-
   @override
-  State<HomeNotification> createState() => _HomepageState();
+  _HomeNotificationState createState() => _HomeNotificationState();
 }
 
-class _HomepageState extends State<HomeNotification> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class _HomeNotificationState extends State<HomeNotification> {
+  late StreamController<ChatMessage> _streamController;
 
+  @override
+  void initState() {
+    super.initState();
+    _streamController = StreamController<ChatMessage>();
+  }
+
+  @override
+  void dispose() {
+    _streamController.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Message",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-      body: _buildUserList(),
+      body: StreamBuilder<ChatMessage>(
+        stream: _streamController.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return buildChatList(snapshot.data!);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final message = ChatMessage(
+            text: 'New Message',
+            timestamp: DateTime.now(),
+            isMe: true,
+          );
+          _streamController.sink.add(message);
+        },
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        child: Container(
+          height: 60.0,
+        ),
+      ),
     );
   }
 
-  // build a list of users list except for the current logged in user
-  Widget _buildUserList() {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("users").snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) return const Text('error');
-        if (snapshot.connectionState == ConnectionState.waiting)
-          return Text("loading...");
-        return ListView(
-          children: snapshot.data!.docs
-              .map<Widget>((doc) => _buildUserListItem(doc))
-              .toList(),
+  Widget buildChatList(ChatMessage message) {
+    return ListView.builder(
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            _onMessageClicked(message);
+          },
+          child: ListTile(
+            leading: const CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text(message.text),
+            subtitle: Text(
+              DateFormat('HH:mm').format(message.timestamp),
+              style: const TextStyle(fontSize: 12.0),
+            ),
+            trailing: message.isMe ? null : const Icon(Icons.person),
+            tileColor: message.isMe ? Colors.blue.withOpacity(0.2) : null,
+          ),
         );
       },
     );
   }
 
-  // build individual user List items
-  Widget _buildUserListItem(DocumentSnapshot documnet) {
-    Map<String, dynamic> data = documnet.data()! as Map<String, dynamic>;
-
-    // dispaly all user except current user
-    if (_auth.currentUser!.email! != data['email']) {
-      return ListTile(
-        title: Text(data['displayName']),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiverUserEmail: data['email'],
-                receiverUserID: data['id'],
-              ),
-            ),
-          );
-        },
-      );
-    }
-    return Container();
+  void _onMessageClicked(ChatMessage message) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SingleChat(),
+      ),
+    );
   }
+}
+
+class ChatMessage {
+  final String text;
+  final DateTime timestamp;
+  final bool isMe;
+
+  ChatMessage({
+    required this.text,
+    required this.timestamp,
+    required this.isMe,
+  });
 }
