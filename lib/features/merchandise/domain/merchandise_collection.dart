@@ -39,4 +39,10 @@ class MerchandiseCollection {
       }).toList();
     }
   }
+
+  List<Merchandise> loadSwipeMerchandise(String currentUsername) {
+    return _merchandises.where((Merchandise m) {
+      return m.purpose == Purpose.browse && m.ownerUsername != currentUsername;
+    }).toList();
+  }
 }

@@ -26,23 +26,74 @@ class SwipeFeature extends ConsumerStatefulWidget {
   ConsumerState<SwipeFeature> createState() => _SwipeFeature();
 }
 
-class _SwipeFeature extends ConsumerState<SwipeFeature> {
+class _SwipeFeature extends ConsumerState<SwipeFeature>
+    with SingleTickerProviderStateMixin {
   final CardSwiperController controller = CardSwiperController();
 
   _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
-      {required User user, required List<Merchandise> merchandise}) async {
+      {required User user, required Merchandise merchandise}) async {
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     );
 
-    final Merchandise currentMerch = merchandise[previousIndex];
+    final Merchandise currentMerch = merchandise;
     User currentUser = user;
 
     if (direction.name == 'right') {
-      handleRightSwipe(currentUser, currentMerch);
-    }
+      // handleRightSwipe(currentUser, currentMerch);
+      final UserDB userDB = ref.read(userDBProvider);
 
-    return true;
+      // create a swiped right item
+      final SwipedRightItems swipeRightItem = SwipedRightItems(
+        ownerUser: currentMerch.ownerUsername,
+        merchId: currentMerch.id,
+      );
+
+      // add to current user's SwipedRightItems list
+      userDB.updateSwipedRight(user.id, swipeRightItem);
+
+      // Check if the username is in database by using username instead of a user's id
+      final User? ownerUser =
+          await userDB.fetchUserByUsername(currentMerch.ownerUsername);
+
+      if (ownerUser != null) {
+        // merchUser exists, go through their swipedRight List
+        // ignore: unnecessary_null_comparison
+        if (ownerUser.swipedRight != null) {
+          try {
+            final SwipedRightItems matchingItem =
+                ownerUser.swipedRight.firstWhere(
+              (swipedItem) => swipedItem.ownerUser == currentUser.username,
+            );
+
+            // Fetch the matching merchandise from owner of currentMerch
+            final MerchandiseDB merchDB = ref.read(merchandiseDBProvider);
+            final Merchandise matchingMerchandise =
+                await merchDB.fetchMerchandise(matchingItem.merchId);
+
+            // Handle "Match Found" view with the matching merchandise
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => MatchFound(
+                  merchUser:
+                      matchingMerchandise, // from current user that owner has in their swipedRight list
+                  merchMatched:
+                      currentMerch, // from owner that currentUser just swiped right on
+                  currentUser: user,
+                  ownerUser: ownerUser,
+                ),
+              ),
+            );
+          } catch (e) {
+            print("merchUser didn't swipe right on any of currentUser's items");
+          }
+        }
+      } else {
+        // merchUser does not exist in database
+        print(
+            'User with username ${currentMerch.ownerUsername} does not exist in UserDB');
+      }
+    }
   }
 
   handleRightSwipe(User user, Merchandise currentMerch) async {
@@ -80,8 +131,10 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => MatchFound(
-                merchUser: currentMerch,
-                merchMatched: matchingMerchandise,
+                merchUser:
+                    matchingMerchandise, // from current user that owner has in their swipedRight list
+                merchMatched:
+                    currentMerch, // from owner that currentUser just swiped right on
                 currentUser: user,
                 ownerUser: ownerUser,
               ),
@@ -140,6 +193,9 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
     List<Merchandise> swipeMerchandises =
         merchandiseCollection.loadMerchanise(Purpose.browse);
 
+    // List<Merchandise> swipeMerchandises =
+    //     merchandiseCollection.loadSwipeMerchandise(user.username);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -160,7 +216,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
                     AllowedSwipeDirection.only(left: true, right: true),
                 onSwipe: (prevIndex, currIndex, direction) => _onSwipe(
                     prevIndex, currIndex, direction,
-                    user: user, merchandise: swipeMerchandises),
+                    user: user, merchandise: swipeMerchandises[prevIndex]),
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(30, 10),
                 cardBuilder: (context, index, horizontalOffsetPercentage,
