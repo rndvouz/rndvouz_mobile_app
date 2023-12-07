@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:rndvouz/features/home/presentation/home_browse.dart';
 
 import '../../merchandise/domain/merchandise.dart';
+import '../../user/domain/user.dart';
 
 class MatchFound extends StatelessWidget {
   const MatchFound(
-      {required this.merchUser, required this.merchMatched, Key? key})
+      {required this.merchUser,
+      required this.merchMatched,
+      required this.currentUser,
+      required this.ownerUser,
+      Key? key})
       : super(key: key);
 
   final Merchandise merchUser;
   final Merchandise merchMatched;
+  final User currentUser;
+  final User ownerUser;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +57,18 @@ class MatchFound extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                )))
+                ))),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeBrowseOrSwipe(),
+              ),
+            );
+          },
+          child: Text("Home"),
+        ),
       ],
     ));
   }

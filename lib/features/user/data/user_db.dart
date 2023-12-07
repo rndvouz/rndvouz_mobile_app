@@ -62,6 +62,22 @@ class UserDB {
     }
   }
 
+  Future<User?> fetchUserByUsername(String username) async {
+    final reference = FirebaseFirestore.instance
+        .collection("users")
+        .where("username", isEqualTo: username);
+
+    final snap = await reference.get();
+
+    if (snap.docs.isEmpty) {
+      return null;
+    } else {
+      final userData = snap.docs.first.data();
+      final user = User.fromJson(userData);
+      return user;
+    }
+  }
+
   Future<void> updateSwipedRight(
       String userId, SwipedRightItems swipedRightItem) async {
     final userPath = FirestorePath.user(userId);

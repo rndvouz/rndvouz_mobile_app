@@ -8,13 +8,18 @@ import 'package:rndvouz/features/swipe/presentation/new_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
+import '../../../repositories/firestore/firestore_path.dart';
 import '../../../repositories/firestore/firestore_providers.dart';
+import '../../../repositories/firestore/firestore_service.dart';
+import '../../common/domain/all_data_provider.dart';
 import '../../merchandise/domain/merchandise.dart';
+import '../../user/data/user_db.dart';
+import '../../user/data/user_providers.dart';
 import '../../user/domain/user.dart';
+import 'match_found.dart';
 
 class SwipeFeature extends ConsumerStatefulWidget {
   // required this User logged in
-
   const SwipeFeature({Key? key}) : super(key: key);
 
   @override
@@ -24,29 +29,73 @@ class SwipeFeature extends ConsumerStatefulWidget {
 class _SwipeFeature extends ConsumerState<SwipeFeature> {
   final CardSwiperController controller = CardSwiperController();
 
-  bool _onSwipe(
-    int previousIndex,
-    int? currentIndex,
-    CardSwiperDirection direction,
-  ) {
+  _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
+      {required User user, required List<Merchandise> merchandise}) async {
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     );
 
-    final User loggedInUser = ref.read(firebaseAuthProvider).currentUser;
-    final Merchandise currentMerch = swipeMerchandises[previousIndex];
+    final Merchandise currentMerch = merchandise[previousIndex];
+    User currentUser = user;
 
     if (direction.name == 'right') {
-      ref.read(firebaseAuthProvider).updateSwipedRight(
-            loggedInUser.id,
-            SwipedRightItems(
-              ownerUser: currentMerch.ownerUsername,
-              merchId: currentMerch.id,
-            ),
-          );
+      handleRightSwipe(currentUser, currentMerch);
     }
 
     return true;
+  }
+
+  handleRightSwipe(User user, Merchandise currentMerch) async {
+    final UserDB userDB = ref.read(userDBProvider);
+
+    // create a swiped right item
+    final SwipedRightItems swipeRightItem = SwipedRightItems(
+      ownerUser: currentMerch.ownerUsername,
+      merchId: currentMerch.id,
+    );
+
+    // add to current user's SwipedRightItems list
+    userDB.updateSwipedRight(user.id, swipeRightItem);
+
+    // Check if the username is in database by using username instead of a user's id
+    final User? ownerUser =
+        await userDB.fetchUserByUsername(currentMerch.ownerUsername);
+
+    if (ownerUser != null) {
+      // merchUser exists, go through their swipedRight List
+      // ignore: unnecessary_null_comparison
+      if (ownerUser.swipedRight != null) {
+        try {
+          final SwipedRightItems matchingItem =
+              ownerUser.swipedRight.firstWhere(
+            (swipedItem) => swipedItem.ownerUser == user.username,
+          );
+
+          // Fetch the matching merchandise from owner of currentMerch
+          final MerchandiseDB merchDB = ref.read(merchandiseDBProvider);
+          final Merchandise matchingMerchandise =
+              await merchDB.fetchMerchandise(matchingItem.merchId);
+
+          // Handle "Match Found" view with the matching merchandise
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MatchFound(
+                merchUser: currentMerch,
+                merchMatched: matchingMerchandise,
+                currentUser: user,
+                ownerUser: ownerUser,
+              ),
+            ),
+          );
+        } catch (e) {
+          print("merchUser didn't swipe right on any of currentUser's items");
+        }
+      }
+    } else {
+      // merchUser does not exist in database
+      print(
+          'User with username ${currentMerch.ownerUsername} does not exist in UserDB');
+    }
   }
 
   void endSwipe() {
@@ -65,25 +114,32 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
 
   @override
   Widget build(BuildContext context) {
-    final AsyncValue<List<Merchandise>> asyncMerchData =
-        ref.watch(merchandiseProvider);
-    final auth = ref.watch(firebaseAuthProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
 
-    return asyncMerchData.when(
-        data: (merchData) => _build(
-              context: context,
-              merch: merchData,
-            ),
+    return asyncAllData.when(
+        data: (allData) {
+          return _build(
+            context: context,
+            userDB: allData.users,
+            user: allData.currentUser,
+            merch: allData.merchandise,
+            ref: ref,
+          );
+        },
         loading: () => const Loading(),
         error: (error, st) => ErrorPage(error.toString(), st.toString()));
   }
 
   Widget _build(
-      {required BuildContext context, required List<Merchandise> merch}) {
+      {required BuildContext context,
+      required UserDB userDB,
+      required User user,
+      required List<Merchandise> merch,
+      required WidgetRef ref}) {
     MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
-
-    final List<Merchandise> swipeMerchandises =
+    List<Merchandise> swipeMerchandises =
         merchandiseCollection.loadMerchanise(Purpose.browse);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -102,7 +158,9 @@ class _SwipeFeature extends ConsumerState<SwipeFeature> {
                 maxAngle: 70,
                 allowedSwipeDirection:
                     AllowedSwipeDirection.only(left: true, right: true),
-                onSwipe: _onSwipe,
+                onSwipe: (prevIndex, currIndex, direction) => _onSwipe(
+                    prevIndex, currIndex, direction,
+                    user: user, merchandise: swipeMerchandises),
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(30, 10),
                 cardBuilder: (context, index, horizontalOffsetPercentage,
