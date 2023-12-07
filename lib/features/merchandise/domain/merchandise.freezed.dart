@@ -55,6 +55,10 @@ mixin _$Merchandise {
   set priceRange(PriceRange? value) => throw _privateConstructorUsedError;
   String? get desiredTrade => throw _privateConstructorUsedError;
   set desiredTrade(String? value) => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  set description(String? value) => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError;
+  set imagePath(String? value) => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   set likes(int value) => throw _privateConstructorUsedError;
 
@@ -85,6 +89,8 @@ abstract class $MerchandiseCopyWith<$Res> {
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
+      String? description,
+      String? imagePath,
       int likes});
 
   $MeasurementsCopyWith<$Res>? get merchMeasurements;
@@ -118,6 +124,8 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
     Object? price = freezed,
     Object? priceRange = freezed,
     Object? desiredTrade = freezed,
+    Object? description = freezed,
+    Object? imagePath = freezed,
     Object? likes = null,
   }) {
     return _then(_value.copyWith(
@@ -177,6 +185,14 @@ class _$MerchandiseCopyWithImpl<$Res, $Val extends Merchandise>
           ? _value.desiredTrade
           : desiredTrade // ignore: cast_nullable_to_non_nullable
               as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -232,6 +248,8 @@ abstract class _$$MerchandiseImplCopyWith<$Res>
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
+      String? description,
+      String? imagePath,
       int likes});
 
   @override
@@ -265,6 +283,8 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
     Object? price = freezed,
     Object? priceRange = freezed,
     Object? desiredTrade = freezed,
+    Object? description = freezed,
+    Object? imagePath = freezed,
     Object? likes = null,
   }) {
     return _then(_$MerchandiseImpl(
@@ -324,6 +344,14 @@ class __$$MerchandiseImplCopyWithImpl<$Res>
           ? _value.desiredTrade
           : desiredTrade // ignore: cast_nullable_to_non_nullable
               as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -350,6 +378,8 @@ class _$MerchandiseImpl extends _Merchandise {
       this.price,
       @PriceRangeConverter() this.priceRange,
       this.desiredTrade,
+      this.description,
+      this.imagePath,
       required this.likes})
       : super._();
 
@@ -387,11 +417,15 @@ class _$MerchandiseImpl extends _Merchandise {
   @override
   String? desiredTrade;
   @override
+  String? description;
+  @override
+  String? imagePath;
+  @override
   int likes;
 
   @override
   String toString() {
-    return 'Merchandise(id: $id, ownerUsername: $ownerUsername, state: $state, purpose: $purpose, primaryStyle: $primaryStyle, secondaryStyle: $secondaryStyle, garment: $garment, merchColors: $merchColors, merchName: $merchName, merchMeasurements: $merchMeasurements, sellingMethod: $sellingMethod, price: $price, priceRange: $priceRange, desiredTrade: $desiredTrade, likes: $likes)';
+    return 'Merchandise(id: $id, ownerUsername: $ownerUsername, state: $state, purpose: $purpose, primaryStyle: $primaryStyle, secondaryStyle: $secondaryStyle, garment: $garment, merchColors: $merchColors, merchName: $merchName, merchMeasurements: $merchMeasurements, sellingMethod: $sellingMethod, price: $price, priceRange: $priceRange, desiredTrade: $desiredTrade, description: $description, imagePath: $imagePath, likes: $likes)';
   }
 
   @JsonKey(ignore: true)
@@ -424,6 +458,8 @@ abstract class _Merchandise extends Merchandise {
       double? price,
       @PriceRangeConverter() PriceRange? priceRange,
       String? desiredTrade,
+      String? description,
+      String? imagePath,
       required int likes}) = _$MerchandiseImpl;
   _Merchandise._() : super._();
 
@@ -476,6 +512,12 @@ abstract class _Merchandise extends Merchandise {
   @override
   String? get desiredTrade;
   set desiredTrade(String? value);
+  @override
+  String? get description;
+  set description(String? value);
+  @override
+  String? get imagePath;
+  set imagePath(String? value);
   @override
   int get likes;
   set likes(int value);

@@ -27,6 +27,8 @@ _$MerchandiseImpl _$$MerchandiseImplFromJson(Map<String, dynamic> json) =>
       priceRange: const PriceRangeConverter()
           .fromJson(json['priceRange'] as Map<String, dynamic>?),
       desiredTrade: json['desiredTrade'] as String?,
+      description: json['description'] as String?,
+      imagePath: json['imagePath'] as String?,
       likes: json['likes'] as int,
     );
 
@@ -48,6 +50,8 @@ Map<String, dynamic> _$$MerchandiseImplToJson(_$MerchandiseImpl instance) =>
       'price': instance.price,
       'priceRange': const PriceRangeConverter().toJson(instance.priceRange),
       'desiredTrade': instance.desiredTrade,
+      'description': instance.description,
+      'imagePath': instance.imagePath,
       'likes': instance.likes,
     };
 
@@ -138,7 +142,7 @@ const _$MerchColorsEnumMap = {
   MerchColors.yellow: 'yellow',
   MerchColors.green: 'green',
   MerchColors.blue: 'blue',
-  MerchColors.indigo: 'indigo',
+  MerchColors.pink: 'pink',
   MerchColors.purple: 'purple',
   MerchColors.gray: 'gray',
   MerchColors.black: 'black',

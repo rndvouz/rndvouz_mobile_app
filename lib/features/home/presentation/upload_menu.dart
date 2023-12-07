@@ -26,80 +26,109 @@ class UploadMenu extends ConsumerWidget {
             height: screenHeight * 0.05,
             width: screenWidth * 0.85,
             color: primaryGreen,
-            child: Padding(
-              padding: EdgeInsets.all(screenHeight * 0.01),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      ref.read(sellingMethodStateProvider.notifier).state =
-                          SellingMethod.selling;
-                      if (theState == SellingMethod.selling) {
-                        developer.log("selling");
-                      }
-                    },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    ref.read(sellingMethodStateProvider.notifier).state =
+                        SellingMethod.selling;
+                    if (theState == SellingMethod.selling) {
+                      developer.log("selling");
+                    }
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.05, left: screenWidth * 0.05),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Sell",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: theState == SellingMethod.selling
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        "|",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      ref.read(sellingMethodStateProvider.notifier).state =
-                          SellingMethod.negotiate;
-                      if (theState == SellingMethod.negotiate) {
-                        developer.log("negotiate");
-                      }
-                    },
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "|",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ref.read(sellingMethodStateProvider.notifier).state =
+                        SellingMethod.negotiate;
+                    if (theState == SellingMethod.negotiate) {
+                      developer.log("negotiate");
+                    }
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.05, left: screenWidth * 0.05),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Negotiate",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: theState == SellingMethod.negotiate
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        "|",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      ref.read(sellingMethodStateProvider.notifier).state =
-                          SellingMethod.trading;
-                      if (theState == SellingMethod.trading) {
-                        developer.log("trading");
-                      }
-                    },
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "|",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ref.read(sellingMethodStateProvider.notifier).state =
+                        SellingMethod.trading;
+                    if (theState == SellingMethod.trading) {
+                      developer.log("trading");
+                    }
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: screenWidth * 0.05, left: screenWidth * 0.05),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Trade",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: theState == SellingMethod.trading
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
