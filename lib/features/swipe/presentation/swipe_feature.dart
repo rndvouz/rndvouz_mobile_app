@@ -29,12 +29,15 @@ class SwipeFeature extends ConsumerStatefulWidget {
 class _SwipeFeature extends ConsumerState<SwipeFeature>
     with SingleTickerProviderStateMixin {
   final CardSwiperController controller = CardSwiperController();
+  int indexState = 0;
 
   _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
       {required User user, required Merchandise merchandise}) {
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     );
+
+    indexState = currentIndex!;
 
     final Merchandise currentMerch = merchandise;
     User currentUser = user;
@@ -62,7 +65,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
     );
 
     // add to current user's SwipedRightItems list
-    userDB.updateSwipedRight(user.id, swipeRightItem);
+    await userDB.updateSwipedRight(user.id, swipeRightItem);
 
     // Check if the username is in database by using username instead of a user's id
     final User? ownerUser =
@@ -125,8 +128,11 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
 
+    // final AllData allData = ref.read(allDataProvider.future);
+
     return asyncAllData.when(
         data: (allData) {
+          print("new data reloaded");
           return _build(
             context: context,
             userDB: allData.users,
@@ -145,6 +151,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
       required User user,
       required List<Merchandise> merch,
       required WidgetRef ref}) {
+    print("rebuilding swipe feature");
     MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
     // List<Merchandise> swipeMerchandises =
     //     merchandiseCollection.loadMerchanise(Purpose.browse);
@@ -165,7 +172,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
               child: CardSwiper(
                 controller: controller,
                 cardsCount: swipeMerchandises.length,
-                initialIndex: 0,
+                initialIndex: indexState,
                 isLoop: false,
                 maxAngle: 70,
                 allowedSwipeDirection:
