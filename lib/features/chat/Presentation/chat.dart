@@ -1,171 +1,222 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rndvouz/features/Chat/domain/chat_message.dart';
+import 'package:intl/intl.dart';
+
+
+import './chat_bubble.dart';
+import './my_test_field.dart';
+import '../domain/chat_service.dart';
 import 'package:rndvouz/features/common/data/colors.dart';
 
-List<ChatMessage> messages = [
-  ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-  ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender"),
-  ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Is there any thing wrong?", messageType: "sender"),
-];
+class ChatPage extends StatefulWidget {
+  final String receiverUserEmail;
+  final String receiverUserID;
 
-class SingleChat extends StatelessWidget {
-  const SingleChat({Key? key}) : super(key: key);
+  const ChatPage({
+    Key? key,
+    required this.receiverUserEmail,
+    required this.receiverUserID,
+  }) : super(key: key);
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController messageController = TextEditingController();
+  final ChatService chatService = ChatService();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  var receiverDisplayName;
+  var receiverImagePath;
+
+  Future<DocumentSnapshot?> getUserInformation(String id) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    // Query to find the user by id
+    QuerySnapshot querySnapshot = await users.where('id', isEqualTo: id).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      DocumentSnapshot userDocument = querySnapshot.docs.first;
+      print('user found');
+      print('${userDocument['displayName']}');
+      return userDocument;
+    } else {
+      print('user not found');
+      return null;
+    }
+  }
+
+  Future<String?> getSenderDisplayName(String senderId) async {
+    DocumentSnapshot? senderSnapshot = await getUserInformation(senderId);
+    return (senderSnapshot?.data() as Map<String, dynamic>?)?['displayName'];
+  }
+
+
+  void sendMessage() async {
+    if (messageController.text.isNotEmpty) {
+      await chatService.sendMessage(
+        widget.receiverUserID,
+        messageController.text,
+      );
+    }
+    // clear the controller
+    messageController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          flexibleSpace: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  const CircleAvatar(
-                    maxRadius: 20,
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          "Kriss Benwat",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        Text(
-                          "Online",
-                          style: TextStyle(
-                              color: Colors.grey.shade600, fontSize: 13),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
+      appBar: AppBar(
+        title: FutureBuilder<DocumentSnapshot?>(
+          future: getUserInformation(widget.receiverUserID),
+          builder: (context, snapshot) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return Text('Loading...'); // Placeholder text while loading
+            // } else if (snapshot.hasError) {
+            //   return Text('Error: ${snapshot.error}');
+            // } else {
+              receiverImagePath = snapshot.data?['imagePath'] ?? '';
+              receiverDisplayName = snapshot.data?['displayName'] ?? '';
+              return Row(
+                children: [
                   CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.settings,
-                        // size: 18,
-                        color: Colors.black,
+                    backgroundImage: NetworkImage(receiverImagePath),
+                    child: Icon(Icons.person),
+                  ),
+                  SizedBox(width: 8),
+                  Text(receiverDisplayName),
+                ],
+              );
+          //  }
+          },
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(child: _buildMessageList()),
+          _buildMessageInput(),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMessageList() {
+    return StreamBuilder(
+      stream: chatService.getMessages(
+        widget.receiverUserID,
+        firebaseAuth.currentUser!.uid,
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error${snapshot.error}');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading...");
+        }
+        return ListView(
+          children: snapshot.data!.docs.map((document) {
+            return _buildMessageItem(document);
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  Widget _buildMessageItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+    var alignment =
+    (data['senderId'] == firebaseAuth.currentUser!.uid)
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
+
+    var sendOrReceiver =
+    (data['senderId'] == firebaseAuth.currentUser!.uid) ? "sender" : "receiver";
+
+    return FutureBuilder<String?>(
+      future: getSenderDisplayName(data['senderId']),
+      builder: (context, senderSnapshot) {
+        var senderDisplayName = senderSnapshot.data ?? 'Unknown';
+
+        return Container(
+          alignment: alignment,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: (data['senderId'] ==
+                  firebaseAuth.currentUser!.uid)
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      (data['timestamp'] as Timestamp?) != null
+                          ? DateFormat.yMd().add_jm().format((data['timestamp'] as Timestamp).toDate())
+                          : "01:00",
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: (data['senderId'] ==
+                      firebaseAuth.currentUser!.uid)
+                      ? MainAxisAlignment.end
+                      : MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      sendOrReceiver == "sender"
+                          ? senderDisplayName
+                          : receiverDisplayName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+                ChatBubble(message: data['message'], align: sendOrReceiver),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
+  Widget _buildMessageInput() {
+    return Row(
+      children: [
+        SizedBox(width: 5),
+        CircleAvatar(
+          backgroundColor: secondaryBrown,
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.add,
+              size: 18,
+              color: Colors.white,
             ),
           ),
         ),
-        body: Stack(
-          children: <Widget>[
-            ListView.builder(
-              itemCount: messages.length,
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(top: 10),
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
-                  child: Align(
-                    alignment: (messages[index].messageType == "receiver"
-                        ? Alignment.topLeft
-                        : Alignment.topRight),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: (messages[index].messageType == "receiver"
-                            ? Colors.grey.shade200
-                            : colorCream2),
-                      ),
-                      padding: const EdgeInsets.all(16),
-                      child: Text(
-                        messages[index].messageContent,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.end, // Align the children at the bottom
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 12, right: 12, top: 3, bottom: 3),
-                  color: Colors.white,
-                  child: Row(
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: secondaryBrown,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            size: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Write message...",
-                            hintStyle: TextStyle(color: Colors.black54),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.send,
-                          size: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                MediaQuery.of(context).viewInsets.bottom == 0
-                    ? const SizedBox(height: 10)
-                    : const SizedBox(height: 0),
-              ],
-            ),
-          ],
-        ));
+        const SizedBox(
+          width: 15,
+        ),
+        Expanded(
+          child: MyTextField(
+            controller: messageController,
+            hintText: 'Write message...',
+            obscureText: false,
+          ),
+        ),
+        IconButton(
+          onPressed: sendMessage,
+          icon: Icon(
+            Icons.send,
+            size: 18,
+          ),
+        ),
+      ],
+    );
   }
 }

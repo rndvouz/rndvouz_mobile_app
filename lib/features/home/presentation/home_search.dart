@@ -34,14 +34,14 @@ class _HomeSearchState extends ConsumerState<HomeSearch> {
                 controller: searchController,
                 decoration: InputDecoration(
                   hintText: "Search for an item",
-                  hintStyle: TextStyle(color: Colors.black54),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(35.0),
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 0.5,
-                    ),
-                  ),
+                  hintStyle: const TextStyle(color: Colors.black54),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(35.0),
+                  //   borderSide: const BorderSide(
+                  //     color: Colors.black,
+                  //     width: 0.5,
+                  //   ),
+                  // ),
                   prefixIcon: Icon(Icons.search),
                   contentPadding: EdgeInsets.symmetric(vertical: 10.0),
                 ),
@@ -49,7 +49,7 @@ class _HomeSearchState extends ConsumerState<HomeSearch> {
             ),
           ),
         ),
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Container(
