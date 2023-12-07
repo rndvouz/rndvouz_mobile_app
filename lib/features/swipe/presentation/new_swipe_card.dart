@@ -4,11 +4,17 @@ import '../../common/data/colors.dart';
 import '../../merchandise/domain/merchandise.dart';
 
 class NewSwipeCard extends StatelessWidget {
-  const NewSwipeCard({required this.merchandise, required this.setup, Key? key})
+  const NewSwipeCard(
+      {required this.merchandise,
+      // required this.setup,
+      required this.cardStyle,
+      Key? key})
       : super(key: key);
 
   final Merchandise merchandise;
-  final bool setup;
+  // final bool setup;
+  final String cardStyle;
+  // final List<String> options = <String>['setup', 'swipe', 'match'];
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +23,21 @@ class NewSwipeCard extends StatelessWidget {
       fit: BoxFit.fitHeight,
     );
 
-    double heightSet;
-    double topSet;
+    double heightSet = 420;
+    double widthSet = 280;
+    double labelSet = 80;
+    // double topSet;
 
-    if (setup) {
+    if (cardStyle == "setup") {
       heightSet = 400;
-      topSet = 300;
-    } else {
+      // topSet = 300;
+    } else if (cardStyle == "swipe") {
       heightSet = 420;
-      topSet = 320;
+      // topSet = 320;
+    } else if (cardStyle == "match") {
+      heightSet = 340;
+      widthSet = 215;
+      labelSet = 70;
     }
 
     return Row(
@@ -34,7 +46,7 @@ class NewSwipeCard extends StatelessWidget {
         const SizedBox(height: 100),
         Container(
           height: heightSet,
-          width: 280,
+          width: widthSet,
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -58,10 +70,9 @@ class NewSwipeCard extends StatelessWidget {
                 ),
                 Positioned(
                   bottom: 0,
-                  // top: topSet,
                   child: Container(
-                    height: 80,
-                    width: 280,
+                    height: labelSet,
+                    width: widthSet,
                     decoration: const ShapeDecoration(
                       color: colorCream2,
                       shape: RoundedRectangleBorder(
@@ -78,7 +89,7 @@ class NewSwipeCard extends StatelessWidget {
                         Text(
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 11),
+                              fontWeight: FontWeight.bold, fontSize: 13),
                           merchandise.merchName,
                         ),
                       ],

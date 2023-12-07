@@ -127,7 +127,7 @@ class _IndividualSetupSwipeState extends ConsumerState<IndividualSetupSwipe> {
                         verticalOffsetPercentage) =>
                     NewSwipeCard(
                   merchandise: merchandises[index],
-                  setup: true,
+                  cardStyle: "setup",
                 ),
                 onEnd: () => endSwipe(ref, newUser),
               ),

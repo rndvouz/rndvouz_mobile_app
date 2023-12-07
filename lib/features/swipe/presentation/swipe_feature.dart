@@ -31,7 +31,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
   final CardSwiperController controller = CardSwiperController();
 
   _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction,
-      {required User user, required Merchandise merchandise}) async {
+      {required User user, required Merchandise merchandise}) {
     debugPrint(
       'Card at $previousIndex was swiped to direction ${direction.name}. Card on currently displayed is $currentIndex',
     );
@@ -40,60 +40,16 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
     User currentUser = user;
 
     if (direction.name == 'right') {
-      // handleRightSwipe(currentUser, currentMerch);
-      final UserDB userDB = ref.read(userDBProvider);
-
-      // create a swiped right item
-      final SwipedRightItems swipeRightItem = SwipedRightItems(
-        ownerUser: currentMerch.ownerUsername,
-        merchId: currentMerch.id,
-      );
-
-      // add to current user's SwipedRightItems list
-      userDB.updateSwipedRight(user.id, swipeRightItem);
-
-      // Check if the username is in database by using username instead of a user's id
-      final User? ownerUser =
-          await userDB.fetchUserByUsername(currentMerch.ownerUsername);
-
-      if (ownerUser != null) {
-        // merchUser exists, go through their swipedRight List
-        // ignore: unnecessary_null_comparison
-        if (ownerUser.swipedRight != null) {
-          try {
-            final SwipedRightItems matchingItem =
-                ownerUser.swipedRight.firstWhere(
-              (swipedItem) => swipedItem.ownerUser == currentUser.username,
-            );
-
-            // Fetch the matching merchandise from owner of currentMerch
-            final MerchandiseDB merchDB = ref.read(merchandiseDBProvider);
-            final Merchandise matchingMerchandise =
-                await merchDB.fetchMerchandise(matchingItem.merchId);
-
-            // Handle "Match Found" view with the matching merchandise
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MatchFound(
-                  merchUser:
-                      matchingMerchandise, // from current user that owner has in their swipedRight list
-                  merchMatched:
-                      currentMerch, // from owner that currentUser just swiped right on
-                  currentUser: user,
-                  ownerUser: ownerUser,
-                ),
-              ),
-            );
-          } catch (e) {
-            print("merchUser didn't swipe right on any of currentUser's items");
-          }
-        }
-      } else {
-        // merchUser does not exist in database
-        print(
-            'User with username ${currentMerch.ownerUsername} does not exist in UserDB');
-      }
+      handleRightSwipe(currentUser, currentMerch)
+          .then((_) => true)
+          .catchError((error) {
+        // Handle errors if needed
+        print('Error in handleRightSwipe: $error');
+        return false;
+      });
     }
+
+    return true;
   }
 
   handleRightSwipe(User user, Merchandise currentMerch) async {
@@ -190,11 +146,11 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
       required List<Merchandise> merch,
       required WidgetRef ref}) {
     MerchandiseCollection merchandiseCollection = MerchandiseCollection(merch);
-    List<Merchandise> swipeMerchandises =
-        merchandiseCollection.loadMerchanise(Purpose.browse);
-
     // List<Merchandise> swipeMerchandises =
-    //     merchandiseCollection.loadSwipeMerchandise(user.username);
+    //     merchandiseCollection.loadMerchanise(Purpose.browse);
+
+    List<Merchandise> swipeMerchandises =
+        merchandiseCollection.loadSwipeMerchandise(user.username);
 
     return Scaffold(
       body: SafeArea(
@@ -223,7 +179,7 @@ class _SwipeFeature extends ConsumerState<SwipeFeature>
                         verticalOffsetPercentage) =>
                     NewSwipeCard(
                   merchandise: swipeMerchandises[index],
-                  setup: false,
+                  cardStyle: "swipe",
                 ),
                 onEnd: endSwipe,
               ),
