@@ -73,8 +73,8 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
               top: 50,
               left: 30,
               child: Container(
-                width: 500, // or specify a fixed width
-                height: 500, // or specify a fixed height
+                width: 500,
+                height: 500,
                 child: Stack(
                   children: [
                     // Bottom Words
@@ -84,9 +84,7 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                       child: Transform.rotate(
                         angle: -0.2,
                         child: Column(
-                          // You can use Row if you want them side by side
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start, // Align children to the start (left in this case)
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Match",
@@ -108,7 +106,6 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                                 height: 1.0,
                               ),
                             ),
-                            // Add more Text widgets or other widgets as needed
                           ],
                         ),
                       ),
@@ -120,9 +117,7 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                       child: Transform.rotate(
                         angle: -0.2,
                         child: Column(
-                          // You can use Row if you want them side by side
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start, // Align children to the start (left in this case)
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Match",
@@ -144,7 +139,6 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                                 height: 1.0,
                               ),
                             ),
-                            // Add more Text widgets or other widgets as needed
                           ],
                         ),
                       ),
@@ -156,9 +150,7 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                       child: Transform.rotate(
                         angle: -0.2,
                         child: Column(
-                          // You can use Row if you want them side by side
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start, // Align children to the start (left in this case)
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Match",
@@ -180,7 +172,6 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                                 height: 1.0,
                               ),
                             ),
-                            // Add more Text widgets or other widgets as needed
                           ],
                         ),
                       ),
@@ -271,7 +262,7 @@ class _MatchFoundState extends State<MatchFound> with TickerProviderStateMixin {
                         child: Text("Message"),
                       ),
                     ),
-                    SizedBox(height: 10), // Add some spacing between buttons
+                    SizedBox(height: 10),
                     Container(
                       width: 260,
                       height: 55,
