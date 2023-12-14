@@ -33,6 +33,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController retypePasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -57,6 +58,7 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
             passwordController,
             retypePasswordController,
             isBusiness,
+            formKey,
             ref);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -75,11 +77,10 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       TextEditingController passwordController,
       TextEditingController retypePasswordController,
       bool isBusiness,
+      GlobalKey<FormState> formKey,
       WidgetRef ref) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-
-    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(),
@@ -201,12 +202,12 @@ class _SetupLoginPageState extends ConsumerState<SetupLoginPage> {
       ),
       // padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
-        onTapOutside: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+        // onTapOutside: (event) {
+        //   FocusManager.instance.primaryFocus?.unfocus();
+        // },
         controller: controller,
-        obscureText: isObscure,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        // obscureText: isObscure,
+        // autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (text) {
           final formSubmit = ref!.read(formSubmitProvider.notifier).state;
           if (controller.text.isEmpty && !formSubmit) {
